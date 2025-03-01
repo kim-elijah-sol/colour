@@ -13,9 +13,4 @@ export const paletteViewSelectWrapperStyle = style({
 export const paletteViewSelectStyle = style({
   ...padding(8),
   cursor: 'pointer',
-  selectors: {
-    '& > input:checked': {
-      fontWeight: 600,
-    },
-  },
 });
