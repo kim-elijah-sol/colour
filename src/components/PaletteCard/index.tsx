@@ -23,7 +23,7 @@ function PaletteCard({ colors, isLike, likeCount, onClickLike }: Props) {
         {colors.map((color) => (
           <div
             className={paletteCardColorBlockStyle}
-            style={{ background: color }}
+            style={{ background: `#${color}` }}
             key={color}
           >
             <p className={colorCodeCopyButtonStyle} onClick={() => copy(color)}>
