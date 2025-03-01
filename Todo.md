@@ -5,7 +5,7 @@
 
 ## 색상 관련 여러 값 추출
 
-HEX -> CMYK, RGB, HSV, HSL, LAB
+HEX -> CMYK, RGB, HSV, HSL, LAB, 팬톤 등 컬러 팔레트 기반 추천
 
 ## Contrast 추측
 
