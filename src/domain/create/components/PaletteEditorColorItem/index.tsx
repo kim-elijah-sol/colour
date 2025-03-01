@@ -10,6 +10,7 @@ import {
 } from './style.css';
 import { useMemo } from 'react';
 import useHandleClickInfo from '../../hooks/useHandleClickInfo';
+import useHandleClickContrast from '../../hooks/useHandleClickContrast';
 
 type Props = {
   color: string;
@@ -20,6 +21,8 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
   const foregroundColorType = useForegroundColorType(color);
 
   const handleClickInfo = useHandleClickInfo(color);
+
+  const handleClickContrast = useHandleClickContrast(color);
 
   const propsByForegroundColorType = useMemo(() => {
     return {
@@ -55,7 +58,10 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
         >
           <Info {...propsByForegroundColorType.icons} />
         </button>
-        <button {...propsByForegroundColorType.toolButton}>
+        <button
+          {...propsByForegroundColorType.toolButton}
+          onClick={handleClickContrast}
+        >
           <Contrast {...propsByForegroundColorType.icons} />
         </button>
       </div>
