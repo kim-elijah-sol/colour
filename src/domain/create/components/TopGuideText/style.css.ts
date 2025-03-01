@@ -37,14 +37,14 @@ export const topGuideText1HighlighterStyle = style({
   position: 'absolute',
   left: 0,
   top: 0,
-  width: '30%',
+  width: '40%',
   height: styleToken.full,
   background: `linear-gradient(
         135deg,
         rgba(255,255,255,0) 10%,
-        rgba(255,255,255,.4) 30% ,
-        rgba(255,255,255,.7) 60% ,
-        rgba(255,255,255,.4) 90%,
+        rgba(255,255,255,.2) 30% ,
+        rgba(255,255,255,.5) 60% ,
+        rgba(255,255,255,.2) 90%,
         rgba(255,255,255,0))`,
   animation: `${highlighterKeyframe} 5s infinite`,
 });
