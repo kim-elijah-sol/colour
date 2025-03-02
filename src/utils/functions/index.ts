@@ -11,3 +11,5 @@ export * from './rgbToHsl';
 export * from './rgbToCmyk';
 export * from './rgbToHsv';
 export * from './rgbToLab';
+export * from './rgbToHex';
+export * from './getShades';

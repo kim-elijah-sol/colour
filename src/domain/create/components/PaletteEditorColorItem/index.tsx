@@ -1,5 +1,5 @@
 import useForegroundColorType from '../../hooks/useForegroundColorType';
-import { Info, Contrast } from 'lucide-react';
+import { Info, Contrast, Table } from 'lucide-react';
 import {
   backgroundBarStyle,
   colorChangeButtonStyle,
@@ -11,6 +11,7 @@ import {
 import { useMemo } from 'react';
 import useHandleClickInfo from '../../hooks/useHandleClickInfo';
 import useHandleClickContrast from '../../hooks/useHandleClickContrast';
+import useHandleClickShade from '../../hooks/useHandleClickShade';
 
 type Props = {
   color: string;
@@ -23,6 +24,8 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
   const handleClickInfo = useHandleClickInfo(color);
 
   const handleClickContrast = useHandleClickContrast(color);
+
+  const handleClickShade = useHandleClickShade(color, onChangeColor);
 
   const propsByForegroundColorType = useMemo(() => {
     return {
@@ -63,6 +66,12 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
           onClick={handleClickContrast}
         >
           <Contrast {...propsByForegroundColorType.icons} />
+        </button>
+        <button
+          {...propsByForegroundColorType.toolButton}
+          onClick={handleClickShade}
+        >
+          <Table {...propsByForegroundColorType.icons} />
         </button>
       </div>
     </div>
