@@ -19,9 +19,19 @@ export const background = style({
   justifyContent: 'center',
 });
 
+const foregroundKeyframes = keyframes({
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+});
+
 export const foreground = style({
   background: '#FFFFFF',
   borderRadius: 16,
   boxShadow: '0 0 24px 8px rgba(70,70,70,0.05)',
   overflow: 'hidden',
+  animation: `${foregroundKeyframes} 0.21s forwards`,
 });
