@@ -1,5 +1,5 @@
 import { padding } from '@/utils/styles';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const contrastList = style({
   maxHeight: 400,

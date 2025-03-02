@@ -1,9 +1,8 @@
 import useModal from '@/stores/useModal';
 import Modal from '@/utils/components/Modal';
-import { getContrastRatio } from '@/utils/functions';
+import { getContrastRatio, getForegroundColorType } from '@/utils/functions';
 import { CircleAlert, CircleCheck } from 'lucide-react';
-import useForegroundColorType from './useForegroundColorType';
-import * as style from './useHandleClickContrast.css';
+import * as style from './style.css';
 
 function ContrastItem({
   foreground,
@@ -16,7 +15,7 @@ function ContrastItem({
 
   const isPass = contrastRatio >= 4.5;
 
-  const foregroundColorType = useForegroundColorType(background);
+  const foregroundColorType = getForegroundColorType(background);
 
   return (
     <li

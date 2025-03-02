@@ -3,6 +3,7 @@ import { ForegroundColorType } from '@/types';
 import Modal from '@/utils/components/Modal';
 import {
   copy,
+  getForegroundColorType,
   hexToRgb,
   rgbToCmyk,
   rgbToHsl,
@@ -10,9 +11,8 @@ import {
   rgbToLab,
 } from '@/utils/functions';
 import { Copy } from 'lucide-react';
-import useForegroundColorType from './useForegroundColorType';
 
-import * as style from './useHandleClickInfo.css';
+import * as style from './style.css';
 
 function InfoItem({
   title,
@@ -49,7 +49,7 @@ function InfoItem({
 function useHandleClickInfo(color: string) {
   const { setModal } = useModal();
 
-  const ForegroundColorType = useForegroundColorType(color);
+  const ForegroundColorType = getForegroundColorType(color);
 
   function handleClickInfo() {
     setModal(() => {

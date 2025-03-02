@@ -3,7 +3,7 @@ import Modal from '@/utils/components/Modal';
 import { getForegroundColorType, getShades } from '@/utils/functions';
 import { Check } from 'lucide-react';
 
-import * as style from './useHandleClickShade.css';
+import * as style from './style.css';
 
 function ShadeItem({
   color,
