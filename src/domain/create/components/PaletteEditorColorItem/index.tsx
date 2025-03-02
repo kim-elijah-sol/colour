@@ -12,6 +12,7 @@ import { useMemo } from 'react';
 import useHandleClickInfo from '../../hooks/useHandleClickInfo';
 import useHandleClickContrast from '../../hooks/useHandleClickContrast';
 import useHandleClickShade from '../../hooks/useHandleClickShade';
+import useColorPicker from '@/hooks/useColorPicker';
 
 type Props = {
   color: string;
@@ -26,6 +27,8 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
   const handleClickContrast = useHandleClickContrast(color);
 
   const handleClickShade = useHandleClickShade(color, onChangeColor);
+
+  const handleClickColorPicker = useColorPicker(onChangeColor);
 
   const propsByForegroundColorType = useMemo(() => {
     return {
@@ -50,7 +53,16 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
 
   return (
     <div style={{ background: `#${color}` }} className={backgroundBarStyle}>
-      <button {...propsByForegroundColorType.colorChangeButton}>
+      <button
+        {...propsByForegroundColorType.colorChangeButton}
+        onClick={(e) =>
+          handleClickColorPicker({
+            mouseX: e.pageX,
+            mouseY: e.pageY,
+            color
+          })
+        }
+      >
         {color.toUpperCase()}
       </button>
 
