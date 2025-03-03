@@ -13,3 +13,5 @@ export * from './rgbToHsv';
 export * from './rgbToLab';
 export * from './rgbToHex';
 export * from './getShades';
+export * from './hslToRgb';
+export * from './getHue';

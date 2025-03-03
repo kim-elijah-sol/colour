@@ -1,6 +1,7 @@
 import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import HexPicker from './HexPicker';
 
 import * as style from './style.css';
 
@@ -33,6 +34,8 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
       <Modal.Header right={<Modal.Header.CloseButton />}>
         Color Picker
       </Modal.Header>
+
+      <HexPicker />
 
       <div className={style.bottom}>
         <button
