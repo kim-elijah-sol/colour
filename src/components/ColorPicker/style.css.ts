@@ -1,5 +1,9 @@
-import { clickableStyle, padding } from '@/utils/styles';
+import { clickableStyle, fixed, padding } from '@/utils/styles';
 import { keyframes, style } from '@vanilla-extract/css';
+
+export const dim = style({
+  ...fixed(0),
+});
 
 const container = style({
   position: 'fixed',
