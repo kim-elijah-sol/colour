@@ -17,11 +17,13 @@ export const picker = style({
   position: 'relative',
   width: styleToken.full,
   height: 268,
+  borderRadius: 8,
   '::before': {
     content: '',
     position: 'absolute',
     inset: 0,
     background: 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))',
+    borderRadius: 8,
   },
 });
 
@@ -54,6 +56,7 @@ export const slider = style({
   width: styleToken.full,
   height: 20,
   background: `linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)`,
+  borderRadius: 8,
 });
 
 export const sliderController = style({

@@ -32,10 +32,10 @@ function useHueSlider(
 
     const elementStartPosition = boundingClientRect.x;
 
-    const position =
+    let position =
       ((clickPosition - elementStartPosition) / elementWidth) * 100;
 
-    if (position >= 99.9 || position < 0) return;
+    position = Math.max(Math.min(position, 99.9), 0);
 
     const hue = Math.round(position * 3.6);
 

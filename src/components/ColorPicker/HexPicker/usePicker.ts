@@ -41,21 +41,16 @@ function usePicker(
 
     const elementTopPosition = boundingClientRect.y + elementHeight;
 
-    const leftPosition =
+    let leftPosition =
       ((clickLeftPosition - elementLeftPosition) / elementWidth) * 100;
 
-    const topPosition =
+    let topPosition =
       ((elementTopPosition - clickTopPosition) / elementHeight) * 100;
 
     const hsv = rgbToHsv(hexToRgb(color));
 
-    if (
-      leftPosition > 100 ||
-      leftPosition < 0 ||
-      topPosition > 100 ||
-      topPosition < 0
-    )
-      return;
+    leftPosition = Math.max(Math.min(leftPosition, 100),0)
+    topPosition = Math.max(Math.min(topPosition, 100),0)
 
     const newColor = rgbToHex(
       hsvToRgb([hsv[0], Math.round(leftPosition), Math.round(topPosition)])
