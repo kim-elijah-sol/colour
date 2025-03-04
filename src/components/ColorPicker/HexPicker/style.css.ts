@@ -10,7 +10,7 @@ export const pickerContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: 12,
-  ...padding(16),
+  ...padding({ x: 16 }),
 });
 
 export const picker = style({
@@ -82,4 +82,44 @@ export const sliderController = style({
     height: 28,
     opacity: 0.9,
   },
+});
+
+export const inputBox = style({
+  position: 'relative',
+  '::after': {
+    content: '#',
+    position: 'absolute',
+    fontSize: 16,
+    fontWeight: 600,
+    color: '#333',
+    left: 16,
+    top: '50%',
+    transform: `translateY(-50%)`,
+  },
+});
+
+export const input = style({
+  width: styleToken.full,
+  height: 46,
+  lineHeight: '46px',
+  fontSize: 16,
+  fontWeight: 600,
+  ...padding({ left: 26, right: 16 }),
+  color: '#333',
+  border: '1px solid #E0E0E0',
+  borderRadius: 8,
+  transition: '0.21s',
+  ':focus': {
+    borderColor: '#000000',
+  },
+});
+
+export const previewColorBox = style({
+  position: 'absolute',
+  right: 8,
+  top: '50%',
+  transform: `translateY(-50%)`,
+  width: 30,
+  height: 30,
+  borderRadius: 4,
 });

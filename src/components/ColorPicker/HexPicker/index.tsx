@@ -7,6 +7,7 @@ import {
 } from '@/utils/functions';
 import React from 'react';
 import * as style from './style.css';
+import useHexInput from './useHexInput';
 import useHueSlider from './useHueSlider';
 import usePicker from './usePicker';
 
@@ -28,6 +29,8 @@ function HexPicker({ color, setColor }: Props) {
     color,
     setColor
   );
+
+  const hexInput = useHexInput(color, setColor);
 
   return (
     <div className={style.container}>
@@ -54,6 +57,13 @@ function HexPicker({ color, setColor }: Props) {
               left: `${sliderLeft}%`,
             }}
             className={style.sliderController}
+          />
+        </div>
+        <div className={style.inputBox}>
+          <input type='text' className={style.input} {...hexInput} />
+          <div
+            style={{ background: `#${color}` }}
+            className={style.previewColorBox}
           />
         </div>
       </div>
