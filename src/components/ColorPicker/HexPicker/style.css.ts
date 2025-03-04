@@ -22,6 +22,30 @@ export const picker = style({
   },
 });
 
+export const pickerController = style({
+  position: 'absolute',
+  transform: 'translate(-50%, 50%)',
+  width: 16,
+  height: 16,
+  background: '#FFFFFF',
+  boxShadow: '0 0 8px 4px rgba(0, 0, 0, 0.1)',
+  borderRadius: '50%',
+  cursor: 'pointer',
+  transitionProperty: 'width, height, box-shadow',
+  transitionDuration: '0.21s',
+  ':hover': {
+    boxShadow: '0 0 16px 8px rgba(0, 0, 0, 0.12)',
+    width: 20,
+    height: 20,
+  },
+  ':active': {
+    boxShadow: '0 0 12px 6px rgba(0, 0, 0, 0.15)',
+    width: 18,
+    height: 18,
+    opacity: 0.9,
+  },
+});
+
 export const slider = style({
   position: 'relative',
   width: styleToken.full,

@@ -15,3 +15,4 @@ export * from './rgbToHex';
 export * from './getShades';
 export * from './hslToRgb';
 export * from './getHue';
+export * from './hsvToRgb';
