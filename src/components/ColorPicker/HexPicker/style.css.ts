@@ -1,4 +1,4 @@
-import { margin, padding, styleToken } from '@/utils/styles';
+import { padding, styleToken } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
@@ -7,6 +7,9 @@ export const container = style({
 
 export const pickerContainer = style({
   width: styleToken.full,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 12,
   ...padding(16),
 });
 
@@ -51,7 +54,6 @@ export const slider = style({
   width: styleToken.full,
   height: 20,
   background: `linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)`,
-  ...margin({ top: 12 }),
 });
 
 export const sliderController = style({

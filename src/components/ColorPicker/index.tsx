@@ -35,7 +35,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
         Color Picker
       </Modal.Header>
 
-      <HexPicker color={color} />
+      <HexPicker color={color} setColor={setColor} />
 
       <div className={style.bottom}>
         <button

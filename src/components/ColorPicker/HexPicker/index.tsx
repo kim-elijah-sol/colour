@@ -5,18 +5,17 @@ import {
   rgbToHex,
   rgbToHsl,
 } from '@/utils/functions';
-import React, { useState } from 'react';
+import React from 'react';
 import * as style from './style.css';
 import useHueSlider from './useHueSlider';
 import usePicker from './usePicker';
 
 type Props = {
   color: string;
+  setColor: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function HexPicker({ color: _color }: Props) {
-  const [color, setColor] = useState(_color);
-
+function HexPicker({ color, setColor }: Props) {
   const {
     pickerRef,
     pickerHighlightColor,
@@ -29,8 +28,6 @@ function HexPicker({ color: _color }: Props) {
     color,
     setColor
   );
-
-  const hsl = rgbToHsl(hexToRgb(color));
 
   return (
     <div className={style.container}>
