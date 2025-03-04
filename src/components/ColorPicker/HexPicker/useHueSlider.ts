@@ -1,9 +1,9 @@
 import {
   getHue,
   hexToRgb,
-  hslToRgb,
+  hsvToRgb,
   rgbToHex,
-  rgbToHsl,
+  rgbToHsv,
 } from '@/utils/functions';
 import React, { useEffect, useRef } from 'react';
 
@@ -13,11 +13,15 @@ function useHueSlider(
   color: string,
   setColor: React.Dispatch<React.SetStateAction<string>>
 ) {
+  const colorRef = useRef<string>(color);
+
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const isClicked = useRef<boolean>(false);
 
   function updateColor(e: Event) {
+    const color = colorRef.current;
+
     const clickPosition = e.clientX;
 
     const boundingClientRect = sliderRef.current?.getBoundingClientRect();
@@ -35,9 +39,9 @@ function useHueSlider(
 
     const hue = Math.round(position * 3.6);
 
-    const currentHsl = rgbToHsl(hexToRgb(color));
+    const currentHsv = rgbToHsv(hexToRgb(color));
 
-    const newColor = rgbToHex(hslToRgb([hue, currentHsl[1], currentHsl[2]]));
+    const newColor = rgbToHex(hsvToRgb([hue, currentHsv[1], currentHsv[2]]));
 
     setColor(newColor);
   }
@@ -57,6 +61,10 @@ function useHueSlider(
   }
 
   const sliderLeft = (getHue(hexToRgb(color)) / 360) * 100;
+
+  useEffect(() => {
+    colorRef.current = color;
+  }, [color]);
 
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
