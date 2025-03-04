@@ -1,5 +1,6 @@
 import useModal from '@/stores/useModal';
 import ColorPicker from '@/components/ColorPicker';
+import { delay } from '@/utils/functions';
 
 type OpenColorPickerParams = {
   mouseX: number;
@@ -8,12 +9,22 @@ type OpenColorPickerParams = {
 };
 
 function useColorPicker(onChangeColor: (color: string) => void) {
-  const { setModal, removeModal } = useModal();
+  const { modal, setModal, removeModal } = useModal();
 
-  function openColorPicker({ mouseX, mouseY, color }: OpenColorPickerParams) {
+  async function openColorPicker({
+    mouseX,
+    mouseY,
+    color,
+  }: OpenColorPickerParams) {
     const { clientWidth } = document.querySelector('body')!;
 
     const direction = clientWidth / 2 > mouseX ? 'right' : 'left';
+
+    if (modal !== null) {
+      removeModal();
+
+      await delay(150);
+    }
 
     setModal(() => {
       return (

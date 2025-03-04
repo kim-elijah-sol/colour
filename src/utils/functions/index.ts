@@ -16,3 +16,4 @@ export * from './getShades';
 export * from './hslToRgb';
 export * from './getHue';
 export * from './hsvToRgb';
+export * from './delay';
