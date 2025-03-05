@@ -1,3 +1,4 @@
+import { ColorPickerContext } from '@/stores/createColorPickerStore';
 import {
   hexToRgb,
   rgbToHex,
@@ -6,14 +7,17 @@ import {
   hsvToRgb,
   rgbToHsv,
 } from '@/utils/functions';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
+import { useStore } from 'zustand';
 
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
 function usePicker(
-  color: string,
-  setColor: React.Dispatch<React.SetStateAction<string>>
 ) {
+  const colorPickerStore = useContext(ColorPickerContext)
+
+  const { color, setColor } = useStore(colorPickerStore!)
+  
   const colorRef = useRef<string>(color);
 
   const pickerRef = useRef<HTMLDivElement>(null);

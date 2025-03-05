@@ -1,3 +1,4 @@
+import { ColorPickerContext } from '@/stores/createColorPickerStore';
 import {
   getHue,
   hexToRgb,
@@ -5,14 +6,17 @@ import {
   rgbToHex,
   rgbToHsv,
 } from '@/utils/functions';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import { useStore } from 'zustand';
 
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
 function useHueSlider(
-  color: string,
-  setColor: React.Dispatch<React.SetStateAction<string>>
 ) {
+  const colorPickerStore = useContext(ColorPickerContext)
+
+  const { color, setColor } = useStore(colorPickerStore!)
+
   const colorRef = useRef<string>(color);
 
   const sliderRef = useRef<HTMLDivElement>(null);

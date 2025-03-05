@@ -54,7 +54,7 @@ export const bottom = style({
   background: '#FFFFFF',
   width: 300,
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
 });
 
 export const applyButton = style([

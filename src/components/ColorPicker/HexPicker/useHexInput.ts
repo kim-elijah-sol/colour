@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { ColorPickerContext } from '@/stores/createColorPickerStore';
+import React, { useContext, useEffect, useState } from 'react';
+import { useStore } from 'zustand';
 
 function useHexInput(
-  color: string,
-  setColor: React.Dispatch<React.SetStateAction<string>>
 ) {
+  const colorPickerStore = useContext(ColorPickerContext)
+
+  const { color, setColor } = useStore(colorPickerStore!)
+
   const [value, setValue] = useState(color);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
