@@ -2,11 +2,10 @@ import { ColorPickerContext } from '@/stores/createColorPickerStore';
 import React, { useContext, useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 
-function useHexInput(
-) {
-  const colorPickerStore = useContext(ColorPickerContext)
+function useHexInput() {
+  const colorPickerStore = useContext(ColorPickerContext);
 
-  const { color, setColor } = useStore(colorPickerStore!)
+  const { color, setColor } = useStore(colorPickerStore!);
 
   const [value, setValue] = useState(color);
 
@@ -19,7 +18,7 @@ function useHexInput(
   }
 
   useEffect(() => {
-    if (value.length === 6) {
+    if (value.length === 6 && color !== value) {
       setColor(value);
     }
   }, [value]);

@@ -1,29 +1,29 @@
-import { createContext } from "react";
-import { create, createStore } from "zustand";
+import { createContext } from 'react';
+import { createStore } from 'zustand';
 
-type PickerType = 'hex' | 'rgb'
+export type PickerType = 'hex' | 'rgb';
 
 type State = {
-    color: string
-    pickerType: PickerType
-}
+  color: string;
+  pickerType: PickerType;
+};
 
 type Actions = {
-    setColor: (color: string) => void
-    setPickerType :(pickerType: PickerType) => void
-}
+  setColor: (color: string) => void;
+  setPickerType: (pickerType: PickerType) => void;
+};
 
-export type ColorPickerStore = ReturnType<typeof createColorPickerStore>
+export type ColorPickerStore = ReturnType<typeof createColorPickerStore>;
 
 const createColorPickerStore = (color: string) => {
-    return createStore<State & Actions>()((set) => ({
-        color,
-        pickerType: 'hex',
-        setColor: (color) => set({color}),
-        setPickerType: (pickerType) => set({pickerType}),
-    }))
-}
+  return createStore<State & Actions>()((set) => ({
+    color,
+    pickerType: 'hex',
+    setColor: (color) => set({ color }),
+    setPickerType: (pickerType) => set({ pickerType }),
+  }));
+};
 
-export default createColorPickerStore
+export default createColorPickerStore;
 
-export const ColorPickerContext = createContext<ColorPickerStore | null>(null)
+export const ColorPickerContext = createContext<ColorPickerStore | null>(null);

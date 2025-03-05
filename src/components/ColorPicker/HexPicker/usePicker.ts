@@ -1,10 +1,10 @@
 import { ColorPickerContext } from '@/stores/createColorPickerStore';
 import {
-  hexToRgb,
-  rgbToHex,
-  hslToRgb,
   getHue,
+  hexToRgb,
+  hslToRgb,
   hsvToRgb,
+  rgbToHex,
   rgbToHsv,
 } from '@/utils/functions';
 import { useContext, useEffect, useRef } from 'react';
@@ -12,12 +12,11 @@ import { useStore } from 'zustand';
 
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
-function usePicker(
-) {
-  const colorPickerStore = useContext(ColorPickerContext)
+function usePicker() {
+  const colorPickerStore = useContext(ColorPickerContext);
 
-  const { color, setColor } = useStore(colorPickerStore!)
-  
+  const { color, setColor } = useStore(colorPickerStore!);
+
   const colorRef = useRef<string>(color);
 
   const pickerRef = useRef<HTMLDivElement>(null);
@@ -53,8 +52,8 @@ function usePicker(
 
     const hsv = rgbToHsv(hexToRgb(color));
 
-    leftPosition = Math.max(Math.min(leftPosition, 100),0)
-    topPosition = Math.max(Math.min(topPosition, 100),0)
+    leftPosition = Math.max(Math.min(leftPosition, 100), 0);
+    topPosition = Math.max(Math.min(topPosition, 100), 0);
 
     const newColor = rgbToHex(
       hsvToRgb([hsv[0], Math.round(leftPosition), Math.round(topPosition)])

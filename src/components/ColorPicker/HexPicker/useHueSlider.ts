@@ -11,11 +11,10 @@ import { useStore } from 'zustand';
 
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
-function useHueSlider(
-) {
-  const colorPickerStore = useContext(ColorPickerContext)
+function useHueSlider() {
+  const colorPickerStore = useContext(ColorPickerContext);
 
-  const { color, setColor } = useStore(colorPickerStore!)
+  const { color, setColor } = useStore(colorPickerStore!);
 
   const colorRef = useRef<string>(color);
 

@@ -1,12 +1,5 @@
 import { ColorPickerContext } from '@/stores/createColorPickerStore';
-import {
-  getHue,
-  hexToRgb,
-  hslToRgb,
-  rgbToHex,
-  rgbToHsl,
-} from '@/utils/functions';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useStore } from 'zustand';
 import * as style from './style.css';
 import useHexInput from './useHexInput';
@@ -14,10 +7,10 @@ import useHueSlider from './useHueSlider';
 import usePicker from './usePicker';
 
 function HexPicker() {
-  const colorPickerStore = useContext(ColorPickerContext)
+  const colorPickerStore = useContext(ColorPickerContext);
 
-  const color = useStore(colorPickerStore!, state => state.color)
-  
+  const color = useStore(colorPickerStore!, (state) => state.color);
+
   const {
     pickerRef,
     pickerHighlightColor,
@@ -26,8 +19,7 @@ function HexPicker() {
     ...pickerProps
   } = usePicker();
 
-  const { sliderRef, sliderLeft, ...sliderProps } = useHueSlider(
-  );
+  const { sliderRef, sliderLeft, ...sliderProps } = useHueSlider();
 
   const hexInput = useHexInput();
 
