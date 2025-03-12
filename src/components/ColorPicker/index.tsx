@@ -5,7 +5,7 @@ import {
 import useModal from '@/stores/useModal';
 import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import HexPicker from './HexPicker';
 import PickerTypeSelect from './PickerTypeSelect';
 
@@ -31,6 +31,12 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
   const xPositionValue =
     direction === 'right' ? x : document.body.clientWidth - x;
 
+  const bottomPosition = useMemo(() => {
+    const mouseFromBottom = window.innerHeight - y;
+
+    return mouseFromBottom - 230;
+  }, []);
+
   return (
     <ColorPickerContext.Provider
       value={{
@@ -43,7 +49,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
       <div className={style.dim} onClick={removeModal}>
         <div
           style={{
-            top: y,
+            bottom: bottomPosition,
             [xPosition]: xPositionValue,
           }}
           className={
@@ -57,7 +63,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
             Color Picker
           </Modal.Header>
 
-          <HexPicker />
+          {pickerType === 'hex' && <HexPicker />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />

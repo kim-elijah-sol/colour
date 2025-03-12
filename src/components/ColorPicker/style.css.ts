@@ -9,17 +9,16 @@ const container = style({
   position: 'fixed',
   background: '#fff',
   borderRadius: 12,
-  overflow: 'hidden',
   boxShadow: '0 0 24px 8px rgba(70,70,70,0.3)',
 });
 
 const toRightKeyframes = keyframes({
   from: {
-    transform: `translate(8px, -50%)`,
+    transform: `translateX(8px)`,
     opacity: 0,
   },
   to: {
-    transform: `translate(24px, -50%)`,
+    transform: `translateX(24px)`,
     opacity: 1,
   },
 });
@@ -55,6 +54,7 @@ export const bottom = style({
   width: 300,
   display: 'flex',
   justifyContent: 'space-between',
+  borderRadius: '0 0 12px 12px',
 });
 
 export const applyButton = style([
