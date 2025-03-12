@@ -34,7 +34,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
   const bottomPosition = useMemo(() => {
     const mouseFromBottom = window.innerHeight - y;
 
-    return mouseFromBottom - 230;
+    return mouseFromBottom - 160;
   }, []);
 
   return (

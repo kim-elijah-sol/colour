@@ -16,7 +16,7 @@ export const pickerContainer = style({
 export const picker = style({
   position: 'relative',
   width: styleToken.full,
-  height: 268,
+  height: 200,
   borderRadius: 8,
   '::before': {
     content: '',
