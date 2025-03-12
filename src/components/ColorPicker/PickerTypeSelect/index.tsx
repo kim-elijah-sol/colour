@@ -1,19 +1,16 @@
 import {
-  ColorPickerContext,
   PickerType,
-} from '@/stores/createColorPickerStore';
+  useColorPickerContext,
+} from '@/stores/createColorPickerContext';
 import classNames from 'classnames';
 import { ChevronUp } from 'lucide-react';
-import { useContext, useState } from 'react';
-import { useStore } from 'zustand';
+import { useState } from 'react';
 import * as style from './style.css';
 
 const OPTIONS: PickerType[] = ['hex', 'rgb'];
 
 function PickerTypeSelect() {
-  const colorPickerStore = useContext(ColorPickerContext);
-
-  const { pickerType, setPickerType } = useStore(colorPickerStore!);
+  const { pickerType, setPickerType } = useColorPickerContext();
 
   const [isOpened, setIsOpened] = useState(false);
 

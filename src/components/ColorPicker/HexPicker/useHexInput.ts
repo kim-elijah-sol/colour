@@ -1,11 +1,8 @@
-import { ColorPickerContext } from '@/stores/createColorPickerStore';
-import React, { useContext, useEffect, useState } from 'react';
-import { useStore } from 'zustand';
+import { useColorPickerContext } from '@/stores/createColorPickerContext';
+import React, { useEffect, useState } from 'react';
 
 function useHexInput() {
-  const colorPickerStore = useContext(ColorPickerContext);
-
-  const { color, setColor } = useStore(colorPickerStore!);
+  const { color, setColor } = useColorPickerContext();
 
   const [value, setValue] = useState(color);
 

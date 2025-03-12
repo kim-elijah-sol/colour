@@ -1,10 +1,11 @@
-import createColorPickerStore, {
+import {
   ColorPickerContext,
-} from '@/stores/createColorPickerStore';
+  PickerType,
+} from '@/stores/createColorPickerContext';
 import useModal from '@/stores/useModal';
 import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
-import { useRef } from 'react';
+import { useState } from 'react';
 import HexPicker from './HexPicker';
 import PickerTypeSelect from './PickerTypeSelect';
 
@@ -18,8 +19,10 @@ type Props = {
   y: number;
 };
 
-function ColorPicker({ color, onChangeColor, direction, x, y }: Props) {
-  const colorPickerStore = useRef(createColorPickerStore(color)).current;
+function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
+  const [color, setColor] = useState(_color);
+
+  const [pickerType, setPickerType] = useState<PickerType>('hex');
 
   const { removeModal } = useModal();
 
@@ -29,7 +32,14 @@ function ColorPicker({ color, onChangeColor, direction, x, y }: Props) {
     direction === 'right' ? x : document.body.clientWidth - x;
 
   return (
-    <ColorPickerContext.Provider value={colorPickerStore}>
+    <ColorPickerContext.Provider
+      value={{
+        color,
+        setColor,
+        pickerType,
+        setPickerType,
+      }}
+    >
       <div className={style.dim} onClick={removeModal}>
         <div
           style={{
@@ -53,7 +63,7 @@ function ColorPicker({ color, onChangeColor, direction, x, y }: Props) {
             <PickerTypeSelect />
             <button
               className={style.applyButton}
-              onClick={() => onChangeColor(colorPickerStore.getState().color)}
+              onClick={() => onChangeColor(color)}
             >
               <Check size={24} />
             </button>

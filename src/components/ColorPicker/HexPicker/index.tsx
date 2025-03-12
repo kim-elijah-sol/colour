@@ -1,15 +1,11 @@
-import { ColorPickerContext } from '@/stores/createColorPickerStore';
-import { useContext } from 'react';
-import { useStore } from 'zustand';
+import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import * as style from './style.css';
 import useHexInput from './useHexInput';
 import useHueSlider from './useHueSlider';
 import usePicker from './usePicker';
 
 function HexPicker() {
-  const colorPickerStore = useContext(ColorPickerContext);
-
-  const color = useStore(colorPickerStore!, (state) => state.color);
+  const color = useColorPickerContext().color;
 
   const {
     pickerRef,
