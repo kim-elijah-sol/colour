@@ -1,12 +1,9 @@
-import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import Slider from '../Slider';
 import * as style from './style.css';
 import useRGBInput from './useRGBInput';
 import useRGBSlider from './useRGBSlider';
 
 function RGBSlider() {
-  const { color } = useColorPickerContext();
-
   const red = useRGBSlider('R');
   const green = useRGBSlider('G');
   const blue = useRGBSlider('B');

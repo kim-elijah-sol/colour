@@ -7,6 +7,7 @@ import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import HexPicker from './HexPicker';
+import HSLSlider from './HSLSlider';
 import PickerTypeSelect from './PickerTypeSelect';
 import RGBSlider from './RGBSlider';
 
@@ -66,6 +67,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
 
           {pickerType === 'hex' && <HexPicker />}
           {pickerType === 'rgb' && <RGBSlider />}
+          {pickerType === 'hsl' && <HSLSlider />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />

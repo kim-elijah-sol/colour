@@ -16,7 +16,7 @@ function HexPicker() {
     ...pickerProps
   } = usePicker();
 
-  const { sliderRef, sliderLeft, ...sliderProps } = useHueSlider();
+  const { sliderRef, sliderLeft, ...sliderProps } = useHueSlider(99.9);
 
   const hexInput = useHexInput();
 

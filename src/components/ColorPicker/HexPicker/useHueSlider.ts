@@ -8,13 +8,13 @@ import {
 } from '@/utils/functions';
 import useSlider from '../Slider/useSlider';
 
-function useHueSlider() {
+function useHueSlider(max: number) {
   const { color, setColor } = useColorPickerContext();
 
   const slider = useSlider(
     {
       onChange: (position) => {
-        position = Math.max(Math.min(position, 99.9), 0);
+        position = Math.max(Math.min(position, max), 0);
 
         const hue = Math.round(position * 3.6);
 

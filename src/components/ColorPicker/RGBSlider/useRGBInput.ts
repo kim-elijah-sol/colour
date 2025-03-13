@@ -1,7 +1,7 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { RGB } from '@/types';
 import { hexToRgb, rgbToHex } from '@/utils/functions';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function useRGBInput(channel: 'R' | 'G' | 'B') {
   const { color, setColor } = useColorPickerContext();
@@ -35,6 +35,10 @@ function useRGBInput(channel: 'R' | 'G' | 'B') {
 
     setColor(rgbToHex(newRGB));
   }
+
+  useEffect(() => {
+    setValue(rgb[rgbIndex].toString());
+  }, [color]);
 
   return {
     value,
