@@ -19,6 +19,11 @@ export const button = style([
 export const text = style({
   fontSize: 14,
   fontWeight: 600,
+  color: '#999',
+});
+
+export const selectText = style({
+  color: '#000',
 });
 
 export const icon = style({
@@ -59,5 +64,9 @@ export const option = style([
     borderRadius: 8,
     width: 120,
     textAlign: 'left',
+    transition: '0.21s',
+    ':hover': {
+      color: '#333',
+    },
   },
 ]);

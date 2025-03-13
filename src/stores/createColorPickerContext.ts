@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-export type PickerType = 'hex' | 'rgb';
+export type PickerType = 'hex' | 'rgb' | 'hsl' | 'hsv' | 'cmyk' | 'lab';
 
 type State = {
   color: string;
