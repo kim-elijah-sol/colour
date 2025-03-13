@@ -8,6 +8,7 @@ import { Check } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import HexPicker from './HexPicker';
 import PickerTypeSelect from './PickerTypeSelect';
+import RGBSlider from './RGBSlider';
 
 import * as style from './style.css';
 
@@ -60,10 +61,11 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
           onClick={(e) => e.stopPropagation()}
         >
           <Modal.Header right={<Modal.Header.CloseButton />}>
-            Color Picker
+            Colour Picker
           </Modal.Header>
 
           {pickerType === 'hex' && <HexPicker />}
+          {pickerType === 'rgb' && <RGBSlider />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />

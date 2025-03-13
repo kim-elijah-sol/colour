@@ -1,4 +1,5 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
+import Slider from '../Slider';
 import * as style from './style.css';
 import useHexInput from './useHexInput';
 import useHueSlider from './useHueSlider';
@@ -38,14 +39,12 @@ function HexPicker() {
             }}
           />
         </div>
-        <div ref={sliderRef} className={style.slider} {...sliderProps}>
-          <div
-            style={{
-              left: `${sliderLeft}%`,
-            }}
-            className={style.sliderController}
-          />
-        </div>
+        <Slider
+          ref={sliderRef}
+          left={sliderLeft}
+          {...sliderProps}
+          background='linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)'
+        />
         <div className={style.inputBox}>
           <input type='text' className={style.input} {...hexInput} />
           <div
