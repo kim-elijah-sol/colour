@@ -1,18 +1,13 @@
-import { useColorPickerContext } from '@/stores/createColorPickerContext';
-import { RGB } from '@/types';
-import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
-function useHSLInput(channel: 'H' | 'S' | 'L') {
-  const { color, setColor } = useColorPickerContext();
+type Props = {
+  defaultValue: number;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+  channel: 'H' | 'S' | 'L';
+};
 
-  const hsl = rgbToHsl(hexToRgb(color));
-
-  const hslIndex = (() => {
-    if (channel === 'H') return 0;
-    if (channel === 'S') return 1;
-    return 2;
-  })();
+function useHSLInput({ defaultValue, setValue, channel }: Props) {
+  const [innerValue, setInnerValue] = useState(defaultValue.toString());
 
   const valueMax = (() => {
     if (channel === 'H') return 360;
@@ -20,34 +15,28 @@ function useHSLInput(channel: 'H' | 'S' | 'L') {
     return 100;
   })();
 
-  const [value, setValue] = useState(hsl[hslIndex].toString());
-
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+    setInnerValue(e.target.value);
   }
 
   function onBlur({ target: { value } }: React.FocusEvent<HTMLInputElement>) {
-    const defaultValue = hsl[hslIndex].toString();
-
     if (value.replace(/[0-9]/g, '').length > 0) {
-      setColor(defaultValue);
+      setValue(defaultValue);
       return;
     }
 
     const newValue = Math.min(Number(value), valueMax);
 
-    const newHSL = [...hsl] as RGB;
-    newHSL[hslIndex] = newValue;
-
-    setColor(rgbToHex(hslToRgb(newHSL)));
+    setValue((newValue / valueMax) * 100);
+    setInnerValue(newValue.toString());
   }
 
   useEffect(() => {
-    setValue(hsl[hslIndex].toString());
-  }, [color]);
+    setInnerValue(defaultValue.toString());
+  }, [defaultValue]);
 
   return {
-    value,
+    value: innerValue,
     maxLength: 3,
     onChange,
     onBlur,

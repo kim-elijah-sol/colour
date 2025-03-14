@@ -1,36 +1,53 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
-import useHueSlider from '../HexPicker/useHueSlider';
+import { useEffect, useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useHSLInput from './useHSLInput';
+import useHSLSlider from './useHSLSlider';
 
 function HSLSlider() {
-  const { color } = useColorPickerContext();
+  const { color, setColor } = useColorPickerContext();
 
-  const hueSlider = useHueSlider(100);
+  const hsl = rgbToHsl(hexToRgb(color));
 
-  const hueInput = useHSLInput('H');
+  const [hue, setHue] = useState<number>(hsl[0] / 3.6);
+  const [saturation, setSaturation] = useState<number>(hsl[1]);
+  const [luminance, setLuminance] = useState<number>(hsl[2]);
 
-  const saturationBackground = (() => {
-    const [h, , l] = rgbToHsl(hexToRgb(color));
+  const hueSlider = useHSLSlider({
+    setValue: setHue,
+    channel: 'H',
+  });
+  const saturationSlider = useHSLSlider({
+    setValue: setSaturation,
+    channel: 'S',
+  });
+  const LuminanceSlider = useHSLSlider({
+    setValue: setLuminance,
+    channel: 'L',
+  });
 
-    const left = rgbToHex(hslToRgb([h, 0, l]));
-    const center = rgbToHex(hslToRgb([h, 50, l]));
-    const right = rgbToHex(hslToRgb([h, 100, l]));
+  const hueInput = useHSLInput({
+    defaultValue: hue * 3.6,
+    setValue: setHue,
+    channel: 'H',
+  });
+  const saturationInput = useHSLInput({
+    defaultValue: saturation,
+    setValue: setSaturation,
+    channel: 'S',
+  });
 
-    return `linear-gradient(to right, #${left}, #${center}, #${right})`;
-  })();
+  const luminanceInput = useHSLInput({
+    defaultValue: luminance,
+    setValue: setLuminance,
+    channel: 'L',
+  });
 
-  const luminanceBackground = (() => {
-    const [h, s] = rgbToHsl(hexToRgb(color));
-
-    const left = rgbToHex(hslToRgb([h, s, 0]));
-    const center = rgbToHex(hslToRgb([h, s, 50]));
-    const right = rgbToHex(hslToRgb([h, s, 100]));
-
-    return `linear-gradient(to right, #${left}, #${center}, #${right})`;
-  })();
+  useEffect(() => {
+    setColor(rgbToHex(hslToRgb([hue * 3.6, saturation, luminance])));
+  }, [hue, saturation, luminance]);
 
   return (
     <div className={style.container}>
@@ -43,7 +60,7 @@ function HSLSlider() {
 
           <Slider
             ref={hueSlider.sliderRef}
-            left={hueSlider.sliderLeft}
+            left={hue}
             onMouseDown={hueSlider.onMouseDown}
             background='linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)'
           />
@@ -52,19 +69,29 @@ function HSLSlider() {
         <div>
           <div className={style.top}>
             <p className={style.label}>Saturation</p>
-            <input className={style.input} type='text' />
+            <input className={style.input} type='text' {...saturationInput} />
           </div>
 
-          <Slider background={saturationBackground} />
+          <Slider
+            ref={saturationSlider.sliderRef}
+            left={saturation}
+            onMouseDown={saturationSlider.onMouseDown}
+            background={saturationSlider.background}
+          />
         </div>
 
         <div>
           <div className={style.top}>
             <p className={style.label}>Luminance</p>
-            <input className={style.input} type='text' />
+            <input className={style.input} type='text' {...luminanceInput} />
           </div>
 
-          <Slider background={luminanceBackground} />
+          <Slider
+            ref={LuminanceSlider.sliderRef}
+            left={luminance}
+            onMouseDown={LuminanceSlider.onMouseDown}
+            background={LuminanceSlider.background}
+          />
         </div>
       </div>
     </div>
