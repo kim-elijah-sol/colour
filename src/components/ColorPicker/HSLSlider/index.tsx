@@ -23,7 +23,7 @@ function HSLSlider() {
     setValue: setSaturation,
     channel: 'S',
   });
-  const LuminanceSlider = useHSLSlider({
+  const luminanceSlider = useHSLSlider({
     setValue: setLuminance,
     channel: 'L',
   });
@@ -87,10 +87,10 @@ function HSLSlider() {
           </div>
 
           <Slider
-            ref={LuminanceSlider.sliderRef}
+            ref={luminanceSlider.sliderRef}
             left={luminance}
-            onMouseDown={LuminanceSlider.onMouseDown}
-            background={LuminanceSlider.background}
+            onMouseDown={luminanceSlider.onMouseDown}
+            background={luminanceSlider.background}
           />
         </div>
       </div>

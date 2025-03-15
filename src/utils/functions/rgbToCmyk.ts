@@ -1,6 +1,6 @@
-import { RGB } from '@/types';
+import { CMYK, RGB } from '@/types';
 
-export function rgbToCmyk([r, g, b]: RGB) {
+export function rgbToCmyk([r, g, b]: RGB): CMYK {
   var c = 1 - r / 255;
   var m = 1 - g / 255;
   var y = 1 - b / 255;

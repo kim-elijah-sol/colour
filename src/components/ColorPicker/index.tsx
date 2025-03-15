@@ -6,6 +6,7 @@ import useModal from '@/stores/useModal';
 import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
+import CMYKSlider from './CMYKSlider';
 import HexPicker from './HexPicker';
 import HSLSlider from './HSLSlider';
 import HSVSlider from './HSVSlider';
@@ -76,6 +77,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
           {pickerType === 'rgb' && <RGBSlider />}
           {pickerType === 'hsl' && <HSLSlider />}
           {pickerType === 'hsv' && <HSVSlider />}
+          {pickerType === 'cmyk' && <CMYKSlider />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />
