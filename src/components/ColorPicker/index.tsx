@@ -5,7 +5,7 @@ import {
 import useModal from '@/stores/useModal';
 import Modal from '@/utils/components/Modal';
 import { Check } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import HexPicker from './HexPicker';
 import HSLSlider from './HSLSlider';
 import PickerTypeSelect from './PickerTypeSelect';
@@ -21,10 +21,12 @@ type Props = {
   y: number;
 };
 
+let _pickerType: PickerType = 'hex';
+
 function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
   const [color, setColor] = useState(_color);
 
-  const [pickerType, setPickerType] = useState<PickerType>('hex');
+  const [pickerType, setPickerType] = useState<PickerType>(_pickerType);
 
   const { removeModal } = useModal();
 
@@ -38,6 +40,10 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
 
     return mouseFromBottom - 160;
   }, []);
+
+  useEffect(() => {
+    _pickerType = pickerType;
+  }, [pickerType]);
 
   return (
     <ColorPickerContext.Provider
