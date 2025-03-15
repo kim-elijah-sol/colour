@@ -8,6 +8,7 @@ import { Check } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import HexPicker from './HexPicker';
 import HSLSlider from './HSLSlider';
+import HSVSlider from './HSVSlider';
 import PickerTypeSelect from './PickerTypeSelect';
 import RGBSlider from './RGBSlider';
 
@@ -74,6 +75,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
           {pickerType === 'hex' && <HexPicker />}
           {pickerType === 'rgb' && <RGBSlider />}
           {pickerType === 'hsl' && <HSLSlider />}
+          {pickerType === 'hsv' && <HSVSlider />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />
