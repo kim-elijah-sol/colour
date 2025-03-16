@@ -26,7 +26,7 @@ export const label = style({
 });
 
 export const input = style({
-  width: 50,
+  width: 56,
   height: 28,
   lineHeight: '28px',
   fontSize: 14,

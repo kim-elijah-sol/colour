@@ -10,6 +10,7 @@ import CMYKSlider from './CMYKSlider';
 import HexPicker from './HexPicker';
 import HSLSlider from './HSLSlider';
 import HSVSlider from './HSVSlider';
+import LABSlider from './LABSlider';
 import PickerTypeSelect from './PickerTypeSelect';
 import RGBSlider from './RGBSlider';
 
@@ -78,6 +79,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
           {pickerType === 'hsl' && <HSLSlider />}
           {pickerType === 'hsv' && <HSVSlider />}
           {pickerType === 'cmyk' && <CMYKSlider />}
+          {pickerType === 'lab' && <LABSlider />}
 
           <div className={style.bottom}>
             <PickerTypeSelect />

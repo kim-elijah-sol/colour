@@ -1,12 +1,13 @@
 import { RGB } from '@/types';
+import { LAB } from '@/types/LAB';
 
-export function rgbToLab(rgb: RGB) {
+export function rgbToLab(rgb: RGB): LAB {
   let r = rgb[0] / 255,
     g = rgb[1] / 255,
     b = rgb[2] / 255,
-    x: number,
-    y: number,
-    z: number;
+    x,
+    y,
+    z;
 
   r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
   g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
@@ -20,9 +21,5 @@ export function rgbToLab(rgb: RGB) {
   y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
   z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;
 
-  return [
-    Math.round(116 * y - 16),
-    Math.round(500 * (x - y)),
-    Math.round(200 * (y - z)),
-  ];
+  return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
 }
