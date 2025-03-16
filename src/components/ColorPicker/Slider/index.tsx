@@ -17,8 +17,6 @@ function Slider({
   min = 0,
   max = 100,
 }: Props) {
-  console.log(left);
-
   return (
     <div
       ref={ref}
