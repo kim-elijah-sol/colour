@@ -1,4 +1,5 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
+import { HSV } from '@/types';
 import { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@/utils/functions';
 import { useEffect, useState } from 'react';
 import * as style from '../RGBSlider/style.css';
@@ -11,7 +12,7 @@ function HSVSlider() {
 
   const hsv = rgbToHsv(hexToRgb(color));
 
-  const [hue, setHue] = useState<number>(hsv[0] / 3.6);
+  const [hue, setHue] = useState<number>(hsv[0]);
   const [saturation, setSaturation] = useState<number>(hsv[1]);
   const [value, setValue] = useState<number>(hsv[2]);
 
@@ -29,7 +30,7 @@ function HSVSlider() {
   });
 
   const hueInput = useHSVInput({
-    defaultValue: hue * 3.6,
+    defaultValue: hue,
     setValue: setHue,
     channel: 'H',
   });
@@ -44,8 +45,26 @@ function HSVSlider() {
     channel: 'V',
   });
 
+  function getBackground(hsvIndex: number) {
+    const hsv = rgbToHsv(hexToRgb(color));
+
+    const leftHSV = [...hsv] as HSV;
+    leftHSV[hsvIndex] = 0;
+    const left = rgbToHex(hsvToRgb(leftHSV));
+
+    const centerHSV = [...hsv] as HSV;
+    centerHSV[hsvIndex] = 50;
+    const center = rgbToHex(hsvToRgb(centerHSV));
+
+    const rightHSV = [...hsv] as HSV;
+    rightHSV[hsvIndex] = 100;
+    const right = rgbToHex(hsvToRgb(rightHSV));
+
+    return `linear-gradient(to right, #${left}, #${center}, #${right})`;
+  }
+
   useEffect(() => {
-    setColor(rgbToHex(hsvToRgb([hue * 3.6, saturation, value])));
+    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
   }, [hue, saturation, value]);
 
   return (
@@ -62,6 +81,7 @@ function HSVSlider() {
             left={hue}
             onMouseDown={hueSlider.onMouseDown}
             background='linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)'
+            max={360}
           />
         </div>
 
@@ -75,7 +95,7 @@ function HSVSlider() {
             ref={saturationSlider.sliderRef}
             left={saturation}
             onMouseDown={saturationSlider.onMouseDown}
-            background={saturationSlider.background}
+            background={getBackground(1)}
           />
         </div>
 
@@ -89,7 +109,7 @@ function HSVSlider() {
             ref={valueSlider.sliderRef}
             left={value}
             onMouseDown={valueSlider.onMouseDown}
-            background={valueSlider.background}
+            background={getBackground(2)}
           />
         </div>
       </div>

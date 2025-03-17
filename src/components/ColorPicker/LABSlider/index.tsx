@@ -1,6 +1,5 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
-import { RGB } from '@/types';
-import { LAB } from '@/types/LAB';
+import { LAB, RGB } from '@/types';
 import { hexToRgb, rgbToHex, rgbToLab } from '@/utils/functions';
 import { labToRgb } from '@/utils/functions/labToRgb';
 import { useEffect, useState } from 'react';
