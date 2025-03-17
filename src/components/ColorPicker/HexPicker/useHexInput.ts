@@ -1,31 +1,40 @@
-import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import React, { useEffect, useState } from 'react';
 
-function useHexInput() {
-  const { color, setColor } = useColorPickerContext();
+type Props = {
+  defaultValue: string;
+  setValue: (value: string) => void;
+  onChanged: (value: string) => void;
+};
 
-  const [value, setValue] = useState(color);
+function useHexInput({ defaultValue, setValue, onChanged }: Props) {
+  const [innerValue, setInnerValue] = useState(defaultValue);
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    let newValue = e.currentTarget.value;
+    setInnerValue(e.target.value);
+  }
+
+  function onBlur(e: React.FocusEvent<HTMLInputElement>) {
+    let newValue = e.target.value;
 
     newValue = newValue.replace(/[^0-9 | ^a-f | ^A-F]/g, '').toUpperCase();
 
+    if (newValue.length !== 6) {
+      setInnerValue(defaultValue);
+      return;
+    }
+
     setValue(newValue);
+    setInnerValue(newValue);
+    onChanged(newValue);
   }
 
   useEffect(() => {
-    if (value.length === 6 && color !== value) {
-      setColor(value);
-    }
-  }, [value]);
-
-  useEffect(() => {
-    setValue(color);
-  }, [color]);
+    setInnerValue(defaultValue);
+  }, [defaultValue]);
 
   return {
-    value,
+    value: innerValue,
+    onBlur,
     onChange,
     maxLength: 6,
   };

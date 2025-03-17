@@ -1,30 +1,18 @@
-import { useColorPickerContext } from '@/stores/createColorPickerContext';
-import {
-  getHue,
-  hexToRgb,
-  hslToRgb,
-  hsvToRgb,
-  rgbToHex,
-  rgbToHsv,
-} from '@/utils/functions';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
-function usePicker() {
-  const { color, setColor } = useColorPickerContext();
+type Props = {
+  setSaturation: React.Dispatch<React.SetStateAction<number>>;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+};
 
-  const colorRef = useRef<string>(color);
-
+function usePicker({ setSaturation, setValue }: Props) {
   const pickerRef = useRef<HTMLDivElement>(null);
 
   const isClicked = useRef<boolean>(false);
 
-  const hsv = rgbToHsv(hexToRgb(color));
-
-  function updateColor(e: Event) {
-    const color = colorRef.current;
-
+  function handleMouseEvent(e: Event) {
     const clickLeftPosition = e.clientX;
 
     const clickTopPosition = e.clientY;
@@ -47,43 +35,26 @@ function usePicker() {
     let topPosition =
       ((elementTopPosition - clickTopPosition) / elementHeight) * 100;
 
-    const hsv = rgbToHsv(hexToRgb(color));
-
     leftPosition = Math.max(Math.min(leftPosition, 100), 0);
     topPosition = Math.max(Math.min(topPosition, 100), 0);
 
-    const newColor = rgbToHex(
-      hsvToRgb([hsv[0], Math.round(leftPosition), Math.round(topPosition)])
-    );
-
-    setColor(newColor);
+    setSaturation(leftPosition);
+    setValue(topPosition);
   }
 
   function onMouseDown(e: Event) {
     isClicked.current = true;
 
-    updateColor(e);
+    handleMouseEvent(e);
   }
 
   function onMouseMove(e: Event) {
-    if (isClicked.current) updateColor(e);
+    if (isClicked.current) handleMouseEvent(e);
   }
 
   function onMouseUp() {
     isClicked.current = false;
   }
-
-  const pickerHighlightColor = rgbToHex(
-    hslToRgb([getHue(hexToRgb(color)), 100, 50])
-  );
-
-  const contollerLeft = `${hsv[1]}%`;
-
-  const contollerBottom = `${hsv[2]}%`;
-
-  useEffect(() => {
-    colorRef.current = color;
-  }, [color]);
 
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
@@ -98,9 +69,6 @@ function usePicker() {
   return {
     pickerRef,
     onMouseDown,
-    pickerHighlightColor,
-    contollerLeft,
-    contollerBottom,
   };
 }
 

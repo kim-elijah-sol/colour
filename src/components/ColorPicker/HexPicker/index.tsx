@@ -1,24 +1,56 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
+import {
+  hexToRgb,
+  hslToRgb,
+  hsvToRgb,
+  rgbToHex,
+  rgbToHsv,
+} from '@/utils/functions';
+import { useEffect, useState } from 'react';
 import Slider from '../Slider';
+import useSlider from '../Slider/useSlider';
 import * as style from './style.css';
 import useHexInput from './useHexInput';
-import useHueSlider from './useHueSlider';
 import usePicker from './usePicker';
 
 function HexPicker() {
-  const color = useColorPickerContext().color;
+  const { color, setColor } = useColorPickerContext();
 
-  const {
-    pickerRef,
-    pickerHighlightColor,
-    contollerLeft,
-    contollerBottom,
-    ...pickerProps
-  } = usePicker();
+  const hsv = rgbToHsv(hexToRgb(color));
 
-  const { sliderRef, sliderLeft, ...sliderProps } = useHueSlider(99.9);
+  const [hue, setHue] = useState(hsv[0]);
+  const [saturation, setSaturation] = useState(hsv[1]);
+  const [value, setValue] = useState(hsv[2]);
 
-  const hexInput = useHexInput();
+  const { pickerRef, ...pickerProps } = usePicker({
+    setSaturation,
+    setValue,
+  });
+
+  const { sliderRef, ...sliderProps } = useSlider(
+    {
+      onChange: setHue,
+      max: 360,
+    },
+    []
+  );
+
+  const hexInput = useHexInput({
+    defaultValue: color,
+    setValue: setColor,
+    onChanged: (hex) => {
+      const [hue, saturation, value] = rgbToHsv(hexToRgb(hex));
+      setHue(hue);
+      setSaturation(saturation);
+      setValue(value);
+    },
+  });
+
+  const pickerHighlightColor = rgbToHex(hslToRgb([hue, 100, 50]));
+
+  useEffect(() => {
+    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
+  }, [hue, saturation, value]);
 
   return (
     <div className={style.container}>
@@ -34,16 +66,17 @@ function HexPicker() {
           <div
             className={style.pickerController}
             style={{
-              left: contollerLeft,
-              bottom: contollerBottom,
+              left: `${saturation}%`,
+              bottom: `${value}%`,
             }}
           />
         </div>
         <Slider
           ref={sliderRef}
-          left={sliderLeft}
+          left={hue}
           {...sliderProps}
           background='linear-gradient(to right, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 17%, rgb(0, 255, 0) 33%, rgb(0, 255, 255) 50%, rgb(0, 0, 255) 67%, rgb(255, 0, 255) 83%, rgb(255, 0, 0) 100%)'
+          max={360}
         />
         <div className={style.inputBox}>
           <input type='text' className={style.input} {...hexInput} />
