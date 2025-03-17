@@ -7,6 +7,7 @@ globalStyle('*, *::before, *::after', {
   boxSizing: 'border-box',
   WebkitFontSmoothing: 'antialiased',
   userSelect: 'none',
+  color: '#000',
 });
 
 globalStyle('button, input, select, textarea', {
