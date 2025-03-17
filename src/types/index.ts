@@ -1,3 +1,2 @@
-export * from './CMYK';
+export * from './ColorChannel';
 export * from './ForegroundColorType';
-export * from './RGB';
