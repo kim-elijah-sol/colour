@@ -10,8 +10,6 @@ HEX -> CMYK, RGB, HSV, HSL, LAB, 팬톤 등 컬러 팔레트 기반 추천
 팬톤 컬러 등 이미 지정된 컬러 추천은 데이터 추출 필요
 
 - 현재 Picker 왔다갔다하면 계산 간 오차로 인해 원래 색상 손실되는 이슈 있음
-- HEX Code에 따라 각 Slider State 가 계산되는 방식 개선 필요. (Slider 가 안움직이는 Case 생김)
-- Slider 에 min, max 추가로 0~100 range 가 아닌 Slider 로직 개선 필요.
 
 ## Contrast 추측 - 완료
 
