@@ -82,7 +82,7 @@ function useHandleClickInfo(color: string) {
             />
             <InfoItem
               title='LAB'
-              value={rgbToLab(hexToRgb(color)).join(', ')}
+              value={rgbToLab(hexToRgb(color)).map(Math.round).join(', ')}
               color={ForegroundColorType}
             />
           </ul>
