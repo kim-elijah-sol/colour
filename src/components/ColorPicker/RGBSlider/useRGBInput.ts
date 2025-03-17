@@ -1,47 +1,35 @@
-import { useColorPickerContext } from '@/stores/createColorPickerContext';
-import { RGB } from '@/types';
-import { hexToRgb, rgbToHex } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
-function useRGBInput(channel: 'R' | 'G' | 'B') {
-  const { color, setColor } = useColorPickerContext();
+type Props = {
+  defaultValue: number;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+};
 
-  const rgb = hexToRgb(color);
-
-  const rgbIndex = (() => {
-    if (channel === 'R') return 0;
-    if (channel === 'G') return 1;
-    return 2;
-  })();
-
-  const [value, setValue] = useState(rgb[rgbIndex].toString());
+function useRGBInput({ defaultValue, setValue }: Props) {
+  const [innerValue, setInnerValue] = useState(defaultValue.toString());
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+    setInnerValue(e.target.value);
   }
 
   function onBlur({ target: { value } }: React.FocusEvent<HTMLInputElement>) {
-    const defaultValue = rgb[rgbIndex].toString();
-
     if (value.replace(/[0-9]/g, '').length > 0) {
-      setColor(defaultValue);
+      setValue(defaultValue);
       return;
     }
 
     const newValue = Math.min(Number(value), 255);
 
-    const newRGB = [...rgb] as RGB;
-    newRGB[rgbIndex] = newValue;
-
-    setColor(rgbToHex(newRGB));
+    setValue(newValue);
+    setInnerValue(newValue.toString());
   }
 
   useEffect(() => {
-    setValue(rgb[rgbIndex].toString());
-  }, [color]);
+    setInnerValue(defaultValue.toString());
+  }, [defaultValue]);
 
   return {
-    value,
+    value: innerValue,
     maxLength: 3,
     onChange,
     onBlur,

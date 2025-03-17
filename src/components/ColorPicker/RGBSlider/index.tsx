@@ -1,16 +1,60 @@
+import { useColorPickerContext } from '@/stores/createColorPickerContext';
+import { RGB } from '@/types';
+import { hexToRgb, rgbToHex } from '@/utils/functions';
+import { useEffect, useState } from 'react';
 import Slider from '../Slider';
 import * as style from './style.css';
 import useRGBInput from './useRGBInput';
 import useRGBSlider from './useRGBSlider';
 
 function RGBSlider() {
-  const red = useRGBSlider('R');
-  const green = useRGBSlider('G');
-  const blue = useRGBSlider('B');
+  const { color, setColor } = useColorPickerContext();
 
-  const redInput = useRGBInput('R');
-  const greenInput = useRGBInput('G');
-  const blueInput = useRGBInput('B');
+  const rgb = hexToRgb(color);
+
+  const [red, setRed] = useState(rgb[0]);
+  const [green, setGreen] = useState(rgb[1]);
+  const [blue, setBlue] = useState(rgb[2]);
+
+  const redSlider = useRGBSlider({
+    setValue: setRed,
+  });
+  const greenSlider = useRGBSlider({
+    setValue: setGreen,
+  });
+  const blueSlider = useRGBSlider({
+    setValue: setBlue,
+  });
+
+  const redInput = useRGBInput({
+    defaultValue: red,
+    setValue: setRed,
+  });
+  const greenInput = useRGBInput({
+    defaultValue: green,
+    setValue: setGreen,
+  });
+  const blueInput = useRGBInput({
+    defaultValue: blue,
+    setValue: setBlue,
+  });
+
+  function getBackground(rgbIndex: number) {
+    const leftRGB = [...rgb] as RGB;
+    leftRGB[rgbIndex] = 0;
+    const centerRGB = [...rgb] as RGB;
+    centerRGB[rgbIndex] = 128;
+    const rightRGB = [...rgb] as RGB;
+    rightRGB[rgbIndex] = 255;
+
+    return `linear-gradient(to right, #${rgbToHex(leftRGB)}, #${rgbToHex(
+      centerRGB
+    )}, #${rgbToHex(rightRGB)})`;
+  }
+
+  useEffect(() => {
+    setColor(rgbToHex([red, green, blue]));
+  }, [red, green, blue]);
 
   return (
     <div className={style.container}>
@@ -21,10 +65,12 @@ function RGBSlider() {
             <input className={style.input} type='text' {...redInput} />
           </div>
           <Slider
-            ref={red.sliderRef}
-            left={red.value / 2.55}
-            onMouseDown={red.onMouseDown}
-            background={red.background}
+            ref={redSlider.sliderRef}
+            left={red}
+            onMouseDown={redSlider.onMouseDown}
+            background={getBackground(0)}
+            min={redSlider.min}
+            max={redSlider.max}
           />
         </div>
 
@@ -35,10 +81,12 @@ function RGBSlider() {
           </div>
 
           <Slider
-            ref={green.sliderRef}
-            left={green.value / 2.55}
-            onMouseDown={green.onMouseDown}
-            background={green.background}
+            ref={greenSlider.sliderRef}
+            left={green}
+            onMouseDown={greenSlider.onMouseDown}
+            background={getBackground(1)}
+            min={greenSlider.min}
+            max={greenSlider.max}
           />
         </div>
 
@@ -48,10 +96,12 @@ function RGBSlider() {
             <input className={style.input} type='text' {...blueInput} />
           </div>
           <Slider
-            ref={blue.sliderRef}
-            left={blue.value / 2.55}
-            onMouseDown={blue.onMouseDown}
-            background={blue.background}
+            ref={blueSlider.sliderRef}
+            left={blue}
+            onMouseDown={blueSlider.onMouseDown}
+            background={getBackground(2)}
+            min={blueSlider.min}
+            max={blueSlider.max}
           />
         </div>
       </div>
