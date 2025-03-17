@@ -14,11 +14,9 @@ function useLABSlider({ setValue, channel }: Props) {
 
   const slider = useSlider(
     {
-      onChange: (value) => {
-        const _value = Math.round(Math.max(Math.min(value, 100), 0));
-
-        setValue(Math.round(min + (_value / 100) * (Math.abs(min) + max)));
-      },
+      onChange: setValue,
+      min,
+      max,
     },
     []
   );

@@ -19,33 +19,25 @@ function CMYKSlider() {
 
   const cyanSlider = useSlider(
     {
-      onChange: (value) => {
-        setCyan(Math.round(Math.max(Math.min(value, 100), 0)));
-      },
+      onChange: setCyan,
     },
     []
   );
   const magentaSlider = useSlider(
     {
-      onChange: (value) => {
-        setMagenta(Math.round(Math.max(Math.min(value, 100), 0)));
-      },
+      onChange: setMagenta,
     },
     []
   );
   const yellowSlider = useSlider(
     {
-      onChange: (value) => {
-        setYellow(Math.round(Math.max(Math.min(value, 100), 0)));
-      },
+      onChange: setYellow,
     },
     []
   );
   const keySlider = useSlider(
     {
-      onChange: (value) => {
-        setKey(Math.round(Math.max(Math.min(value, 100), 0)));
-      },
+      onChange: setKey,
     },
     []
   );

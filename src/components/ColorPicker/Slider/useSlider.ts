@@ -4,9 +4,14 @@ type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
 type Props = {
   onChange: (value: number) => void;
+  max?: number;
+  min?: number;
 };
 
-function useSlider({ onChange }: Props, deps: React.DependencyList) {
+function useSlider(
+  { onChange, max = 100, min = 0 }: Props,
+  deps: React.DependencyList
+) {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const isClicked = useRef<boolean>(false);
@@ -26,6 +31,8 @@ function useSlider({ onChange }: Props, deps: React.DependencyList) {
       ((clickPosition - elementStartPosition) / elementWidth) * 100;
 
     position = Math.max(Math.min(position, 100), 0);
+
+    position = Math.round(min + (position / 100) * (Math.abs(min) + max));
 
     onChange(position);
   }
