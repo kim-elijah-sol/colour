@@ -1,10 +1,11 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { CMYK } from '@/types';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
+import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import useCMYKInput from './useCMYKInput';
 
 function CMYKSlider() {
@@ -65,7 +66,7 @@ function CMYKSlider() {
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
-  useEffect(() => {
+  useIgnoreFirstEffect(() => {
     setColor(rgbToHex(cmykToRgb([cyan, magenta, yellow, key])));
   }, [cyan, magenta, yellow, key]);
 

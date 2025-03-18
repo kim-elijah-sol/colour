@@ -1,8 +1,9 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { RGB } from '@/types';
 import { hexToRgb, rgbToHex } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Slider from '../Slider';
+import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import * as style from './style.css';
 import useRGBInput from './useRGBInput';
 import useRGBSlider from './useRGBSlider';
@@ -52,7 +53,7 @@ function RGBSlider() {
     )}, #${rgbToHex(rightRGB)})`;
   }
 
-  useEffect(() => {
+  useIgnoreFirstEffect(() => {
     setColor(rgbToHex([red, green, blue]));
   }, [red, green, blue]);
 

@@ -1,9 +1,10 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { HSL } from '@/types';
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
+import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import useHSLInput from './useHSLInput';
 import useHSLSlider from './useHSLSlider';
 
@@ -64,7 +65,7 @@ function HSLSlider() {
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
-  useEffect(() => {
+  useIgnoreFirstEffect(() => {
     setColor(rgbToHex(hslToRgb([hue, saturation, luminance])));
   }, [hue, saturation, luminance]);
 

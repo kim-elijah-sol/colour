@@ -1,9 +1,10 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { LAB, RGB } from '@/types';
 import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
+import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import useLABInput from './useLABInput';
 import useLABSlider from './useLABSlider';
 
@@ -66,7 +67,7 @@ function LABSlider() {
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
-  useEffect(() => {
+  useIgnoreFirstEffect(() => {
     setColor(
       rgbToHex(
         labToRgb([luminance, greenRed, blueYellow]).map(Math.round) as RGB

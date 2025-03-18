@@ -1,9 +1,10 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { HSV } from '@/types';
 import { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
+import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import useHSVInput from './useHSVInput';
 import useHSVSlider from './useHSVSlider';
 
@@ -63,7 +64,7 @@ function HSVSlider() {
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
-  useEffect(() => {
+  useIgnoreFirstEffect(() => {
     setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
   }, [hue, saturation, value]);
 
