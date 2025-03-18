@@ -1,3 +1,4 @@
+import { enterToBlur } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -37,6 +38,7 @@ function useHexInput({ defaultValue, setValue, onChanged }: Props) {
     onBlur,
     onChange,
     maxLength: 6,
+    onKeyDown: enterToBlur(),
   };
 }
 

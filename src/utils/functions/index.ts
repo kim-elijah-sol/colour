@@ -1,6 +1,7 @@
 export * from './cmykToRgb';
 export * from './copy';
 export * from './delay';
+export * from './enterToBlur';
 export * from './findNotNil';
 export * from './getContrastRatio';
 export * from './getForegroundColorType';
@@ -18,3 +19,4 @@ export * from './rgbToHsl';
 export * from './rgbToHsv';
 export * from './rgbToLab';
 export * from './rgbToRgbPercentage';
+export * from './labToRgb'

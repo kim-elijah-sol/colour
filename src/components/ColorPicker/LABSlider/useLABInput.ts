@@ -1,3 +1,4 @@
+import { enterToBlur } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -43,6 +44,7 @@ function useLABInput({ defaultValue, setValue, channel }: Props) {
     maxLength: 4,
     onChange,
     onBlur,
+    onKeyDown: enterToBlur(),
   };
 }
 

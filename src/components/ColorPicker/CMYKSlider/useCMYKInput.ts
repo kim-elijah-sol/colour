@@ -1,3 +1,4 @@
+import { enterToBlur } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -36,6 +37,7 @@ function useCMYKInput(
     maxLength: 3,
     onChange,
     onBlur,
+    onKeyDown: enterToBlur(),
   };
 }
 

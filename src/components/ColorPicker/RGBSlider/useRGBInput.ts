@@ -1,3 +1,4 @@
+import { enterToBlur } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -33,6 +34,7 @@ function useRGBInput({ defaultValue, setValue }: Props) {
     maxLength: 3,
     onChange,
     onBlur,
+    onKeyDown: enterToBlur(),
   };
 }
 

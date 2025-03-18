@@ -1,3 +1,4 @@
+import { enterToBlur } from '@/utils/functions';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -40,6 +41,7 @@ function useHSVInput({ defaultValue, setValue, channel }: Props) {
     maxLength: 3,
     onChange,
     onBlur,
+    onKeyDown: enterToBlur(),
   };
 }
 

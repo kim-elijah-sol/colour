@@ -1,7 +1,6 @@
 import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { LAB, RGB } from '@/types';
-import { hexToRgb, rgbToHex, rgbToLab } from '@/utils/functions';
-import { labToRgb } from '@/utils/functions/labToRgb';
+import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@/utils/functions';
 import { useEffect, useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
