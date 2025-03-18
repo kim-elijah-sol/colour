@@ -1,6 +1,6 @@
-import { RGB } from '@/types';
+import { HSV, RGB } from '@/types';
 
-export function rgbToHsv([r, g, b]: RGB) {
+export function rgbToHsv([r, g, b]: RGB): HSV {
   const rabs = r / 255;
   const gabs = g / 255;
   const babs = b / 255;

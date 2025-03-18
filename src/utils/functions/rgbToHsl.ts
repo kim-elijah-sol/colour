@@ -1,6 +1,6 @@
-import { RGB } from '@/types';
+import { HSL, RGB } from '@/types';
 
-export function rgbToHsl(rgb: RGB): RGB {
+export function rgbToHsl(rgb: RGB): HSL {
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
   const b = rgb[2] / 255;
