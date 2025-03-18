@@ -37,17 +37,20 @@ function HexPicker() {
     setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
   }
 
-  const { pickerRef, ...pickerProps } = usePicker({
-    setSaturation: setSaturationForSlider,
-    setValue: setValueForSlider,
-  });
+  const { pickerRef, ...pickerProps } = usePicker(
+    {
+      setSaturation: setSaturationForSlider,
+      setValue: setValueForSlider,
+    },
+    [hue]
+  );
 
   const { sliderRef, ...sliderProps } = useSlider(
     {
       onChange: setHueForSlider,
       max: 360,
     },
-    []
+    [saturation, value]
   );
 
   const hexInput = useHexInput({

@@ -7,7 +7,10 @@ type Props = {
   setValue: (value: number) => void;
 };
 
-function usePicker({ setSaturation, setValue }: Props) {
+function usePicker(
+  { setSaturation, setValue }: Props,
+  deps: React.DependencyList
+) {
   const pickerRef = useRef<HTMLDivElement>(null);
 
   const isClicked = useRef<boolean>(false);
@@ -64,7 +67,7 @@ function usePicker({ setSaturation, setValue }: Props) {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
-  }, []);
+  }, deps);
 
   return {
     pickerRef,
