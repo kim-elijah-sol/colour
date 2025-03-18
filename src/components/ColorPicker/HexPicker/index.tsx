@@ -6,7 +6,7 @@ import {
   rgbToHex,
   rgbToHsv,
 } from '@/utils/functions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
 import * as style from './style.css';
@@ -22,14 +22,29 @@ function HexPicker() {
   const [saturation, setSaturation] = useState(hsv[1]);
   const [value, setValue] = useState(hsv[2]);
 
+  function setHueForSlider(hue: number) {
+    setHue(hue);
+    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
+  }
+
+  function setSaturationForSlider(saturation: number) {
+    setSaturation(saturation);
+    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
+  }
+
+  function setValueForSlider(value: number) {
+    setValue(value);
+    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
+  }
+
   const { pickerRef, ...pickerProps } = usePicker({
-    setSaturation,
-    setValue,
+    setSaturation: setSaturationForSlider,
+    setValue: setValueForSlider,
   });
 
   const { sliderRef, ...sliderProps } = useSlider(
     {
-      onChange: setHue,
+      onChange: setHueForSlider,
       max: 360,
     },
     []
@@ -47,10 +62,6 @@ function HexPicker() {
   });
 
   const pickerHighlightColor = rgbToHex(hslToRgb([hue, 100, 50]));
-
-  useEffect(() => {
-    setColor(rgbToHex(hsvToRgb([hue, saturation, value])));
-  }, [hue, saturation, value]);
 
   return (
     <div className={style.container}>

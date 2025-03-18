@@ -3,8 +3,8 @@ import React, { useEffect, useRef } from 'react';
 type Event = React.MouseEvent<HTMLDivElement> | MouseEvent;
 
 type Props = {
-  setSaturation: React.Dispatch<React.SetStateAction<number>>;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setSaturation: (saturation: number) => void;
+  setValue: (value: number) => void;
 };
 
 function usePicker({ setSaturation, setValue }: Props) {
