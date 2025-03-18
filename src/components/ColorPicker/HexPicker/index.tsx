@@ -42,7 +42,7 @@ function HexPicker() {
       setSaturation: setSaturationForSlider,
       setValue: setValueForSlider,
     },
-    [hue]
+    [hue, saturation, value]
   );
 
   const { sliderRef, ...sliderProps } = useSlider(
