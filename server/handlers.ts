@@ -1,6 +1,7 @@
 import { http, HttpResponse } from 'msw';
-import { getNew } from './new.get';
+import { createPost } from './create.post';
 import { putLike } from './like.put';
+import { getNew } from './new.get';
 
 export const handlers = [
   http.get('/', () => {
@@ -14,4 +15,5 @@ export const handlers = [
 
   getNew,
   putLike,
+  createPost,
 ];

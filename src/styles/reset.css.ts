@@ -1,7 +1,7 @@
 import { globalStyle } from '@vanilla-extract/css';
 
 globalStyle('*, *::before, *::after', {
-  fontFamily: 'Open Sans',
+  fontFamily: 'Fira Sans',
   margin: 0,
   padding: 0,
   boxSizing: 'border-box',

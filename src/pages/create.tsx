@@ -1,4 +1,9 @@
-import { PaletteEditor, TopGuideText } from '@/domain/create/components';
+import {
+  CreateContainer,
+  CreateCTAButton,
+  PaletteEditor,
+  TopGuideText,
+} from '@/domain/create/components';
 import useCreatePalette from '@/domain/create/hooks/useCreatePalette';
 
 function Create() {
@@ -7,10 +12,11 @@ function Create() {
   if (colors.length === 0) return null;
 
   return (
-    <div>
+    <CreateContainer>
       <TopGuideText />
       <PaletteEditor />
-    </div>
+      <CreateCTAButton />
+    </CreateContainer>
   );
 }
 

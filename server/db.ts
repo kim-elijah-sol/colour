@@ -50,4 +50,15 @@ export class PaletteDB {
   getData() {
     return this.data;
   }
+
+  create(colors: string[]){ 
+    this.data.unshift({
+      id: new Date().valueOf(),
+      colors,
+      isLike: false,
+      likeCount: 0
+    })
+
+    return true
+  }
 }

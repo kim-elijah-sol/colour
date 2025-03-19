@@ -2,14 +2,14 @@ import { margin, padding, styleToken } from '@/utils/styles';
 import { keyframes, style } from '@vanilla-extract/css';
 
 export const topGuideTextContainerStyle = style({
-  ...margin({ y: 40 }),
+  ...margin({ bottom: 40 }),
   ...padding({ x: 32 }),
   textAlign: 'center',
 });
 
 export const topGuideImageStyle = style({
   width: 64,
-  ...margin({bottom: 24}),
+  ...margin({ bottom: 24 }),
 });
 
 export const topGuideText1BackgroundStyle = style({
