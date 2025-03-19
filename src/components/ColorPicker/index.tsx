@@ -1,3 +1,5 @@
+import useResizeWindow from '@/hooks/useResizeWindow';
+import useScrollWindow from '@/hooks/useScrollWindow';
 import {
   ColorPickerContext,
   PickerType,
@@ -48,6 +50,10 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
     _pickerType = pickerType;
   }, [pickerType]);
 
+  useResizeWindow(removeModal, []);
+
+  useScrollWindow(removeModal, []);
+
   return (
     <ColorPickerContext.Provider
       value={{
@@ -57,7 +63,7 @@ function ColorPicker({ color: _color, onChangeColor, direction, x, y }: Props) {
         setPickerType,
       }}
     >
-      <div className={style.dim} onClick={removeModal}>
+      <div className={style.dim}>
         <div
           style={{
             bottom: bottomPosition,
