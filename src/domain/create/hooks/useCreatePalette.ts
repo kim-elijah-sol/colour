@@ -1,4 +1,5 @@
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import { randomHex } from '@/utils/functions';
 import { useEffect } from 'react';
 
 function useCreatePalette() {
@@ -7,7 +8,12 @@ function useCreatePalette() {
 
   useEffect(() => {
     if (colors.length === 0) {
-      setAllColors(['003049', 'D62828', 'F77F00', 'FCBF49']);
+      setAllColors([
+        randomHex(150),
+        randomHex(150),
+        randomHex(150),
+        randomHex(150),
+      ]);
     }
 
     return () => {

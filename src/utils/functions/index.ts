@@ -13,10 +13,12 @@ export * from './hexToRgb';
 export * from './hslToRgb';
 export * from './hsvToRgb';
 export * from './isNotUndefined';
+export * from './labToRgb';
+export * from './random';
+export * from './randomHex';
 export * from './rgbToCmyk';
 export * from './rgbToHex';
 export * from './rgbToHsl';
 export * from './rgbToHsv';
 export * from './rgbToLab';
 export * from './rgbToRgbPercentage';
-export * from './labToRgb'
