@@ -4,6 +4,7 @@ import {
   PaletteEditor,
   TopGuideText,
 } from '@/domain/create/components';
+import ShowTools from '@/domain/create/components/ShowTools';
 import useCreatePalette from '@/domain/create/hooks/useCreatePalette';
 
 function Create() {
@@ -14,6 +15,7 @@ function Create() {
   return (
     <CreateContainer>
       <TopGuideText />
+      <ShowTools />
       <PaletteEditor />
       <CreateCTAButton />
     </CreateContainer>
