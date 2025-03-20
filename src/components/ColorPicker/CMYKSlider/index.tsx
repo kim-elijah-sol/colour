@@ -2,10 +2,10 @@ import { useColorPickerContext } from '@/stores/createColorPickerContext';
 import { CMYK } from '@/types';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
 import { useState } from 'react';
+import useIgnoreFirstEffect from '../../../hooks/useIgnoreFirstEffect';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
-import useIgnoreFirstEffect from '../useIgnoreFirstEffect';
 import useCMYKInput from './useCMYKInput';
 
 function CMYKSlider() {
