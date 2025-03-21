@@ -1,5 +1,4 @@
-import { clickableStyle } from '@/utils/styles';
-import { flex } from '@/utils/styles/flex.css';
+import { flex } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
 export const container = style([
