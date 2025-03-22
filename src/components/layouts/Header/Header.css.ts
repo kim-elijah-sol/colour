@@ -1,9 +1,10 @@
 import { style } from '@vanilla-extract/css';
 
+import { vars } from '@/styles/theme.css';
 import { fixed, margin, padding, styleToken } from '@/utils/styles';
 
 export const headerStyle = style({
-  height: 64,
+  height: vars.size.headerHeight,
   background: '#FFFFFF',
   ...fixed({
     x: 0,
@@ -19,7 +20,7 @@ export const headerStyle = style({
     left: 0,
     right: 0,
     height: 1,
-    background: 'linear-gradient(to right, transparent, #e1e1e1, transparent)',
+    background: 'linear-gradient(to right, transparent, #E0E0E0, transparent)',
   },
 });
 

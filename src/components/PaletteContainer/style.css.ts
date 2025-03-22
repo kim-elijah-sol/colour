@@ -1,11 +1,14 @@
-import { padding } from '@/utils/styles';
+import { vars } from '@/styles/theme.css';
+import { margin, padding, styleToken } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
 export const paletteContainerStyle = style({
+  width: `calc(${styleToken.full} - ${vars.size.asideWidth})`,
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
   gap: 24,
   ...padding(32),
+  ...margin({ left: styleToken.auto }),
   '@media': {
     'screen and (max-width: 1000px)': {
       gridTemplateColumns: 'repeat(3, 1fr)',

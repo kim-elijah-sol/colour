@@ -11,4 +11,8 @@ export const [themeClass, vars] = createTheme({
     black: hexToRGBAValue('000000'),
     text: hexToRGBAValue('333333'),
   },
+  size: {
+    headerHeight: '64px',
+    asideWidth: '72px',
+  },
 });

@@ -1,13 +1,10 @@
 import { style } from '@vanilla-extract/css';
 
-import { margin, padding, styleToken } from '@/utils/styles';
+import { margin } from '@/utils/styles';
 
 export const mainStyle = style({
-  ...padding({
-    top: 64,
-  }),
-  maxWidth: 1200,
+  position: 'relative',
   ...margin({
-    x: styleToken.auto,
+    top: 64,
   }),
 });

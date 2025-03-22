@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router';
-import Main from './Main/Main';
+import Aside from './Aside/Aside';
 import Header from './Header/Header';
+import Main from './Main/Main';
 
 function Layout() {
   return (
     <>
       <Header />
       <Main>
+        <Aside />
         <Outlet />
       </Main>
     </>
