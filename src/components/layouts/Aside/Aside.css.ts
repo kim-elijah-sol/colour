@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { flex, padding } from '@/utils/styles';
+import { fixed, flex, padding } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
 export const aside = style([
@@ -8,10 +8,11 @@ export const aside = style([
     align: 'center',
   }),
   {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    height: `calc(100vh - ${vars.size.headerHeight})`,
+    ...fixed({
+      top: vars.size.headerHeight,
+      left: 0,
+      bottom: 0,
+    }),
     width: vars.size.asideWidth,
     zIndex: 90,
     background: vars.color.white,
@@ -53,6 +54,7 @@ export const iconHolder = style([
 
 export const icon = style({
   transition: '0.21s',
+  stroke: '#BCBCBC',
   selectors: {
     [`${anchor}:hover &`]: {
       stroke: vars.color.text,
@@ -60,11 +62,28 @@ export const icon = style({
   },
 });
 
+export const activeIcon = style([
+  icon,
+  {
+    stroke: vars.color.text,
+  },
+]);
+
 export const anchorText = style({
   fontSize: 14,
+  color: '#BCBCBC',
+  fontWeight: 600,
   selectors: {
     [`${anchor}:hover &`]: {
       color: `${vars.color.text} !important`,
     },
   },
 });
+
+export const activeAnchorText = style([
+  anchorText,
+  {
+    color: vars.color.text,
+    fontWeight: 800,
+  },
+]);

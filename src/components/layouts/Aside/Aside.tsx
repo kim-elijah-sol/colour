@@ -45,9 +45,9 @@ function Aside() {
         return (
           <Link to={it.path} className={style.anchor} key={it.path}>
             <div className={style.iconHolder}>
-              <Icon size={24} color={color} className={style.icon} />
+              <Icon size={24} className={isActive ? style.activeIcon: style.icon} />
             </div>
-            <p className={style.anchorText} style={{ color }}>
+            <p className={isActive ? style.activeAnchorText : style.anchorText}>
               {it.name}
             </p>
           </Link>
