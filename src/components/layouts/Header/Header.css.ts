@@ -43,3 +43,13 @@ export const logoU = style({
 export const logoR = style({
   color: vars.color.brand,
 });
+
+export const shadow = style({
+  position: 'fixed',
+  left: '50%',
+  top: 0,
+  height: vars.size.headerHeight,
+  width: '50%',
+  transform: 'translateX(-50%)',
+  boxShadow: '0 0 16px 4px rgba(30,30,30,0.05)',
+});
