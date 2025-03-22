@@ -1,4 +1,5 @@
 import { globalStyle } from '@vanilla-extract/css';
+import { vars } from './theme.css';
 
 globalStyle('*, *::before, *::after', {
   fontFamily: 'Fira Sans',
@@ -7,7 +8,7 @@ globalStyle('*, *::before, *::after', {
   boxSizing: 'border-box',
   WebkitFontSmoothing: 'antialiased',
   userSelect: 'none',
-  color: '#000',
+  color: vars.color.text,
 });
 
 globalStyle('button, input, select, textarea', {
@@ -18,4 +19,8 @@ globalStyle('button, input, select, textarea', {
 
 globalStyle('::-webkit-scrollbar', {
   display: 'none',
+});
+
+globalStyle('html', {
+  background: '#F6F8FA',
 });
