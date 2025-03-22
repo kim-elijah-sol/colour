@@ -26,8 +26,7 @@ export const header = style([
       right: 0,
       bottom: 0,
       height: 1,
-      background:
-        'linear-gradient(to right, transparent, #E0E0E0, transparent)',
+      background: 'linear-gradient(to right, #F8F8F8, #E0E0E0, #F8F8F8)',
     },
   },
 ]);
@@ -51,5 +50,5 @@ export const shadow = style({
   height: vars.size.headerHeight,
   width: '50%',
   transform: 'translateX(-50%)',
-  boxShadow: '0 0 16px 4px rgba(30,30,30,0.05)',
+  boxShadow: '0 0 32px 0px rgba(30,30,30,0.08)',
 });
