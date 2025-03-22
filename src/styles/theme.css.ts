@@ -10,6 +10,8 @@ export const [themeClass, vars] = createTheme({
     white: hexToRGBAValue('FFFFFF'),
     black: hexToRGBAValue('000000'),
     text: hexToRGBAValue('333333'),
+    red: hexToRGBAValue('FF006A'),
+    green: hexToRGBAValue('00F05F'),
   },
   size: {
     headerHeight: '64px',
