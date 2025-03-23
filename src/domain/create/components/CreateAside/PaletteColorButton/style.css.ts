@@ -9,7 +9,7 @@ export const button = style([
   }),
   {
     flex: 1,
-    height: `calc(calc(${vars.size.domain.create.asideWidth} - 32px) / 4)`,
+    height: `calc(calc(${vars.size.domain.create.asideWidth} - 48px) / 4)`,
     cursor: 'pointer',
     transition: '0.21s',
     ':hover': {

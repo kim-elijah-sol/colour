@@ -1,4 +1,4 @@
-import { flex } from '@/utils/styles';
+import { flex, margin } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
-export const container = style([flex(), {}]);
+export const container = style([flex(), { ...margin({ bottom: 16 }) }]);

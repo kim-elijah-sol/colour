@@ -19,7 +19,7 @@ export const [themeClass, vars] = createTheme({
 
     domain: {
       create: {
-        asideWidth: '392px',
+        asideWidth: '408px',
       },
     },
   },

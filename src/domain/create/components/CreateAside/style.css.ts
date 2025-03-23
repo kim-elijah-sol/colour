@@ -9,6 +9,7 @@ export const aside = style([
     height: vars.full,
     background: vars.color.white,
     boxShadow: '0 0 16px 8px rgba(50, 50, 50, 0.05)',
-    ...padding(16),
+    ...padding(24),
+    gap: 16,
   },
 ]);
