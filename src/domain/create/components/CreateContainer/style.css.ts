@@ -1,9 +1,10 @@
-import { padding } from '@/utils/styles';
+import { vars } from '@/styles/theme.css';
+import { flex } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
-export const createContaier = style({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  ...padding({ top: 40 }),
-});
+export const createContaier = style([
+  flex(),
+  {
+    height: vars.full,
+  },
+]);

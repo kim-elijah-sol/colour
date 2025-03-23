@@ -16,7 +16,7 @@ export const aside = style([
     width: vars.size.asideWidth,
     zIndex: 90,
     background: vars.color.white,
-    boxShadow: '0 0 32px 8px rgba(50, 50, 50, 0.05)',
+    boxShadow: '0 0 16px 8px rgba(50, 50, 50, 0.05)',
     ...padding({ x: 8, y: 16 }),
     gap: 24,
   },

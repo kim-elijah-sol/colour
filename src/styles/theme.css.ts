@@ -16,5 +16,13 @@ export const [themeClass, vars] = createTheme({
   size: {
     headerHeight: '64px',
     asideWidth: '72px',
+
+    domain: {
+      create: {
+        asideWidth: '392px',
+      },
+    },
   },
+  full: '100%',
+  auto: 'auto',
 });

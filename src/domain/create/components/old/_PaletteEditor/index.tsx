@@ -1,9 +1,9 @@
-import useCreatePalette from '@/domain/create/hooks/useCreatePalette';
+import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import PaletteEditorColorItem from '../_PaletteEditorColorItem';
 import { paletteEditorContainer } from './style.css';
 
 function PaletteEditor() {
-  const { colors, setColor } = useCreatePalette();
+  const { colors, setColor } = useCreatePaletteColors();
 
   return (
     <div className={paletteEditorContainer}>
