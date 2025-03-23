@@ -1,10 +1,4 @@
-import {
-  CreateContainer,
-  CreateCTAButton,
-  PaletteEditor,
-  TopGuideText,
-} from '@/domain/create/components';
-import ShowTools from '@/domain/create/components/ShowTools';
+import { CreateContainer } from '@/domain/create/components';
 import useCreatePalette from '@/domain/create/hooks/useCreatePalette';
 
 function Create() {
@@ -12,14 +6,7 @@ function Create() {
 
   if (colors.length === 0) return null;
 
-  return (
-    <CreateContainer>
-      <TopGuideText />
-      <ShowTools />
-      <PaletteEditor />
-      <CreateCTAButton />
-    </CreateContainer>
-  );
+  return <CreateContainer></CreateContainer>;
 }
 
 export default Create;

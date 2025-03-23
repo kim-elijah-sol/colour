@@ -1,7 +1,7 @@
 import { LoaderPinwheel, Paintbrush } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import useCreatePalette from '../../hooks/useCreatePalette';
-import { useHandleCreate } from '../../hooks/useHandleCreate';
+import useCreatePalette from '../../../hooks/useCreatePalette';
+import { useHandleCreate } from '../../../hooks/useHandleCreate';
 import * as style from './style.css';
 
 function CreateCTAButton() {

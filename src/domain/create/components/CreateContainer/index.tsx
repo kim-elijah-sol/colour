@@ -1,8 +1,8 @@
+import { flex } from '@/utils/styles';
 import { PropsWithChildren } from 'react';
-import * as style from './style.css';
 
 function CreateContainer({ children }: PropsWithChildren) {
-  return <div className={style.createContaier}>{children}</div>;
+  return <div className={flex()}>{children}</div>;
 }
 
 export default CreateContainer;

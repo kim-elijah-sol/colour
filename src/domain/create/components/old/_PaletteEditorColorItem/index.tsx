@@ -1,5 +1,10 @@
-import useForegroundColorType from '../../hooks/useForegroundColorType';
-import { Info, Contrast, Table } from 'lucide-react';
+import useForegroundColorType from '@/domain/create/hooks/useForegroundColorType';
+import useHandleClickContrast from '@/domain/create/hooks/useHandleClickContrast';
+import useHandleClickInfo from '@/domain/create/hooks/useHandleClickInfo';
+import useHandleClickShade from '@/domain/create/hooks/useHandleClickShade';
+import useColorPicker from '@/hooks/useColorPicker';
+import { Contrast, Info, Table } from 'lucide-react';
+import { useMemo } from 'react';
 import {
   backgroundBarStyle,
   colorChangeButtonStyle,
@@ -8,11 +13,6 @@ import {
   whiteColorChangeButtonStyle,
   whiteToolButtonStyle,
 } from './style.css';
-import { useMemo } from 'react';
-import useHandleClickInfo from '../../hooks/useHandleClickInfo';
-import useHandleClickContrast from '../../hooks/useHandleClickContrast';
-import useHandleClickShade from '../../hooks/useHandleClickShade';
-import useColorPicker from '@/hooks/useColorPicker';
 
 type Props = {
   color: string;
@@ -59,7 +59,7 @@ function PaletteEditorColorItem({ color, onChangeColor }: Props) {
           handleClickColorPicker({
             mouseX: e.pageX,
             mouseY: e.pageY,
-            color
+            color,
           })
         }
       >

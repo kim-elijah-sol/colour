@@ -1,5 +1,5 @@
-import useCreatePalette from '../../hooks/useCreatePalette';
-import PaletteEditorColorItem from '../PaletteEditorColorItem';
+import useCreatePalette from '@/domain/create/hooks/useCreatePalette';
+import PaletteEditorColorItem from '../_PaletteEditorColorItem';
 import { paletteEditorContainer } from './style.css';
 
 function PaletteEditor() {
@@ -8,7 +8,11 @@ function PaletteEditor() {
   return (
     <div className={paletteEditorContainer}>
       {colors.map((it, index) => (
-        <PaletteEditorColorItem color={it} key={index} onChangeColor={color => setColor(index, color)} />
+        <PaletteEditorColorItem
+          color={it}
+          key={index}
+          onChangeColor={(color) => setColor(index, color)}
+        />
       ))}
     </div>
   );
