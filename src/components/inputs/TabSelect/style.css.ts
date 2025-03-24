@@ -32,6 +32,9 @@ export const notSelectedOption = style([
     ':hover': {
       background: '#e8ebed',
     },
+    ':active': {
+      background: '#d7dbde',
+    },
   },
 ]);
 
