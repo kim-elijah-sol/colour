@@ -48,10 +48,15 @@ type OptionProps = PropsWithChildren<{
 }>;
 
 function Option({ children, value }: OptionProps) {
-  const { setValue } = useTabSelectContext();
+  const { setValue, value: _value } = useTabSelectContext();
+
+  const isSelected = value === _value;
 
   return (
-    <button className={style.option} onClick={() => setValue(value)}>
+    <button
+      className={isSelected ? style.option : style.notSelectedOption}
+      onClick={() => setValue(value)}
+    >
       {children}
     </button>
   );

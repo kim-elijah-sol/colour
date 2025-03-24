@@ -5,6 +5,8 @@ import { style } from '@vanilla-extract/css';
 export const tabSelect = style([
   flex(),
   {
+    ...padding(4),
+    gap: 8,
     position: 'relative',
     background: vars.color.background,
     borderRadius: 22,
@@ -18,10 +20,20 @@ export const option = style({
   flex: 1,
   fontSize: 16,
   fontWeight: 600,
-  height: 44,
+  height: 36,
   position: 'relative',
+  borderRadius: 18,
   zIndex: 2,
 });
+
+export const notSelectedOption = style([
+  option,
+  {
+    ':hover': {
+      background: '#e8ebed',
+    },
+  },
+]);
 
 export const indicator = style({
   position: 'absolute',
