@@ -1,14 +1,24 @@
+# Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
+
 ## Todo Feature
 
 - [ ] Preview 기능 - 간단한 UI
 - [ ] 팬톤 컬러 추천 - 라이센스 취득 필요
 - [ ] Similar Palette 추천
 
+# 2025-03-24
+
+Create 페이지 리디자인 중에 있다.<br>
+현재 팔레트를 최상단에 보여주고 바로 아래에 색상 정보, 색상 대조 기능까지 붙혔다.<br>
+이제 ColorPicker 를 Aside 부분에 잘 녹여내면 될 것 같다.<br>
+Aside 우측에는 UI 미리보기를 만들어보는걸로!<br>
+Shade 추천 기능은 좀 더 가다듬어야 할 것 같다.
+
 # 2025-03-21
 
-브랜드 컬러를 <b style="color:#0064FF">#006BFF</b> 로 정했다.<br>
+브랜드 컬러를 <b style="color:#006BFF">#006BFF</b> 로 정했다.<br>
 파란색 계열로 하고 싶었고, 파란색 중 white, black 의 Contrast 가 거의 비슷한 색상을 찾다가<br>
-<b style="color:#0064FF">#006BFF</b> 컬러가 <b>white: 4.62:1</b> , <b>black : 4.55:1</b> 로 결과가 나오길래 바로 fix.<br>
+<b style="color:#006BFF">#006BFF</b> 컬러가 <b>white: 4.62:1</b> , <b>black : 4.55:1</b> 로 결과가 나오길래 바로 fix.<br>
 디자인 레퍼런스는 <b>Dribbble</b> 에서 스튜디오 같은 느낌을 찾다가,<br>
 <b>스튜디오 느낌</b>도 나면서 <b>Admin Dashboard 느낌</b>도 나는 디자인을 찾아서 화면 구성을 다시 해볼 예정이다.
 
