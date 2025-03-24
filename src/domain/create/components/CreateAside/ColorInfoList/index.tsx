@@ -6,6 +6,7 @@ import {
   rgbToLab,
 } from '@/utils/functions';
 import ColorInfo from '../ColorInfo';
+import * as style from './style.css';
 
 type Props = {
   color: string;
@@ -13,7 +14,7 @@ type Props = {
 
 function ColorInfoList({ color }: Props) {
   return (
-    <>
+    <ul className={style.container}>
       <ColorInfo label='HEX' value={`#${color}`} />
       <ColorInfo label='RGB' value={hexToRgb(color).join(', ')} />
       <ColorInfo label='HSL' value={rgbToHsl(hexToRgb(color)).join(', ')} />
@@ -23,7 +24,7 @@ function ColorInfoList({ color }: Props) {
         label='LAB'
         value={rgbToLab(hexToRgb(color)).map(Math.round).join(', ')}
       />
-    </>
+    </ul>
   );
 }
 
