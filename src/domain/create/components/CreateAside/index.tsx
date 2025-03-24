@@ -2,6 +2,7 @@ import { TabSelect } from '@/components/inputs';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { useState } from 'react';
 import ColorInfoList from './ColorInfoList';
+import ContrastInfoList from './ContrastInfoList';
 import PaletteColorButton from './PaletteColorButton';
 import PaletteContainer from './PaletteContainer';
 import * as style from './style.css';
@@ -35,6 +36,9 @@ function CreateAside() {
       </TabSelect>
 
       {selectedDetail === 'info' && <ColorInfoList color={selectedColor} />}
+      {selectedDetail === 'contrast' && (
+        <ContrastInfoList color={selectedColor} />
+      )}
     </div>
   );
 }
