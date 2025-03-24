@@ -1,3 +1,4 @@
+import { TabSelect } from '@/components/inputs';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import {
   hexToRgb,
@@ -15,6 +16,8 @@ import * as style from './style.css';
 function CreateAside() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const [selectedDetail, setSelectedDetail] = useState<string>('info');
+
   const { colors } = useCreatePaletteColors();
 
   const selectedColor = colors[selectedIndex];
@@ -31,6 +34,13 @@ function CreateAside() {
           />
         ))}
       </PaletteContainer>
+
+      <TabSelect value={selectedDetail} onChange={setSelectedDetail}>
+        <TabSelect.Option value='info'>Info</TabSelect.Option>
+        <TabSelect.Option value='contrast'>Contrast</TabSelect.Option>
+        <TabSelect.Option value='shades'>Shades</TabSelect.Option>
+      </TabSelect>
+
       <ColorInfo label='HEX' value={`#${selectedColor}`} />
       <ColorInfo label='RGB' value={hexToRgb(selectedColor).join(', ')} />
       <ColorInfo

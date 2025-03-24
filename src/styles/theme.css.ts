@@ -12,6 +12,7 @@ export const [themeClass, vars] = createTheme({
     text: hexToRGBAValue('333333'),
     red: hexToRGBAValue('FF006A'),
     green: hexToRGBAValue('00F05F'),
+    background: hexToRGBAValue('F6F8FA'),
   },
   size: {
     headerHeight: '64px',
@@ -24,5 +25,6 @@ export const [themeClass, vars] = createTheme({
     },
   },
   full: '100%',
+  half: '50%',
   auto: 'auto',
 });
