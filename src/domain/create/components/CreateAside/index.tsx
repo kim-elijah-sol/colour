@@ -5,14 +5,13 @@ import ColorInfoList from './ColorInfoList';
 import ContrastInfoList from './ContrastInfoList';
 import PaletteColorButton from './PaletteColorButton';
 import PaletteContainer from './PaletteContainer';
+import ShadeInfoList from './ShadeInfoList';
 import * as style from './style.css';
 
 function CreateAside() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
   const [selectedDetail, setSelectedDetail] = useState<string>('info');
 
-  const { colors } = useCreatePaletteColors();
+  const { selectedIndex, setSelectedIndex, colors } = useCreatePaletteColors();
 
   const selectedColor = colors[selectedIndex];
 
@@ -39,6 +38,7 @@ function CreateAside() {
       {selectedDetail === 'contrast' && (
         <ContrastInfoList color={selectedColor} />
       )}
+      {selectedDetail === 'shades' && <ShadeInfoList color={selectedColor} />}
     </div>
   );
 }

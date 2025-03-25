@@ -1,55 +1,25 @@
+import { pipe } from 'fp-ts/function';
 import { hexToRgb } from './hexToRgb';
+import { hslToRgb } from './hslToRgb';
 import { rgbToHex } from './rgbToHex';
-
-const STEP_COUNT = 6;
-
-function getWhiteStep(value: number) {
-  return (255 - value) / STEP_COUNT;
-}
-
-function getBlackStep(value: number) {
-  return value / STEP_COUNT;
-}
-
-function getWhiteValueByStep(baseValue: number, step: number, index: number) {
-  return Math.round(baseValue + step * index);
-}
-function getBlackValueByStep(baseValue: number, step: number, index: number) {
-  return Math.round(baseValue - step * index);
-}
+import { rgbToHsl } from './rgbToHsl';
 
 export function getShades(hex: string): string[] {
-  const [r, g, b] = hexToRgb(hex);
+  const shades: string[] = [];
 
-  const whiteRedStep = getWhiteStep(r);
-  const whiteGreenStep = getWhiteStep(g);
-  const whiteBlueStep = getWhiteStep(b);
+  const [h, s, l] = pipe(hex, hexToRgb, rgbToHsl);
 
-  const blackRedStep = getBlackStep(r);
-  const blackGreenStep = getBlackStep(g);
-  const blackBlueStep = getBlackStep(b);
+  const currentHexBrightLevel = Math.floor(l / 10);
 
-  const whiteColors: string[] = [];
-  const blackColors: string[] = [];
+  const brightRemain = l % 10;
 
-  for (let i = 1; i < STEP_COUNT; i++) {
-    whiteColors.push(
-      rgbToHex([
-        getWhiteValueByStep(r, whiteRedStep, i),
-        getWhiteValueByStep(g, whiteGreenStep, i),
-        getWhiteValueByStep(b, whiteBlueStep, i),
-      ])
-    );
-    blackColors.push(
-      rgbToHex([
-        getBlackValueByStep(r, blackRedStep, i),
-        getBlackValueByStep(g, blackGreenStep, i),
-        getBlackValueByStep(b, blackBlueStep, i),
-      ])
-    );
+  for (let i = 9; i >= 0; i--) {
+    if (currentHexBrightLevel === i) {
+      shades.push(hex);
+    } else {
+      shades.push(pipe([h, s, i * 10 + brightRemain], hslToRgb, rgbToHex));
+    }
   }
 
-  blackColors.reverse();
-
-  return blackColors.concat(hex).concat(whiteColors);
+  return shades;
 }
