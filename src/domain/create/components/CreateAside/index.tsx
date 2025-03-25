@@ -1,9 +1,9 @@
 import { TabSelect } from '@/components/inputs';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { useState } from 'react';
-import CreateColorPicker from './CreateColorPicker';
 import ColorInfoList from './ColorInfoList';
 import ContrastInfoList from './ContrastInfoList';
+import CreateColorPicker from './CreateColorPicker';
 import PaletteColorButton from './PaletteColorButton';
 import PaletteContainer from './PaletteContainer';
 import ShadeInfoList from './ShadeInfoList';
@@ -29,15 +29,21 @@ function CreateAside() {
 
       <CreateColorPicker />
 
-      <TabSelect value={selectedDetail} onChange={setSelectedDetail}>
+      <TabSelect
+        className={style.tabSelect}
+        value={selectedDetail}
+        onChange={setSelectedDetail}
+      >
         <TabSelect.Option value='info'>Info</TabSelect.Option>
         <TabSelect.Option value='contrast'>Contrast</TabSelect.Option>
         <TabSelect.Option value='shades'>Shades</TabSelect.Option>
       </TabSelect>
 
-      {selectedDetail === 'info' && <ColorInfoList />}
-      {selectedDetail === 'contrast' && <ContrastInfoList />}
-      {selectedDetail === 'shades' && <ShadeInfoList />}
+      <div className={style.detail}>
+        {selectedDetail === 'info' && <ColorInfoList />}
+        {selectedDetail === 'contrast' && <ContrastInfoList />}
+        {selectedDetail === 'shades' && <ShadeInfoList />}
+      </div>
     </div>
   );
 }
