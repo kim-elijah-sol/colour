@@ -1,6 +1,7 @@
 import { TabSelect } from '@/components/inputs';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { useState } from 'react';
+import CreateColorPicker from './CreateColorPicker';
 import ColorInfoList from './ColorInfoList';
 import ContrastInfoList from './ContrastInfoList';
 import PaletteColorButton from './PaletteColorButton';
@@ -25,6 +26,8 @@ function CreateAside() {
           />
         ))}
       </PaletteContainer>
+
+      <CreateColorPicker />
 
       <TabSelect value={selectedDetail} onChange={setSelectedDetail}>
         <TabSelect.Option value='info'>Info</TabSelect.Option>
