@@ -1,3 +1,4 @@
+import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import {
   hexToRgb,
   rgbToCmyk,
@@ -8,11 +9,11 @@ import {
 import ColorInfo from '../ColorInfo';
 import * as style from './style.css';
 
-type Props = {
-  color: string;
-};
+function ColorInfoList() {
+  const { selectedIndex, colors } = useCreatePaletteColors();
 
-function ColorInfoList({ color }: Props) {
+  const color = colors[selectedIndex];
+
   return (
     <ul className={style.container}>
       <ColorInfo label='HEX' value={`#${color}`} />

@@ -13,8 +13,6 @@ function CreateAside() {
 
   const { selectedIndex, setSelectedIndex, colors } = useCreatePaletteColors();
 
-  const selectedColor = colors[selectedIndex];
-
   return (
     <div className={style.aside}>
       <PaletteContainer>
@@ -34,11 +32,9 @@ function CreateAside() {
         <TabSelect.Option value='shades'>Shades</TabSelect.Option>
       </TabSelect>
 
-      {selectedDetail === 'info' && <ColorInfoList color={selectedColor} />}
-      {selectedDetail === 'contrast' && (
-        <ContrastInfoList color={selectedColor} />
-      )}
-      {selectedDetail === 'shades' && <ShadeInfoList color={selectedColor} />}
+      {selectedDetail === 'info' && <ColorInfoList />}
+      {selectedDetail === 'contrast' && <ContrastInfoList />}
+      {selectedDetail === 'shades' && <ShadeInfoList />}
     </div>
   );
 }

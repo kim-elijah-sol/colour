@@ -1,11 +1,12 @@
+import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import ContrastInfo from '../ContrastInfo';
 import * as style from './style.css';
 
-type Props = {
-  color: string;
-};
+function ContrastInfoList() {
+  const { selectedIndex, colors } = useCreatePaletteColors();
 
-function ContrastInfoList({ color }: Props) {
+  const color = colors[selectedIndex];
+
   return (
     <ul className={style.container}>
       <ContrastInfo foreground='FFFFFF' background={color} />

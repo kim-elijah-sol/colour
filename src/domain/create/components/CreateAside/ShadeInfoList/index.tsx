@@ -1,12 +1,13 @@
+import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { getShades } from '@/utils/functions';
 import ShadeInfo from '../ShadeInfo';
 import * as style from './style.css';
 
-type Props = {
-  color: string;
-};
+function ShadeInfoList() {
+  const { selectedIndex, colors } = useCreatePaletteColors();
 
-function ShadeInfoList({ color }: Props) {
+  const color = colors[selectedIndex];
+
   const shades = getShades(color);
 
   return (

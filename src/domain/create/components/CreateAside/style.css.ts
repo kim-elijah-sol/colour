@@ -11,5 +11,6 @@ export const aside = style([
     boxShadow: '0 0 16px 8px rgba(50, 50, 50, 0.05)',
     ...padding(24),
     gap: 16,
+    overflowY: 'auto',
   },
 ]);
