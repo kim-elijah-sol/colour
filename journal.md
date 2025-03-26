@@ -1,10 +1,10 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
-## Todo Feature
+# 2025-03-26
 
-- [ ] Preview 기능 - 간단한 UI
-- [ ] 팬톤 컬러 추천 - 라이센스 취득 필요
-- [ ] Similar Palette 추천
+Create 페이지에 ColorPicker 를 이식시켰다.<br>
+현재 문제는 Shades Tab 에서 색상을 변경했을 때 ColorPicker 에 반영되지 않는 다는 점.<br>
+useEffect 를 통해서 해결해야할 것 같다.
 
 # 2025-03-24
 
