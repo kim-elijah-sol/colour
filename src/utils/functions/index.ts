@@ -22,3 +22,4 @@ export * from './rgbToHsl';
 export * from './rgbToHsv';
 export * from './rgbToLab';
 export * from './rgbToRgbPercentage';
+export * from './roundMap';

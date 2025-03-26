@@ -2,6 +2,7 @@ import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { HSV } from '@/types';
 import { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@/utils/functions';
+import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
@@ -13,7 +14,7 @@ function HSVSlider() {
 
   const color = colors[selectedIndex];
 
-  const hsv = rgbToHsv(hexToRgb(color));
+  const hsv = pipe(color, hexToRgb, rgbToHsv);
 
   const [hue, setHue] = useState<number>(hsv[0]);
   const [saturation, setSaturation] = useState<number>(hsv[1]);
@@ -49,25 +50,25 @@ function HSVSlider() {
   });
 
   function getBackground(hsvIndex: number) {
-    const hsv = rgbToHsv(hexToRgb(color));
+    const hsv = pipe(color, hexToRgb, rgbToHsv);
 
     const leftHSV = [...hsv] as HSV;
     leftHSV[hsvIndex] = 0;
-    const left = rgbToHex(hsvToRgb(leftHSV));
+    const left = pipe(leftHSV, hsvToRgb, rgbToHex);
 
     const centerHSV = [...hsv] as HSV;
     centerHSV[hsvIndex] = 50;
-    const center = rgbToHex(hsvToRgb(centerHSV));
+    const center = pipe(centerHSV, hsvToRgb, rgbToHex);
 
     const rightHSV = [...hsv] as HSV;
     rightHSV[hsvIndex] = 100;
-    const right = rgbToHex(hsvToRgb(rightHSV));
+    const right = pipe(rightHSV, hsvToRgb, rgbToHex);
 
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(selectedIndex, rgbToHex(hsvToRgb([hue, saturation, value])));
+    setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
   }, [hue, saturation, value]);
 
   return (

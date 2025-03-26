@@ -1,7 +1,14 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { LAB, RGB } from '@/types';
-import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@/utils/functions';
+import { LAB } from '@/types';
+import {
+  hexToRgb,
+  labToRgb,
+  rgbToHex,
+  rgbToLab,
+  roundMap,
+} from '@/utils/functions';
+import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
@@ -13,7 +20,7 @@ function LABSlider() {
 
   const color = colors[selectedIndex];
 
-  const lab = rgbToLab(hexToRgb(color)).map(Math.round);
+  const lab = pipe(color, hexToRgb, rgbToLab, roundMap);
 
   const [luminance, setLuminance] = useState<number>(lab[0]);
   const [greenRed, setGreenRed] = useState<number>(lab[1]);
@@ -52,19 +59,19 @@ function LABSlider() {
     labIndex: number,
     valueRange: [number, number, number]
   ) {
-    const lab = rgbToLab(hexToRgb(color));
+    const lab = pipe(color, hexToRgb, rgbToLab);
 
     const leftLAB = [...lab] as LAB;
     leftLAB[labIndex] = valueRange[0];
-    const left = rgbToHex(labToRgb(leftLAB).map(Math.round) as LAB);
+    const left = pipe(leftLAB, labToRgb, roundMap, rgbToHex);
 
     const centerLAB = [...lab] as LAB;
     centerLAB[labIndex] = valueRange[1];
-    const center = rgbToHex(labToRgb(centerLAB).map(Math.round) as LAB);
+    const center = pipe(centerLAB, labToRgb, roundMap, rgbToHex);
 
     const rightLAB = [...lab] as LAB;
     rightLAB[labIndex] = valueRange[2];
-    const right = rgbToHex(labToRgb(rightLAB).map(Math.round) as LAB);
+    const right = pipe(rightLAB, labToRgb, roundMap, rgbToHex);
 
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
@@ -72,9 +79,7 @@ function LABSlider() {
   useIgnoreFirstEffect(() => {
     setColor(
       selectedIndex,
-      rgbToHex(
-        labToRgb([luminance, greenRed, blueYellow]).map(Math.round) as RGB
-      )
+      pipe([luminance, greenRed, blueYellow], labToRgb, roundMap, rgbToHex)
     );
   }, [luminance, greenRed, blueYellow]);
 

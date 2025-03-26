@@ -2,6 +2,7 @@ import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { HSL } from '@/types';
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
+import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
@@ -13,7 +14,7 @@ function HSLSlider() {
 
   const color = colors[selectedIndex];
 
-  const hsl = rgbToHsl(hexToRgb(color));
+  const hsl = pipe(color, hexToRgb, rgbToHsl);
 
   const [hue, setHue] = useState<number>(hsl[0]);
   const [saturation, setSaturation] = useState<number>(hsl[1]);
@@ -50,25 +51,28 @@ function HSLSlider() {
   });
 
   function getBackground(hslIndex: number) {
-    const hsl = rgbToHsl(hexToRgb(color));
+    const hsl = pipe(color, hexToRgb, rgbToHsl);
 
     const leftHSL = [...hsl] as HSL;
     leftHSL[hslIndex] = 0;
-    const left = rgbToHex(hslToRgb(leftHSL));
+    const left = pipe(leftHSL, hslToRgb, rgbToHex);
 
     const centerHSL = [...hsl] as HSL;
     centerHSL[hslIndex] = 50;
-    const center = rgbToHex(hslToRgb(centerHSL));
+    const center = pipe(centerHSL, hslToRgb, rgbToHex);
 
     const rightHSL = [...hsl] as HSL;
     rightHSL[hslIndex] = 100;
-    const right = rgbToHex(hslToRgb(rightHSL));
+    const right = pipe(rightHSL, hslToRgb, rgbToHex);
 
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(selectedIndex, rgbToHex(hslToRgb([hue, saturation, luminance])));
+    setColor(
+      selectedIndex,
+      pipe([hue, saturation, luminance], hslToRgb, rgbToHex)
+    );
   }, [hue, saturation, luminance]);
 
   return (

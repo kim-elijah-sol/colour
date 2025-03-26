@@ -2,6 +2,7 @@ import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { CMYK } from '@/types';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
+import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
@@ -13,7 +14,7 @@ function CMYKSlider() {
 
   const color = colors[selectedIndex];
 
-  const cmyk = rgbToCmyk(hexToRgb(color));
+  const cmyk = pipe(color, hexToRgb, rgbToCmyk)
 
   const [cyan, setCyan] = useState(cmyk[0]);
   const [magenta, setMagenta] = useState(cmyk[1]);
@@ -55,21 +56,24 @@ function CMYKSlider() {
 
     const leftCMYK = [...cmyk] as CMYK;
     leftCMYK[changeIndex] = 0;
-    const left = rgbToHex(cmykToRgb(leftCMYK));
+    const left = pipe(leftCMYK, cmykToRgb, rgbToHex)
 
     const centerCMYK = [...cmyk] as CMYK;
     centerCMYK[changeIndex] = 50;
-    const center = rgbToHex(cmykToRgb(centerCMYK));
+    const center = pipe(centerCMYK, cmykToRgb, rgbToHex)
 
     const rightCMYK = [...cmyk] as CMYK;
     rightCMYK[changeIndex] = 100;
-    const right = rgbToHex(cmykToRgb(rightCMYK));
+    const right = pipe(rightCMYK, cmykToRgb, rgbToHex)
 
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(selectedIndex, rgbToHex(cmykToRgb([cyan, magenta, yellow, key])));
+    setColor(
+      selectedIndex,
+      pipe([cyan, magenta, yellow, key], cmykToRgb, rgbToHex)
+    );
   }, [cyan, magenta, yellow, key]);
 
   return (
