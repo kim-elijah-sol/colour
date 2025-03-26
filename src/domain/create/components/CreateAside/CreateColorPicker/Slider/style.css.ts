@@ -1,9 +1,9 @@
-import { styleToken } from '@/utils/styles';
+import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const slider = style({
   position: 'relative',
-  width: styleToken.full,
+  width: vars.full,
   height: 20,
   borderRadius: 8,
 });
