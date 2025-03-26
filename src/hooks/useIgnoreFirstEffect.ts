@@ -13,7 +13,7 @@ function useIgnoreFirstEffect(
     }
 
     effect();
-  }, [deps]);
+  }, deps);
 }
 
 export default useIgnoreFirstEffect;
