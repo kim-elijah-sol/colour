@@ -88,7 +88,7 @@ function LABSlider() {
       <div className={style.pickerContainer}>
         <div>
           <div className={style.top}>
-            <p className={style.label}>Hue</p>
+            <p className={style.label}>Luminance</p>
             <input className={style.input} type='text' {...luminanceInput} />
           </div>
 
@@ -102,7 +102,7 @@ function LABSlider() {
 
         <div>
           <div className={style.top}>
-            <p className={style.label}>Saturation</p>
+            <p className={style.label}>Green-Red Value</p>
             <input className={style.input} type='text' {...greenRedInput} />
           </div>
 
@@ -118,7 +118,7 @@ function LABSlider() {
 
         <div>
           <div className={style.top}>
-            <p className={style.label}>Value</p>
+            <p className={style.label}>Blue-Yellow Value</p>
             <input className={style.input} type='text' {...blueYellowInput} />
           </div>
 
