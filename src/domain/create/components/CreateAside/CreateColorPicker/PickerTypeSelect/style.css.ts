@@ -1,4 +1,5 @@
-import { clickableStyle, padding, styleToken } from '@/utils/styles';
+import { vars } from '@/styles/theme.css';
+import { clickableStyle, flex, padding } from '@/utils/styles';
 import { keyframes, style } from '@vanilla-extract/css';
 
 export const container = style({
@@ -38,24 +39,27 @@ export const openedIcon = style({
 
 const optionsContainerKeyframes = keyframes({
   from: {
-    bottom: styleToken.full,
+    bottom: vars.full,
     opacity: 0,
   },
   to: {
-    bottom: 'calc(100% + 8px)',
+    bottom: `calc(${vars.full} + 8px)`,
     opacity: 1,
   },
 });
 
-export const optionsContainer = style({
-  position: 'absolute',
-  left: 0,
-  ...padding(8),
-  borderRadius: 12,
-  background: '#FFFFFF',
-  boxShadow: '0 0 24px 8px rgba(70,70,70,0.3)',
-  animation: `${optionsContainerKeyframes} 0.21s forwards`,
-});
+export const optionsContainer = style([
+  flex({ direction: 'column' }),
+  {
+    position: 'absolute',
+    left: 0,
+    ...padding(8),
+    borderRadius: 12,
+    background: vars.color.white,
+    boxShadow: '0 0 24px 8px rgba(70,70,70,0.3)',
+    animation: `${optionsContainerKeyframes} 0.21s forwards`,
+  },
+]);
 
 export const option = style([
   text,
