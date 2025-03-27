@@ -1,4 +1,8 @@
-import { CreateAside, CreateContainer } from '@/domain/create/components';
+import {
+  CreateAside,
+  CreateContainer,
+  CreatePreview,
+} from '@/domain/create/components';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { randomHex } from '@/utils/functions';
 import { useEffect } from 'react';
@@ -26,6 +30,7 @@ function Create() {
   return (
     <CreateContainer>
       <CreateAside />
+      <CreatePreview />
     </CreateContainer>
   );
 }

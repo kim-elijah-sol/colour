@@ -3,15 +3,31 @@ import { Children, PropsWithChildren, ReactElement } from 'react';
 import * as style from './style.css';
 import { TabSelectContext, useTabSelectContext } from './TabSelectContext';
 
+type IndicatorProps = Omit<
+  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  'style'
+>;
+
 type Props = Omit<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
   'onChange'
 > & {
   value: string;
   onChange: (value: string) => void;
+
+  indicatorProps?: IndicatorProps;
 };
 
-function TabSelect({ className, value, onChange, children, ...props }: Props) {
+function TabSelect({
+  className,
+  value,
+  onChange,
+  children,
+  indicatorProps: _indicatorProps = {},
+  ...props
+}: Props) {
+  const { className: indicatorClassName, ...indicatorProps } = _indicatorProps;
+
   const optionCount = Children.count(children);
 
   const options = Children.map(children, (child) => {
@@ -31,12 +47,13 @@ function TabSelect({ className, value, onChange, children, ...props }: Props) {
     >
       <div className={classNames(style.tabSelect, className)} {...props}>
         <div
-          className={style.indicator}
+          className={classNames(style.indicator, indicatorClassName)}
           style={{
             left: `${indicatorLeftStep * currentSelectedOptionIndex}%`,
             width: `${indicatorLeftStep}%`,
           }}
-        ></div>
+          {...indicatorProps}
+        />
         {children}
       </div>
     </TabSelectContext.Provider>
