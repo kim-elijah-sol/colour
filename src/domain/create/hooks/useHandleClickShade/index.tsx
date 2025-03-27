@@ -45,7 +45,7 @@ function ShadeItem({
   );
 }
 
-function useHandleClickShade(
+function useHandleChangeAsdieColor(
   color: string,
   onChangeColor: (color: string) => void
 ) {
@@ -82,4 +82,4 @@ function useHandleClickShade(
   return handleClickShade;
 }
 
-export default useHandleClickShade;
+export default useHandleChangeAsdieColor;

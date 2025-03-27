@@ -1,6 +1,6 @@
 import { TabSelect } from '@/components/inputs';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ColorInfoList from './ColorInfoList';
 import ContrastInfoList from './ContrastInfoList';
 import CreateColorPicker from './CreateColorPicker';
@@ -14,6 +14,15 @@ function CreateAside() {
 
   const { selectedIndex, setSelectedIndex, colors } = useCreatePaletteColors();
 
+  function handleClickPaletteColor(index: number) {
+    setSelectedIndex(index)
+
+    const color = colors[index]
+
+    const event = new CustomEvent('changeAsideColor', { detail: { color } });
+    window.dispatchEvent(event);
+  }
+
   return (
     <div className={style.aside}>
       <PaletteContainer>
@@ -21,7 +30,7 @@ function CreateAside() {
           <PaletteColorButton
             color={color}
             isSelected={index === selectedIndex}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => handleClickPaletteColor(index)}
             key={color}
           />
         ))}

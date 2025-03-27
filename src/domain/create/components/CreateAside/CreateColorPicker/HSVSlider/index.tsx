@@ -4,7 +4,7 @@ import { HSV } from '@/types';
 import { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleClickShade from '../../useHandleClickShade';
+import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useHSVInput from './useHSVInput';
@@ -72,7 +72,7 @@ function HSVSlider() {
     setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
   }, [hue, saturation, value]);
 
-  useHandleClickShade((color) => {
+  useHandleChangeAsdieColor((color) => {
     const [h, s, v] = pipe(color, hexToRgb, rgbToHsv);
 
     setHue(h);

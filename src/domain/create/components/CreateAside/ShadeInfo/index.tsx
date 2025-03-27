@@ -15,9 +15,9 @@ function ShadeInfo({ color, isDefaultColor }: Props) {
     getForegroundColorType(color) === 'white' ? '#FFFFFF' : '#333333';
 
   function handleClick() {
-    setColor(selectedIndex, color)
+    setColor(selectedIndex, color);
 
-    const event = new CustomEvent("shadeClick", { detail: { color } });
+    const event = new CustomEvent('changeAsideColor', { detail: { color } });
     window.dispatchEvent(event);
   }
 

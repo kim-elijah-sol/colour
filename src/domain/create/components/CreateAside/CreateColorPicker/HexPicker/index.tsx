@@ -8,7 +8,7 @@ import {
 } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleClickShade from '../../useHandleClickShade';
+import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
 import * as style from './style.css';
@@ -70,7 +70,7 @@ function HexPicker() {
 
   const pickerHighlightColor = pipe([hue, 100, 50], hslToRgb, rgbToHex);
 
-  useHandleClickShade((color) => {
+  useHandleChangeAsdieColor((color) => {
     const [h, s, v] = pipe(color, hexToRgb, rgbToHsv);
 
     setHue(h);

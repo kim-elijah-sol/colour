@@ -4,7 +4,7 @@ import { CMYK } from '@/types';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleClickShade from '../../useHandleClickShade';
+import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
@@ -77,7 +77,7 @@ function CMYKSlider() {
     );
   }, [cyan, magenta, yellow, key]);
 
-  useHandleClickShade((color) => {
+  useHandleChangeAsdieColor((color) => {
     const [c, m, y, k] = pipe(color, hexToRgb, rgbToCmyk);
 
     setCyan(c);

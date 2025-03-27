@@ -3,7 +3,7 @@ import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { RGB } from '@/types';
 import { hexToRgb, rgbToHex } from '@/utils/functions';
 import { useState } from 'react';
-import useHandleClickShade from '../../useHandleClickShade';
+import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import Slider from '../Slider';
 import * as style from './style.css';
 import useRGBInput from './useRGBInput';
@@ -60,7 +60,7 @@ function RGBSlider() {
     setColor(selectedIndex, rgbToHex([red, green, blue]));
   }, [red, green, blue]);
 
-  useHandleClickShade((color) => {
+  useHandleChangeAsdieColor((color) => {
     const [r, g, b] = hexToRgb(color);
 
     setRed(r);

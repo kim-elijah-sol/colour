@@ -10,7 +10,7 @@ import {
 } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleClickShade from '../../useHandleClickShade';
+import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useLABInput from './useLABInput';
@@ -84,7 +84,7 @@ function LABSlider() {
     );
   }, [luminance, greenRed, blueYellow]);
 
-  useHandleClickShade((color) => {
+  useHandleChangeAsdieColor((color) => {
     const [l, a, b] = pipe(color, hexToRgb, rgbToLab, roundMap);
 
     setLuminance(l);
