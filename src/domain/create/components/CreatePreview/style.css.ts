@@ -19,6 +19,7 @@ export const top = style({
 export const page = style({
   background: vars.color.white,
   borderRadius: 16,
+  overflow: 'hidden',
   flex: 1,
   boxShadow: '0 0 16px 6px rgba(50,50,50,0.05)',
 });

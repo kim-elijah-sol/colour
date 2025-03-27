@@ -1,5 +1,6 @@
 import { TabSelect } from '@/components/inputs';
 import { useState } from 'react';
+import { Dashboard, LandingPage } from './Previews';
 import * as style from './style.css';
 
 function CreatePreview() {
@@ -20,7 +21,10 @@ function CreatePreview() {
           <TabSelect.Option value='dashboard'>Dashboard</TabSelect.Option>
         </TabSelect>
       </div>
-      <div className={style.page}></div>
+      <div className={style.page}>
+        {previewType === 'landing' && <LandingPage />}
+        {previewType === 'dashboard' && <Dashboard />}
+      </div>
     </div>
   );
 }
