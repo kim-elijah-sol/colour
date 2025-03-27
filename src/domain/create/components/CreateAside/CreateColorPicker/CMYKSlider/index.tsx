@@ -4,6 +4,7 @@ import { CMYK } from '@/types';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
+import useHandleClickShade from '../../useHandleClickShade';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
@@ -14,7 +15,7 @@ function CMYKSlider() {
 
   const color = colors[selectedIndex];
 
-  const cmyk = pipe(color, hexToRgb, rgbToCmyk)
+  const cmyk = pipe(color, hexToRgb, rgbToCmyk);
 
   const [cyan, setCyan] = useState(cmyk[0]);
   const [magenta, setMagenta] = useState(cmyk[1]);
@@ -56,15 +57,15 @@ function CMYKSlider() {
 
     const leftCMYK = [...cmyk] as CMYK;
     leftCMYK[changeIndex] = 0;
-    const left = pipe(leftCMYK, cmykToRgb, rgbToHex)
+    const left = pipe(leftCMYK, cmykToRgb, rgbToHex);
 
     const centerCMYK = [...cmyk] as CMYK;
     centerCMYK[changeIndex] = 50;
-    const center = pipe(centerCMYK, cmykToRgb, rgbToHex)
+    const center = pipe(centerCMYK, cmykToRgb, rgbToHex);
 
     const rightCMYK = [...cmyk] as CMYK;
     rightCMYK[changeIndex] = 100;
-    const right = pipe(rightCMYK, cmykToRgb, rgbToHex)
+    const right = pipe(rightCMYK, cmykToRgb, rgbToHex);
 
     return `linear-gradient(to right, #${left}, #${center}, #${right})`;
   }
@@ -75,6 +76,15 @@ function CMYKSlider() {
       pipe([cyan, magenta, yellow, key], cmykToRgb, rgbToHex)
     );
   }, [cyan, magenta, yellow, key]);
+
+  useHandleClickShade((color) => {
+    const [c, m, y, k] = pipe(color, hexToRgb, rgbToCmyk);
+
+    setCyan(c);
+    setMagenta(m);
+    setYellow(y);
+    setKey(k);
+  });
 
   return (
     <div className={style.container}>

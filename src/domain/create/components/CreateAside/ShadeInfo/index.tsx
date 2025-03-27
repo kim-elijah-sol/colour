@@ -14,9 +14,16 @@ function ShadeInfo({ color, isDefaultColor }: Props) {
   const textColor =
     getForegroundColorType(color) === 'white' ? '#FFFFFF' : '#333333';
 
+  function handleClick() {
+    setColor(selectedIndex, color)
+
+    const event = new CustomEvent("shadeClick", { detail: { color } });
+    window.dispatchEvent(event);
+  }
+
   return (
     <div
-      onClick={() => setColor(selectedIndex, color)}
+      onClick={handleClick}
       className={style.shadeInfo}
       style={{ backgroundColor: `#${color}` }}
     >

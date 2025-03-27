@@ -4,6 +4,7 @@ import { HSL } from '@/types';
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
+import useHandleClickShade from '../../useHandleClickShade';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useHSLInput from './useHSLInput';
@@ -74,6 +75,14 @@ function HSLSlider() {
       pipe([hue, saturation, luminance], hslToRgb, rgbToHex)
     );
   }, [hue, saturation, luminance]);
+
+  useHandleClickShade((color) => {
+    const [h, s, l] = pipe(color, hexToRgb, rgbToHsl);
+
+    setHue(h);
+    setSaturation(s);
+    setLuminance(l);
+  });
 
   return (
     <div className={style.container}>
