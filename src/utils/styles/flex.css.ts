@@ -25,5 +25,10 @@ export const flex = recipe({
       rowReverse: { flexDirection: 'row-reverse' },
       columnReverse: { flexDirection: 'column-reverse' },
     },
+    wrap: {
+      wrap: { flexWrap: 'wrap' },
+      wrapReverse: { flexWrap: 'wrap-reverse' },
+      noWrap: { flexWrap: 'nowrap' },
+    },
   },
 });
