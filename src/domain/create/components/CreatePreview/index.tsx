@@ -1,7 +1,6 @@
 import { TabSelect } from '@/components/inputs';
 import { useState } from 'react';
-import { Dashboard } from './Previews';
-import Gradient from './Previews/Gradient';
+import { Dashboard, Gradient } from './Previews';
 import * as style from './style.css';
 
 function CreatePreview() {
