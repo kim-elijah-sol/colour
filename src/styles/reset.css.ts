@@ -22,5 +22,5 @@ globalStyle('::-webkit-scrollbar', {
 });
 
 globalStyle('html', {
-  background: '#F6F8FA',
+  background: '#F9F9FA',
 });
