@@ -17,11 +17,11 @@ export const aside = style([
     width: vars.size.domain.create.asideWidth,
     height: vars.full,
     background: vars.color.white,
-    boxShadow: '0 0 16px 8px rgba(50, 50, 50, 0.05)',
     ...padding(24),
     gap: 16,
     overflowY: 'auto',
     animation: `${slideInKeyframes} 0.42s forwards`,
+    borderRight: '1px solid #F3F3F3',
   },
 ]);
 

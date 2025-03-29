@@ -1,4 +1,3 @@
-import { vars } from '@/styles/theme.css';
 import { BadgePlus, Flame, LucideProps, Sparkles } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
@@ -38,14 +37,15 @@ function Aside() {
       {ANCHORS.map((it) => {
         const isActive = it.path === pathname;
 
-        const color = isActive ? vars.color.text : '#BCBCBC';
-
         const Icon = it.icon;
 
         return (
           <Link to={it.path} className={style.anchor} key={it.path}>
             <div className={style.iconHolder}>
-              <Icon size={24} className={isActive ? style.activeIcon: style.icon} />
+              <Icon
+                size={24}
+                className={isActive ? style.activeIcon : style.icon}
+              />
             </div>
             <p className={isActive ? style.activeAnchorText : style.anchorText}>
               {it.name}

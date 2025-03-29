@@ -21,7 +21,7 @@ export const page = style({
   borderRadius: 16,
   overflow: 'hidden',
   flex: 1,
-  boxShadow: '0 0 16px 6px rgba(50,50,50,0.05)',
+  boxShadow: '0 0 8px 4px rgba(50, 50, 50, 0.03)',
 });
 
 export const tabSelect = style({
