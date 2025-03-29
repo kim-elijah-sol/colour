@@ -1,5 +1,11 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-03-29
+
+전체적으로 존재하던 shadow 를 좀 죽이고 border 로 영역을 구분했다.<br>
+shadow 가 너무 많으니 페이지 자체가 좀 칙칙해지고 너무 정리가 안된 느낌이였다.<br>
+내일부터는 PaletteCard 의 Design 을 바꿔볼 예정이다.
+
 # 2025-03-26
 
 Create 페이지에 ColorPicker 를 이식시켰다.<br>
