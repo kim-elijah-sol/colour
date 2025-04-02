@@ -1,5 +1,11 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-02
+
+PaletteCard 의 디자인을 바꿨다.<br>
+세상 너무 맘에 드는 레퍼런스를 찾아서 바꿀 수 있었다.<br>
+추가적으로 Submit CTA Button 도 /create 페이지에 그렸다.
+
 # 2025-03-29
 
 전체적으로 존재하던 shadow 를 좀 죽이고 border 로 영역을 구분했다.<br>
