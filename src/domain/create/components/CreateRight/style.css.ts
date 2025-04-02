@@ -11,9 +11,10 @@ export const container = style([
   },
 ]);
 
-export const top = style({
-  maxWidth: 280,
-  width: vars.full,
+export const top = flex({ align: 'center', justify: 'between' });
+
+export const topLeft = style({
+  width: 280,
 });
 
 export const page = style({

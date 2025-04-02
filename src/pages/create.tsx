@@ -1,7 +1,7 @@
 import {
   CreateAside,
   CreateContainer,
-  CreatePreview,
+  CreateRight,
 } from '@/domain/create/components';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
 import { randomHex } from '@/utils/functions';
@@ -30,7 +30,7 @@ function Create() {
   return (
     <CreateContainer>
       <CreateAside />
-      <CreatePreview />
+      <CreateRight />
     </CreateContainer>
   );
 }
