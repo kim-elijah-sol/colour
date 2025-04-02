@@ -1,13 +1,6 @@
 import Icons from '@/assets/icons';
 import { copy } from '@/utils/functions';
-import {
-  colorCodeCopyButtonStyle,
-  paletteCardBottomStyle,
-  paletteCardColorBlockStyle,
-  paletteCardLikeButtonStyle,
-  paletteCardLikeCountStyle,
-  paletteCardListStyle,
-} from './style.css';
+import * as style from './style.css';
 
 type Props = {
   colors: string[];
@@ -18,27 +11,32 @@ type Props = {
 
 function PaletteCard({ colors, isLike, likeCount, onClickLike }: Props) {
   return (
-    <div>
-      <div className={paletteCardListStyle}>
-        {colors.map((color) => (
+    <div className={style.card}>
+      <div className={style.top}>
+        {colors.map((it) => (
           <div
-            className={paletteCardColorBlockStyle}
-            style={{ background: `#${color}` }}
-            key={color}
-          >
-            <p className={colorCodeCopyButtonStyle} onClick={() => copy(color)}>
-              {color}
-            </p>
-          </div>
+            className={style.colorItem}
+            key={it}
+            style={{ background: `#${it}` }}
+          />
         ))}
       </div>
-
-      <div className={paletteCardBottomStyle}>
-        <button className={paletteCardLikeButtonStyle} onClick={onClickLike}>
-          {isLike ? <Icons.Like.Fill /> : <Icons.Like />}
-          <p className={paletteCardLikeCountStyle}>
-            {likeCount.toLocaleString()}
-          </p>
+      <div className={style.bottom}>
+        {colors.map((it) => (
+          <button
+            onClick={() => copy(it)}
+            key={it}
+            className={style.bottomButton}
+          >
+            <p className={style.bottomButtonText}>{it}</p>
+          </button>
+        ))}
+      </div>
+      <div className={style.divisionBar} />
+      <div className={style.toolRow}>
+        <button onClick={onClickLike} className={style.bottomButton}>
+          {isLike ? <Icons.Like.Fill size={16} /> : <Icons.Like size={16} />}
+          <p className={style.likeButtonText}>{likeCount}</p>
         </button>
       </div>
     </div>

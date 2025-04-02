@@ -1,70 +1,65 @@
-import { margin, padding } from '@/utils/styles';
+import { vars } from '@/styles/theme.css';
+import { flex, margin, padding } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
-export const paletteCardListStyle = style({
-  height: 64 * 4,
-  display: 'flex',
-  flexDirection: 'column',
-  overflow: 'hidden',
-  borderRadius: 12,
+export const card = style({
+  ...padding(12),
+  backgroundColor: vars.color.white,
+  borderRadius: 16,
+  boxShadow: '0 0 6px 2px rgba(100,100,100,0.03)',
 });
 
-export const paletteCardColorBlockStyle = style({
-  flex: 1,
-  transition: '0.2s',
-  cursor: 'pointer',
-  position: 'relative',
-  ':hover': {
-    flex: 1.25,
+export const top = style([
+  flex(),
+  {
+    borderRadius: 6,
+    overflow: 'hidden',
+    ...margin({ bottom: 12 }),
+    height: 80,
   },
+]);
+
+export const colorItem = style({
+  flex: 1,
 });
 
-export const colorCodeCopyButtonStyle = style({
-  position: 'absolute',
-  left: 0,
-  bottom: 0,
-  fontSize: 14,
-  ...padding({
-    x: 8,
-    y: 4,
-  }),
-  color: '#FFFFFF',
-  background: 'rgba(50,50,50,0.1)',
-  borderTopRightRadius: 8,
-  transition: '0.2s',
-  opacity: 0,
-  pointerEvents: 'none',
-  selectors: {
-    [`${paletteCardColorBlockStyle}:hover &`]: {
-      opacity: 1,
-      pointerEvents: 'all',
+export const bottom = flex({ justify: 'around' });
+
+export const bottomButton = style([
+  flex({ align: 'center' }),
+  {
+    ...padding({ x: 8, y: 4 }),
+    transition: '0.21s',
+    cursor: 'pointer',
+    borderRadius: 6,
+    backgroundColor: 'transparent',
+    ':hover': {
+      backgroundColor: '#F2F5F9',
+    },
+    ':active': {
+      backgroundColor: '#E0E6ED',
     },
   },
-  ':active': {
-    background: 'rgba(50,50,50,0.3)',
-  },
-});
+]);
 
-export const paletteCardBottomStyle = style({
-  ...margin({ top: 12 }),
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-});
-
-export const paletteCardLikeButtonStyle = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: 6,
-  background: '#fff',
-  ...padding({ left: 10, right: 12, y: 6 }),
-  border: '1px solid #eee',
-  borderRadius: 12,
-  cursor: 'pointer',
-});
-
-export const paletteCardLikeCountStyle = style({
+export const bottomButtonText = style({
+  fontWeight: 600,
   fontSize: 14,
-  color: '#777',
-  transform: 'translateY(-1px)',
+  color: '#666',
 });
+
+export const divisionBar = style({
+  width: vars.full,
+  height: 1,
+  background: 'linear-gradient(to right, transparent, #EEE, transparent)',
+  ...margin({ y: 12 }),
+});
+
+export const toolRow = flex({ justify: 'end' });
+
+export const likeButtonText = style([
+  bottomButtonText,
+  {
+    ...margin({ left: 6 }),
+  },
+]);
