@@ -3,7 +3,8 @@
 # 2025-04-05
 
 package manager 를 yarn 에서 pnpm 으로 변경하고 monorepo 형태로 구성했다.<br>
-be 를 nest-js 로 구성할 생각이라 색상 변환 관련 함수를 공유하고자 monorepo 로 구성했다.
+be 를 nest-js 로 구성할 생각이라 색상 변환 관련 함수를 공유하고자 monorepo 로 구성했다.<br>
+내일부터는 @colour/fx 의 test 코드 작성 및 be 관련 작업 예정
 
 # 2025-04-02
 
