@@ -1,5 +1,10 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-05
+
+package manager 를 yarn 에서 pnpm 으로 변경하고 monorepo 형태로 구성했다.<br>
+be 를 nest-js 로 구성할 생각이라 색상 변환 관련 함수를 공유하고자 monorepo 로 구성했다.
+
 # 2025-04-02
 
 PaletteCard 의 디자인을 바꿨다.<br>
