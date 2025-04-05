@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "fe": "pnpm --filter @colour/fe",
+    "be": "pnpm --filter @colour/be",
     "fx": "pnpm --filter @colour/fx",
     "types": "pnpm --filter @colour/types"
   },
