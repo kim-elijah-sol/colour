@@ -42,3 +42,7 @@ export const logoU = style({
 export const logoR = style({
   color: vars.color.brand,
 });
+
+export const link = style({
+  textDecoration: 'none',
+});
