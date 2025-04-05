@@ -1,5 +1,6 @@
-import { ForegroundColorType } from '@colour/types';
 import { getContrastRatio } from './getContrastRatio';
+
+type ForegroundColorType = 'white' | 'black';
 
 export function getForegroundColorType(hex: string): ForegroundColorType {
   const whiteConstrast = getContrastRatio(hex, 'FFFFFF');
