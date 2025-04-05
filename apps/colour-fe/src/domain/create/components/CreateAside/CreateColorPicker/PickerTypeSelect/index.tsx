@@ -1,7 +1,7 @@
-import { PickerType } from '@/stores/createColorPickerContext';
 import classNames from 'classnames';
 import { ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import { PickerType } from '..';
 import * as style from './style.css';
 
 const OPTIONS: PickerType[] = ['hex', 'rgb', 'hsl', 'hsv', 'cmyk', 'lab'];

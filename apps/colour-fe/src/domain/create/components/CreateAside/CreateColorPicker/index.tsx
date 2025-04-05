@@ -1,4 +1,3 @@
-import { PickerType } from '@/stores/createColorPickerContext';
 import { useState } from 'react';
 import CMYKSlider from './CMYKSlider';
 import HexPicker from './HexPicker';
@@ -8,6 +7,8 @@ import LABSlider from './LABSlider';
 import PickerTypeSelect from './PickerTypeSelect';
 import RGBSlider from './RGBSlider';
 import * as style from './style.css';
+
+export type PickerType = 'hex' | 'rgb' | 'hsl' | 'hsv' | 'cmyk' | 'lab';
 
 let _pickerType: PickerType = 'hex';
 
