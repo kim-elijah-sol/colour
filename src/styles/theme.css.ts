@@ -16,7 +16,7 @@ export const [themeClass, vars] = createTheme({
   },
   size: {
     headerHeight: '64px',
-    asideWidth: '72px',
+    asideWidth: '80px',
 
     domain: {
       create: {

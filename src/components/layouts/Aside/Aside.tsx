@@ -1,4 +1,4 @@
-import { BadgePlus, Flame, LucideProps, Sparkles } from 'lucide-react';
+import { BadgePlus, Flame, Heart, LucideProps, Sparkles } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
 import * as style from './Aside.css';
@@ -26,6 +26,11 @@ const ANCHORS: Anchor[] = [
     path: '/create',
     name: 'Create',
     icon: BadgePlus,
+  },
+  {
+    path: '/favourite',
+    name: 'Favourite',
+    icon: Heart,
   },
 ];
 
