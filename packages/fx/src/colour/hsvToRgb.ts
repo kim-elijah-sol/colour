@@ -1,4 +1,4 @@
-import { HSV, RGB } from '@/types';
+import { HSV, RGB } from "@colour/types";
 
 export function hsvToRgb([h, s, v]: HSV): RGB {
   h = parseFloat(h.toString());

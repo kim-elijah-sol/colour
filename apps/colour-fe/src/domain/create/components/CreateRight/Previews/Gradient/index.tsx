@@ -1,5 +1,5 @@
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { hexToRgb } from '@/utils/functions';
+import { hexToRgb } from '@colour/fx';
 import * as style from './style.css';
 
 function Gradient() {

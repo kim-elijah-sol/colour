@@ -1,4 +1,4 @@
-import { ForegroundColorType } from '@/types';
+import { ForegroundColorType } from '@colour/types';
 import { getContrastRatio } from './getContrastRatio';
 
 export function getForegroundColorType(hex: string): ForegroundColorType {

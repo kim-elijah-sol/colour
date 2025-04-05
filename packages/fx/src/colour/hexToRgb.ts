@@ -1,5 +1,5 @@
-import { RGB } from '@/types';
-import { hexToDec } from './hexToDec';
+import { RGB } from "@colour/types";
+import { hexToDec } from "./hexToDec";
 
 export function hexToRgb(hex: string): RGB {
   const hexRed = hex.substring(0, 2);

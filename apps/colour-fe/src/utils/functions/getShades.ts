@@ -1,8 +1,5 @@
+import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@colour/fx';
 import { pipe } from 'fp-ts/function';
-import { hexToRgb } from './hexToRgb';
-import { hslToRgb } from './hslToRgb';
-import { rgbToHex } from './rgbToHex';
-import { rgbToHsl } from './rgbToHsl';
 
 export function getShades(hex: string): string[] {
   const shades: string[] = [];

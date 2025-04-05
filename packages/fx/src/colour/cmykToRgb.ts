@@ -1,4 +1,4 @@
-import { CMYK, RGB } from '@/types';
+import { CMYK, RGB } from "@colour/types";
 
 export function cmykToRgb([c, m, y, k]: CMYK): RGB {
   const C = c / 100;

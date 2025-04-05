@@ -1,7 +1,7 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { CMYK } from '@/types';
-import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@/utils/functions';
+import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@colour/fx';
+import { CMYK } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';

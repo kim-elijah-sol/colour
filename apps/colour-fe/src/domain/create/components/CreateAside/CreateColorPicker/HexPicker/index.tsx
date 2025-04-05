@@ -5,7 +5,7 @@ import {
   hsvToRgb,
   rgbToHex,
   rgbToHsv,
-} from '@/utils/functions';
+} from '@colour/fx';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';

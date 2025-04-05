@@ -1,4 +1,4 @@
-import { HSL, RGB } from '@/types';
+import { HSL, RGB } from '@colour/types';
 
 export function hslToRgb([h, s, l]: HSL): RGB {
   s /= 100;

@@ -1,4 +1,4 @@
-import { RGB } from '@/types';
+import { RGB } from '@colour/types';
 
 export function getLuminance([r, g, b]: RGB) {
   const a = [r, g, b].map(function (x) {

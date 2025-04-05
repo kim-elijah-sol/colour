@@ -1,7 +1,7 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { HSL } from '@/types';
-import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@/utils/functions';
+import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@colour/fx';
+import { HSL } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';

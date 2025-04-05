@@ -1,4 +1,4 @@
-import { LAB, RGB } from '@/types';
+import { LAB, RGB } from "@colour/types";
 
 export function rgbToLab(rgb: RGB): LAB {
   let r = rgb[0] / 255,

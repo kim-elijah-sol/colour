@@ -1,4 +1,4 @@
-import { hexToRgb } from '@/utils/functions';
+import { hexToRgb } from '@colour/fx';
 import { createTheme } from '@vanilla-extract/css';
 
 const hexToRGBAValue = (hex: string, alpha: number = 1) =>

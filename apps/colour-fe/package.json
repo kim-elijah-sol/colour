@@ -6,7 +6,10 @@
     "dev": "vite",
     "build": "vite build"
   },
+  "packageManager": "pnpm@10.7.1",
   "dependencies": {
+    "@colour/fx": "workspace:^",
+    "@colour/types": "workspace:^",
     "@hookform/resolvers": "^4.0.0",
     "@tanstack/react-query": "^5.66.9",
     "@types/axios": "^0.14.4",

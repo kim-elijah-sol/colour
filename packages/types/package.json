@@ -1,0 +1,14 @@
+{
+  "name": "@colour/types",
+  "version": "1.0.0",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

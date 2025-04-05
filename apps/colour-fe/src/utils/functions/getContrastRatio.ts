@@ -1,5 +1,5 @@
+import { hexToRgb } from '@colour/fx';
 import { getLuminance } from './getLuminance';
-import { hexToRgb } from './hexToRgb';
 
 export function getContrastRatio(hex1: string, hex2: string) {
   const rgb1 = hexToRgb(hex1);

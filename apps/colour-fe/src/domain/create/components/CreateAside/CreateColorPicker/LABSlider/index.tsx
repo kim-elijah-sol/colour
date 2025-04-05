@@ -1,13 +1,8 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { LAB } from '@/types';
-import {
-  hexToRgb,
-  labToRgb,
-  rgbToHex,
-  rgbToLab,
-  roundMap,
-} from '@/utils/functions';
+import { roundMap } from '@/utils/functions';
+import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@colour/fx';
+import { LAB } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
 import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';

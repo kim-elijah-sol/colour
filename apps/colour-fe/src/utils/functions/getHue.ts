@@ -1,4 +1,4 @@
-import { RGB } from '@/types';
+import { RGB } from '@colour/types';
 
 export function getHue([_r, _g, _b]: RGB) {
   const r = _r / 255;

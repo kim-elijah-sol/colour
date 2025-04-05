@@ -1,11 +1,5 @@
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import {
-  hexToRgb,
-  rgbToCmyk,
-  rgbToHsl,
-  rgbToHsv,
-  rgbToLab,
-} from '@/utils/functions';
+import { hexToRgb, rgbToCmyk, rgbToHsl, rgbToHsv, rgbToLab } from '@colour/fx';
 import ColorInfo from '../ColorInfo';
 import * as style from './style.css';
 

@@ -1,7 +1,7 @@
-import { RGB } from '@/types';
+import { RGB } from "@colour/types";
 
 function decToHex(value: number) {
-  return value.toString(16).toUpperCase().padStart(2, '0');
+  return value.toString(16).toUpperCase().padStart(2, "0");
 }
 
 export function rgbToHex([r, g, b]: RGB): string {

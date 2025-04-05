@@ -1,5 +1,5 @@
+import { rgbToHex } from '@colour/fx';
 import { random } from './random';
-import { rgbToHex } from './rgbToHex';
 
 export function randomHex(minValue?: number): string;
 export function randomHex(minValue: number = 0): string {

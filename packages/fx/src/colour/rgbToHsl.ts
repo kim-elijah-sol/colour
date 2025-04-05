@@ -1,4 +1,4 @@
-import { HSL, RGB } from '@/types';
+import { HSL, RGB } from "@colour/types";
 
 export function rgbToHsl(rgb: RGB): HSL {
   const r = rgb[0] / 255;

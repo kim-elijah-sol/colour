@@ -1,7 +1,7 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { RGB } from '@/types';
-import { hexToRgb, rgbToHex } from '@/utils/functions';
+import { hexToRgb, rgbToHex } from '@colour/fx';
+import { RGB } from '@colour/types';
 import { useState } from 'react';
 import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
 import Slider from '../Slider';
