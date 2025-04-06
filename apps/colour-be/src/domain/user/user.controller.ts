@@ -22,14 +22,14 @@ import { LoginRequestDTO } from './dtos/LoginRequest.dto';
 import { LoginResponseDTO } from './dtos/LoginResponse.dto';
 import { UserService } from './user.service';
 
-@Controller('/user')
+@Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly authService: AuthService
   ) {}
 
-  @Post('/join')
+  @Post('join')
   @HttpCode(200)
   async join(
     @Body() joinRequestDTO: JoinRequestDTO

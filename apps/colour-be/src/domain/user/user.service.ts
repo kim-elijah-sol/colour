@@ -12,16 +12,26 @@ export class UserService {
     return await this.userRepository.findUserByEmail(email);
   }
 
-  async createVerificationEmail(joinRequestDTO: JoinRequestDTO) {
+  async createVerificationEmail({
+    email: requestEmail,
+    password: _requestPassword,
+  }: JoinRequestDTO) {
     const now = new Date();
 
+    const requestPassword = SHA256(_requestPassword).toString();
+    const id = SHA256(`${now.valueOf()}-${requestEmail}`).toString();
+    const code = this.getVerificationEmailCode();
+    const expiredAt = new Date(now.getTime() + 30 * 60 * 1000);
+
+    console.log(id, code);
+
     return await this.userRepository.createVerificationEmail({
-      requestEmail: joinRequestDTO.email,
-      requestPassword: SHA256(joinRequestDTO.password).toString(),
-      id: SHA256(`${now.valueOf()}-${joinRequestDTO.email}`).toString(),
-      code: this.getVerificationEmailCode(),
-      expiredAt: new Date(now.getTime() + 30 * 60 * 1000)
-    })
+      requestEmail,
+      requestPassword,
+      id,
+      code,
+      expiredAt,
+    });
   }
 
   async join(joinRequestDTO: JoinRequestDTO) {
