@@ -17,7 +17,6 @@ model user {
   idx       Int       @id @default(autoincrement())
   email     String    @unique @db.VarChar(50) 
   password  String    @db.VarChar(256)
-  name      String    @db.VarChar(20)
 
   createdAt DateTime  @db.Timestamp(3) @default(now())
   updatedAt DateTime? @db.Timestamp(3) @updatedAt()
