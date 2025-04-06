@@ -6,8 +6,6 @@ import { AuthRepository } from './auth.repository';
 import { AuthService } from './auth.service';
 import { JwtAccessTokenGuard } from './guard/accessToken.guard';
 import { JwtRefreshTokenGuard } from './guard/refreshToken.guard';
-import { JwtAccessTokenStrategy } from './strategy/accessToken.strategy';
-import { JwtRefreshTokenStrategy } from './strategy/refreshToken.strategy';
 
 @Module({
   providers: [
@@ -19,8 +17,6 @@ import { JwtRefreshTokenStrategy } from './strategy/refreshToken.strategy';
 
     PrismaService,
 
-    JwtAccessTokenStrategy,
-    JwtRefreshTokenStrategy,
     JwtAccessTokenGuard,
     JwtRefreshTokenGuard,
   ],
