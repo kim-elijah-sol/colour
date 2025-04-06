@@ -13,6 +13,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model verificationEmail {
+  id                String @id @db.VarChar(256)
+  code              String @db.VarChar(4)
+  requestEmail      String @db.VarChar(50)
+  requestPassword   String @db.VarChar(256)
+  createdAt         DateTime  @db.Timestamp(3) @default(now())
+  expiredAt         DateTime  @db.Timestamp(3)
+}
+
 model user {
   idx       Int       @id @default(autoincrement())
   email     String    @unique @db.VarChar(50) 
