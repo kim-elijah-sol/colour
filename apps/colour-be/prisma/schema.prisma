@@ -17,7 +17,7 @@ model verificationEmail {
   id                String @id @db.VarChar(256)
   code              String @db.VarChar(6)
   requestEmail      String @db.VarChar(50)
-  requestPassword   String @db.VarChar(256)
+  requestPassword   String @db.VarChar(16)
   createdAt         DateTime  @db.Timestamp(3) @default(now())
   expiredAt         DateTime  @db.Timestamp(3)
 }
