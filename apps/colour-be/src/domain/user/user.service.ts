@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
 import { JoinRequestDTO } from './dtos/JoinRequest.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
+import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -14,16 +15,11 @@ export class UserService {
 
   async createVerificationEmail({
     email: requestEmail,
-    password: _requestPassword,
+    password: requestPassword,
   }: JoinRequestDTO) {
-    const now = new Date();
-
-    const requestPassword = SHA256(_requestPassword).toString();
-    const id = SHA256(`${now.valueOf()}-${requestEmail}`).toString();
+    const id = this.getVerificationEmailId(requestEmail);
     const code = this.getVerificationEmailCode();
-    const expiredAt = new Date(now.getTime() + 30 * 60 * 1000);
-
-    console.log(id, code);
+    const expiredAt = this.getExpiredDate();
 
     return await this.userRepository.createVerificationEmail({
       requestEmail,
@@ -34,16 +30,46 @@ export class UserService {
     });
   }
 
-  async join(joinRequestDTO: JoinRequestDTO) {
-    return await this.userRepository.createUser(joinRequestDTO);
+  async findVerificationEmail(verifyRequestDTO: VerifyRequestDTO) {
+    return await this.userRepository.findVerificationEmail(verifyRequestDTO);
   }
 
-  async login(loginRequestDTO: LoginRequestDTO) {
-    return await this.userRepository.findUserByIdAndPassword(loginRequestDTO);
+  async deleteVerificationEmailAtVerifySuccess(
+    verifyRequestDTO: VerifyRequestDTO
+  ) {
+    return await this.userRepository.deleteVerificationEmailAtVerifySuccess(
+      verifyRequestDTO
+    );
+  }
+
+  async join({ email, password }: JoinRequestDTO) {
+    return await this.userRepository.createUser({
+      email,
+      password: SHA256(password).toString(),
+    });
+  }
+
+  async login({ email, password }: LoginRequestDTO) {
+    return await this.userRepository.findUserByIdAndPassword({
+      email,
+      password: SHA256(password).toString(),
+    });
   }
 
   getVerificationEmailCode(): string {
     const code = Math.floor(Math.random() * 1000000);
     return code.toString().padStart(6, '0');
+  }
+
+  getExpiredDate(): Date {
+    const now = new Date();
+
+    return new Date(now.getTime() + 30 * 60 * 1000);
+  }
+
+  getVerificationEmailId(email: string) {
+    const now = new Date();
+
+    return SHA256(`${now.valueOf()}-${email}`).toString();
   }
 }

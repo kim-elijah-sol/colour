@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { SHA256 } from 'crypto-js';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateVerificationEmailDTO } from './dtos/CreateVerificationEmailRequest.dto';
 import { JoinRequestDTO } from './dtos/JoinRequest.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
 import { UserDTO } from './dtos/User.dto';
+import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 
 @Injectable()
 export class UserRepository {
@@ -32,11 +32,34 @@ export class UserRepository {
     });
   }
 
+  async findVerificationEmail({ id, code }: VerifyRequestDTO) {
+    const now = new Date();
+
+    return await this.prismaClient.verificationEmail.findUnique({
+      where: {
+        id,
+        code,
+        expiredAt: {
+          gt: now,
+        },
+      },
+    });
+  }
+
+  async deleteVerificationEmailAtVerifySuccess({ id, code }: VerifyRequestDTO) {
+    return await this.prismaClient.verificationEmail.delete({
+      where: {
+        id,
+        code,
+      },
+    });
+  }
+
   async createUser({ email, password }: JoinRequestDTO) {
     return await this.prismaClient.user.create({
       data: {
         email,
-        password: SHA256(password).toString(),
+        password,
       },
     });
   }
@@ -52,7 +75,7 @@ export class UserRepository {
       },
       where: {
         email,
-        password: SHA256(password).toString(),
+        password,
       },
     });
   }

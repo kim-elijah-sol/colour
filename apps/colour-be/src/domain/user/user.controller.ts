@@ -1,5 +1,6 @@
 import { ColourResponse } from '@colour/types';
 import {
+  BadRequestException,
   Body,
   ConflictException,
   Controller,
@@ -20,6 +21,7 @@ import { JoinRequestDTO } from './dtos/JoinRequest.dto';
 import { JoinResponseDTO } from './dtos/JoinResponse.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
 import { LoginResponseDTO } from './dtos/LoginResponse.dto';
+import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -53,6 +55,34 @@ export class UserController {
       data: {
         verificationId: createVerificationEmailResult.id,
       },
+    };
+  }
+
+  @Post('verify')
+  @HttpCode(200)
+  async verify(
+    @Body() verifyRequestDTO: VerifyRequestDTO
+  ): Promise<ColourResponse> {
+    const verificationEmail =
+      await this.userService.findVerificationEmail(verifyRequestDTO);
+
+    if (verificationEmail === null)
+      throw new BadRequestException('invalid virify request');
+
+    await this.userService.deleteVerificationEmailAtVerifySuccess(
+      verifyRequestDTO
+    );
+
+    const { requestEmail, requestPassword } = verificationEmail;
+
+    await this.userService.join({
+      email: requestEmail,
+      password: requestPassword,
+    });
+
+    return {
+      statusCode: 200,
+      success: true,
     };
   }
 
