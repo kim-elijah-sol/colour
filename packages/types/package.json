@@ -7,8 +7,5 @@
   ],
   "scripts": {
     "build": "tsc --emitDeclarationOnly"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.3"
   }
 }
