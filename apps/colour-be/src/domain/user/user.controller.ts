@@ -1,3 +1,4 @@
+import { ColourResponse } from '@colour/types';
 import {
   Body,
   ConflictException,
@@ -16,6 +17,7 @@ import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { JoinRequestDTO } from './dtos/JoinRequest.dto';
+import { JoinResponseDTO } from './dtos/JoinResponse.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
 import { LoginResponseDTO } from './dtos/LoginResponse.dto';
 import { UserService } from './user.service';
@@ -29,23 +31,29 @@ export class UserController {
 
   @Post('/join')
   @HttpCode(200)
-  async join(@Body() joinRequestDTO: JoinRequestDTO) {
-    try {
-      await this.userService.join(joinRequestDTO);
+  async join(
+    @Body() joinRequestDTO: JoinRequestDTO
+  ): Promise<ColourResponse<JoinResponseDTO>> {
+    const alreadyJoinedUser = await this.userService.findUserByEmail(
+      joinRequestDTO.email
+    );
 
-      return {
-        statusCode: 200,
-        success: true,
-      };
-    } catch (error) {
-      if (error.code === 'P2002') {
-        throw new ConflictException(
-          `${joinRequestDTO.email} is already registered`
-        );
-      } else {
-        throw new InternalServerErrorException();
-      }
+    if (alreadyJoinedUser !== null) {
+      throw new ConflictException(
+        `${joinRequestDTO.email} is already registered`
+      );
     }
+
+    const createVerificationEmailResult =
+      await this.userService.createVerificationEmail(joinRequestDTO);
+
+    return {
+      statusCode: 200,
+      success: true,
+      data: {
+        verificationId: createVerificationEmailResult.id,
+      },
+    };
   }
 
   @Post('login')
