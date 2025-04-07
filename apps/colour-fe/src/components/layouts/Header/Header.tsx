@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import * as style from './Header.css';
+import SignInButton from '../../SignInButton';
 
 function Header() {
   return (
@@ -11,6 +12,7 @@ function Header() {
           <span className={style.logoR}>r</span>
         </Link>
       </h1>
+      <SignInButton />
     </header>
   );
 }
