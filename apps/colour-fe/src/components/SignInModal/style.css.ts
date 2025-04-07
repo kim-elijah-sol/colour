@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { flex, margin, padding } from '@/utils/styles';
+import { brandButtonCSS, flex, margin, padding } from '@/utils/styles';
 import { style, styleVariants } from '@vanilla-extract/css';
 
 export const container = style({
@@ -71,24 +71,17 @@ export const input = style({
   },
 });
 
-export const button = style({
-  width: vars.full,
-  height: 46,
-  ...margin({ top: 24 }),
-  borderRadius: 12,
-  color: vars.color.white,
-  backgroundColor: vars.color.brand,
-  cursor: 'pointer',
-  transition: '0.21s',
-  ':hover': {
-    backgroundColor: `rgba(0,106,255,0.6)`,
+export const button = style([
+  brandButtonCSS,
+  {
+    width: vars.full,
+    height: 46,
+    ...margin({ top: 24 }),
+    borderRadius: 12,
+    fontSize: 16,
+    fontWeight: 600,
   },
-  ':active': {
-    backgroundColor: `#005BDB`,
-  },
-  fontSize: 16,
-  fontWeight: 600,
-});
+]);
 
 export const inputWrapper = style({
   overflow: 'hidden',
