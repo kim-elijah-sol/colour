@@ -17,6 +17,7 @@
     "@vanilla-extract/recipes": "^0.5.5",
     "classnames": "^2.5.1",
     "fp-ts": "^2.16.9",
+    "ky": "^1.8.0",
     "lucide-react": "^0.476.0",
     "msw": "^2.7.0",
     "react": "^19.0.0",
