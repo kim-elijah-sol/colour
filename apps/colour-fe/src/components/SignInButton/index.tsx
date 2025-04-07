@@ -1,7 +1,17 @@
+import useSignIn from '@/hooks/useSignIn';
 import * as style from './style.css';
 
 function SignInButton() {
-  return <button className={style.button}>Sign In</button>;
+  const [SignIn, open] = useSignIn();
+
+  return (
+    <>
+      <button className={style.button} onClick={open}>
+        Sign In
+      </button>
+      <SignIn />
+    </>
+  );
 }
 
 export default SignInButton;
