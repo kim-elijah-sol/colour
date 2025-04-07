@@ -66,6 +66,9 @@ export const input = style({
   ':focus': {
     borderColor: vars.color.brand,
   },
+  '::placeholder': {
+    color: '#BBBBBB',
+  },
 });
 
 export const button = style({
