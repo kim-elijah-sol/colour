@@ -9,6 +9,7 @@ import Favourite from './pages/favourite';
 import Layout from '@/components/layouts/Layout';
 
 import '@/styles/reset.css';
+import { useEffect } from 'react';
 import { themeClass } from './styles/theme.css';
 
 const queryClient = new QueryClient({
@@ -22,21 +23,23 @@ const queryClient = new QueryClient({
 });
 
 function Router() {
+  useEffect(() => {
+    document.querySelector('html')?.classList.add(themeClass);
+  }, []);
+
   return (
-    <div className={themeClass}>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<Index />} />
-              <Route path='/popular' element={<Popular />} />
-              <Route path='/create' element={<Create />} />
-              <Route path='/favourite' element={<Favourite />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Index />} />
+            <Route path='/popular' element={<Popular />} />
+            <Route path='/create' element={<Create />} />
+            <Route path='/favourite' element={<Favourite />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
