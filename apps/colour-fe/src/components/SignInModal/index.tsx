@@ -1,6 +1,8 @@
 import Modal from '@/utils/Modal';
 import React, { useEffect, useRef, useState } from 'react';
+import Description from './Description';
 import * as style from './style.css';
+import Title from './Title';
 
 type Props = {
   close: () => void;
@@ -57,33 +59,9 @@ function SignInModal({ close }: Props) {
       <Modal.Header right={<Modal.Header.CloseButton onClick={close} />} />
 
       <div className={style.container}>
-        <div className={style.titleWrapper}>
-          <div
-            className={style.rolling}
-            style={{
-              transform: `translateY(${submitType === 'sign-in' ? 0 : -50}%)`,
-            }}
-          >
-            <p className={style.title}>Sign In</p>
-            <p className={style.title}>Sign Up</p>
-          </div>
-        </div>
+        <Title translateY={submitType === 'sign-in' ? 0 : -38} />
 
-        <div className={style.descriptionWrapper}>
-          <div
-            className={style.rolling}
-            style={{
-              transform: `translateY(${descriptionTranslateY}px)`,
-            }}
-          >
-            <p className={style.description}>Enter the your email!</p>
-            <p className={style.description}>Enter the your password!</p>
-            <p className={style.description}>Enter the password to join us!</p>
-            <p className={style.description}>
-              Enter the code we sent to your email!
-            </p>
-          </div>
-        </div>
+        <Description translateY={descriptionTranslateY} />
 
         <form onSubmit={handleSubmit}>
           <div className={style.inputWrapper}>
