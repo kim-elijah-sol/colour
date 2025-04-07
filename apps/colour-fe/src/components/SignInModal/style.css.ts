@@ -1,6 +1,6 @@
 import { vars } from '@/styles/theme.css';
 import { flex, margin, padding } from '@/utils/styles';
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 export const container = style({
   width: 360,
@@ -89,6 +89,7 @@ export const button = style({
 
 export const inputWrapper = style({
   overflow: 'hidden',
+  transition: '0.21s',
 });
 
 export const inputRolling = style([
@@ -97,3 +98,42 @@ export const inputRolling = style([
     transition: '0.21s',
   },
 ]);
+
+export const passwordGuideWrapper = style([
+  flex({ wrap: 'wrap' }),
+  {
+    gap: '4px 12px',
+    ...margin({ top: 8 }),
+    ...padding({ x: 8 }),
+  },
+]);
+
+export const passwordGuideItem = style([
+  flex({ align: 'center' }),
+  {
+    gap: 8,
+  },
+]);
+
+const _passwordGuideCircle = style({
+  width: 4,
+  height: 4,
+  borderRadius: vars.half,
+  transition: '0.21s',
+});
+
+export const passwordGuideCircle = styleVariants({
+  pass: [_passwordGuideCircle, { backgroundColor: vars.color.brand }],
+  nonePass: [_passwordGuideCircle, { backgroundColor: '#AAAAAA' }],
+});
+
+export const _passwordGuideText = style({
+  fontSize: 13,
+  transition: '0.21s',
+  fontWeight: 600,
+});
+
+export const passwordGuideText = styleVariants({
+  pass: [_passwordGuideText, { color: vars.color.brand }],
+  nonePass: [_passwordGuideText, { color: '#AAAAAA' }],
+});

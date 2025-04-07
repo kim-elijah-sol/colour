@@ -64,7 +64,10 @@ function SignInModal({ close }: Props) {
         <Description translateY={descriptionTranslateY} />
 
         <form onSubmit={handleSubmit}>
-          <div className={style.inputWrapper}>
+          <div
+            className={style.inputWrapper}
+            style={{ height: step === 'password' ? 92 : 46 }}
+          >
             <div
               className={style.inputRolling}
               style={{
@@ -89,6 +92,26 @@ function SignInModal({ close }: Props) {
                   className={style.input}
                   placeholder='your password'
                 />
+                <div className={style.passwordGuideWrapper}>
+                  <div className={style.passwordGuideItem}>
+                    <div className={style.passwordGuideCircle['pass']} />
+                    <p className={style.passwordGuideText['pass']}>
+                      8 ~ 16 characters
+                    </p>
+                  </div>
+                  <div className={style.passwordGuideItem}>
+                    <div className={style.passwordGuideCircle['nonePass']} />
+                    <p className={style.passwordGuideText['nonePass']}>
+                      letter & number
+                    </p>
+                  </div>
+                  <div className={style.passwordGuideItem}>
+                    <div className={style.passwordGuideCircle['nonePass']} />
+                    <p className={style.passwordGuideText['nonePass']}>
+                      special character
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className={style.inputBox}>
                 <input
