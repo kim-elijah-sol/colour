@@ -7,7 +7,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  InternalServerErrorException,
   Post,
   UnauthorizedException,
   UseGuards,
@@ -112,17 +111,13 @@ export class UserController {
 
   @Delete('sign-out')
   @HttpCode(200)
-  async logout(@Token() token: TokenDTO) {
-    try {
-      await this.authService.removeRefreshToken(token.refreshToken);
+  async signOut(@Token() token: TokenDTO) {
+    await this.authService.removeRefreshToken(token.refreshToken);
 
-      return {
-        statusCode: 200,
-        success: true,
-      };
-    } catch {
-      throw new InternalServerErrorException();
-    }
+    return {
+      statusCode: 200,
+      success: true,
+    };
   }
 
   @UseGuards(JwtRefreshTokenGuard)
