@@ -1,16 +1,15 @@
+import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
-type Props = {
-  translateY: number;
-};
+function Title() {
+  const { submitType } = useSignInStore()
 
-function Title({ translateY }: Props) {
   return (
     <div className={style.titleWrapper}>
       <div
         className={style.rolling}
         style={{
-          transform: `translateY(${translateY}px)`,
+          transform: `translateY(${submitType === 'sign-in' ? 0 : -38}px)`,
         }}
       >
         <p className={style.title}>Sign In</p>

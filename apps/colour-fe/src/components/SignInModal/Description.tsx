@@ -1,10 +1,16 @@
+import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
-type Props = {
-  translateY: number;
-};
+function Description() {
+  const { step, submitType } = useSignInStore();
 
-function Description({ translateY }: Props) {
+  const translateY = (() => {
+    if (step === 'email') return 0;
+    if (step === 'password' && submitType === 'sign-in') return -24;
+    if (step === 'password' && submitType === 'sign-up') return -48;
+    return -72;
+  })();
+
   return (
     <div className={style.descriptionWrapper}>
       <div

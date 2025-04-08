@@ -1,72 +1,41 @@
 import Modal from '@/utils/components/Modal';
-import React, { useEffect, useRef, useState } from 'react';
 import Description from './Description';
+import EmailInput from './EmailInput';
+import useInputRollingHeight from './hooks/useInputRollingHeight';
+import useInputRollingTranslateX from './hooks/useInputRollingTranslateX';
+import useSignInInputAutoFocus from './hooks/useSignInInputAutoFocus';
+import useSignInSubmit from './hooks/useSignInSubmit';
+import PasswordInput from './PasswordInput';
 import * as style from './style.css';
 import Title from './Title';
+import VerifyCodeInput from './VerifyCodeInput';
 
 type Props = {
   close: () => void;
 };
 
-type Step = 'email' | 'password' | 'verify';
-
-type SubmitType = 'sign-in' | 'sign-up';
-
 function SignInModal({ close }: Props) {
-  const $email = useRef<HTMLInputElement | null>(null);
-  const $password = useRef<HTMLInputElement | null>(null);
-  const $verify = useRef<HTMLInputElement | null>(null);
+  const { $email, $password, $verify } = useSignInInputAutoFocus();
 
-  const [step, setStep] = useState<Step>('email');
+  const handleSubmit = useSignInSubmit();
 
-  const [submitType, setSubmitType] = useState<SubmitType>('sign-in');
+  const inputRollingTranslateX = useInputRollingTranslateX();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    if (step === 'email') {
-      setStep('password');
-      setSubmitType('sign-up');
-    } else if (step === 'password') {
-      if (submitType === 'sign-in') {
-        close();
-      } else {
-        setStep('verify');
-      }
-    }
-  }
-
-  const descriptionTranslateY = (() => {
-    if (step === 'email') return 0;
-    if (step === 'password' && submitType === 'sign-in') return -24;
-    if (step === 'password' && submitType === 'sign-up') return -48;
-    return -72;
-  })();
-
-  const inputRollingTranslateX = `translateX(${
-    step === 'email' ? 0 : step === 'password' ? -336 : -672
-  }px)`;
-
-  useEffect(() => {
-    if (step === 'email') $email.current?.focus({ preventScroll: true });
-    else if (step === 'password')
-      $password.current?.focus({ preventScroll: true });
-    else $verify.current?.focus({ preventScroll: true });
-  }, [step]);
+  const inputRollingHeight = useInputRollingHeight();
 
   return (
     <Modal>
       <Modal.Header right={<Modal.Header.CloseButton onClick={close} />} />
 
       <div className={style.container}>
-        <Title translateY={submitType === 'sign-in' ? 0 : -38} />
+        <Title />
 
-        <Description translateY={descriptionTranslateY} />
+        <Description />
 
         <form onSubmit={handleSubmit}>
           <div
             className={style.inputWrapper}
-            style={{ height: step === 'password' ? 92 : 46 }}
+            style={{ height: inputRollingHeight }}
           >
             <div
               className={style.inputRolling}
@@ -74,55 +43,9 @@ function SignInModal({ close }: Props) {
                 transform: inputRollingTranslateX,
               }}
             >
-              <div className={style.inputBox}>
-                <input
-                  ref={$email}
-                  disabled={step !== 'email'}
-                  type='email'
-                  className={style.input}
-                  placeholder='your email'
-                />
-              </div>
-              <div className={style.inputBox}>
-                <input
-                  ref={$password}
-                  disabled={step !== 'password'}
-                  type='password'
-                  maxLength={20}
-                  className={style.input}
-                  placeholder='your password'
-                />
-                <div className={style.passwordGuideWrapper}>
-                  <div className={style.passwordGuideItem}>
-                    <div className={style.passwordGuideCircle['pass']} />
-                    <p className={style.passwordGuideText['pass']}>
-                      8 ~ 16 characters
-                    </p>
-                  </div>
-                  <div className={style.passwordGuideItem}>
-                    <div className={style.passwordGuideCircle['nonePass']} />
-                    <p className={style.passwordGuideText['nonePass']}>
-                      letter & number
-                    </p>
-                  </div>
-                  <div className={style.passwordGuideItem}>
-                    <div className={style.passwordGuideCircle['nonePass']} />
-                    <p className={style.passwordGuideText['nonePass']}>
-                      special character
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className={style.inputBox}>
-                <input
-                  ref={$verify}
-                  disabled={step !== 'verify'}
-                  type='text'
-                  maxLength={6}
-                  className={style.input}
-                  placeholder='verify code (6-digit)'
-                />
-              </div>
+              <EmailInput ref={$email} />
+              <PasswordInput ref={$password} />
+              <VerifyCodeInput ref={$verify} />
             </div>
           </div>
 
