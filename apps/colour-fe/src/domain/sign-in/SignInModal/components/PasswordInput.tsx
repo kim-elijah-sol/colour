@@ -2,7 +2,7 @@ import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
 function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
-  const { step, password, setPassword } = useSignInStore();
+  const { step, submitType, password, setPassword } = useSignInStore();
 
   return (
     <div className={style.inputBox}>
@@ -16,22 +16,26 @@ function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
         className={style.input}
         placeholder='your password'
       />
-      <div className={style.passwordGuideWrapper}>
-        <div className={style.passwordGuideItem}>
-          <div className={style.passwordGuideCircle['pass']} />
-          <p className={style.passwordGuideText['pass']}>8 ~ 16 characters</p>
+      {submitType === 'sign-up' && (
+        <div className={style.passwordGuideWrapper}>
+          <div className={style.passwordGuideItem}>
+            <div className={style.passwordGuideCircle['pass']} />
+            <p className={style.passwordGuideText['pass']}>8 ~ 16 characters</p>
+          </div>
+          <div className={style.passwordGuideItem}>
+            <div className={style.passwordGuideCircle['nonePass']} />
+            <p className={style.passwordGuideText['nonePass']}>
+              letter & number
+            </p>
+          </div>
+          <div className={style.passwordGuideItem}>
+            <div className={style.passwordGuideCircle['nonePass']} />
+            <p className={style.passwordGuideText['nonePass']}>
+              special character
+            </p>
+          </div>
         </div>
-        <div className={style.passwordGuideItem}>
-          <div className={style.passwordGuideCircle['nonePass']} />
-          <p className={style.passwordGuideText['nonePass']}>letter & number</p>
-        </div>
-        <div className={style.passwordGuideItem}>
-          <div className={style.passwordGuideCircle['nonePass']} />
-          <p className={style.passwordGuideText['nonePass']}>
-            special character
-          </p>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
