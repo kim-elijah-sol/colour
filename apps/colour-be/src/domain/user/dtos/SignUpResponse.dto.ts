@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class JoinResponseDTO {
+export class SignUpResponseDTO {
   @IsString()
   verificationId: string;
 }

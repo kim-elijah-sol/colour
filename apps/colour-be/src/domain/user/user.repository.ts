@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateVerificationEmailDTO } from './dtos/CreateVerificationEmailRequest.dto';
-import { JoinRequestDTO } from './dtos/JoinRequest.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
+import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { UserDTO } from './dtos/User.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 
@@ -55,7 +55,7 @@ export class UserRepository {
     });
   }
 
-  async createUser({ email, password }: JoinRequestDTO) {
+  async createUser({ email, password }: SignUpRequestDTO) {
     return await this.prismaClient.user.create({
       data: {
         email,

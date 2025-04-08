@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
-import { JoinRequestDTO } from './dtos/JoinRequest.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
+import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserRepository } from './user.repository';
 
@@ -16,7 +16,7 @@ export class UserService {
   async createVerificationEmail({
     email: requestEmail,
     password: requestPassword,
-  }: JoinRequestDTO) {
+  }: SignUpRequestDTO) {
     const id = this.getVerificationEmailId(requestEmail);
     const code = this.getVerificationEmailCode();
     const expiredAt = this.getExpiredDate();
@@ -42,7 +42,7 @@ export class UserService {
     );
   }
 
-  async join({ email, password }: JoinRequestDTO) {
+  async signUp({ email, password }: SignUpRequestDTO) {
     return await this.userRepository.createUser({
       email,
       password: SHA256(password).toString(),

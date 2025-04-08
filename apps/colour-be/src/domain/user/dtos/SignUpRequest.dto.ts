@@ -1,6 +1,6 @@
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class JoinRequestDTO {
+export class SignUpRequestDTO {
   @IsEmail()
   @MaxLength(50)
   readonly email: string;

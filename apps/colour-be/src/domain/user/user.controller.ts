@@ -17,10 +17,10 @@ import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
-import { JoinRequestDTO } from './dtos/JoinRequest.dto';
-import { JoinResponseDTO } from './dtos/JoinResponse.dto';
 import { LoginRequestDTO } from './dtos/LoginRequest.dto';
 import { LoginResponseDTO } from './dtos/LoginResponse.dto';
+import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
+import { SignUpResponseDTO } from './dtos/SignUpResponse.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserService } from './user.service';
 
@@ -33,21 +33,21 @@ export class UserController {
 
   @Post('sign-up-request')
   @HttpCode(200)
-  async join(
-    @Body() joinRequestDTO: JoinRequestDTO
-  ): Promise<ColourResponse<JoinResponseDTO>> {
-    const alreadyJoinedUser = await this.userService.findUserByEmail(
-      joinRequestDTO.email
+  async signUpRequest(
+    @Body() signUpRequest: SignUpRequestDTO
+  ): Promise<ColourResponse<SignUpResponseDTO>> {
+    const alreadyRegisteredUser = await this.userService.findUserByEmail(
+      signUpRequest.email
     );
 
-    if (alreadyJoinedUser !== null) {
+    if (alreadyRegisteredUser !== null) {
       throw new ConflictException(
-        `${joinRequestDTO.email} is already registered`
+        `${signUpRequest.email} is already registered`
       );
     }
 
     const createVerificationEmailResult =
-      await this.userService.createVerificationEmail(joinRequestDTO);
+      await this.userService.createVerificationEmail(signUpRequest);
 
     return {
       statusCode: 200,
@@ -75,7 +75,7 @@ export class UserController {
 
     const { requestEmail, requestPassword } = verificationEmail;
 
-    await this.userService.join({
+    await this.userService.signUp({
       email: requestEmail,
       password: requestPassword,
     });
