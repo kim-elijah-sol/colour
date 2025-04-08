@@ -17,8 +17,8 @@ import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
-import { LoginRequestDTO } from './dtos/LoginRequest.dto';
-import { LoginResponseDTO } from './dtos/LoginResponse.dto';
+import { SignInRequestDTO } from './dtos/SignInRequest.dto';
+import { SignInResponseDTO } from './dtos/SignInResponse.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { SignUpResponseDTO } from './dtos/SignUpResponse.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
@@ -34,20 +34,20 @@ export class UserController {
   @Post('sign-up-request')
   @HttpCode(200)
   async signUpRequest(
-    @Body() signUpRequest: SignUpRequestDTO
+    @Body() signUpRequestDTO: SignUpRequestDTO
   ): Promise<ColourResponse<SignUpResponseDTO>> {
     const alreadyRegisteredUser = await this.userService.findUserByEmail(
-      signUpRequest.email
+      signUpRequestDTO.email
     );
 
     if (alreadyRegisteredUser !== null) {
       throw new ConflictException(
-        `${signUpRequest.email} is already registered`
+        `${signUpRequestDTO.email} is already registered`
       );
     }
 
     const createVerificationEmailResult =
-      await this.userService.createVerificationEmail(signUpRequest);
+      await this.userService.createVerificationEmail(signUpRequestDTO);
 
     return {
       statusCode: 200,
@@ -88,35 +88,26 @@ export class UserController {
 
   @Post('sign-in')
   @HttpCode(200)
-  async login(@Body() loginRequestDTO: LoginRequestDTO) {
-    try {
-      const user = await this.userService.login(loginRequestDTO);
+  async signIn(@Body() signInRequestDTO: SignInRequestDTO) {
+    const user = await this.userService.signIn(signInRequestDTO);
 
-      if (!user)
-        throw new UnauthorizedException('Can not find matching account');
+    if (!user) throw new UnauthorizedException('Can not find matching account');
 
-      const accessToken = await this.authService.createAccessToken(user);
-      const refreshToken = await this.authService.createRefreshToken(user);
+    const accessToken = await this.authService.createAccessToken(user);
+    const refreshToken = await this.authService.createRefreshToken(user);
 
-      const tokens: LoginResponseDTO = {
-        accessToken,
-        refreshToken,
-      };
+    const tokens: SignInResponseDTO = {
+      accessToken,
+      refreshToken,
+    };
 
-      await this.authService.saveRefreshToken(user.idx, tokens.refreshToken);
+    await this.authService.saveRefreshToken(user.idx, tokens.refreshToken);
 
-      return {
-        statusCode: 200,
-        success: true,
-        data: tokens,
-      };
-    } catch (error) {
-      if (error instanceof UnauthorizedException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException();
-    }
+    return {
+      statusCode: 200,
+      success: true,
+      data: tokens,
+    };
   }
 
   @Delete('sign-out')

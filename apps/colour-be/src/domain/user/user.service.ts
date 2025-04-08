@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
-import { LoginRequestDTO } from './dtos/LoginRequest.dto';
+import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserRepository } from './user.repository';
@@ -49,7 +49,7 @@ export class UserService {
     });
   }
 
-  async login({ email, password }: LoginRequestDTO) {
+  async signIn({ email, password }: SignInRequestDTO) {
     return await this.userRepository.findUserByIdAndPassword({
       email,
       password: SHA256(password).toString(),

@@ -1,6 +1,6 @@
 import { IsString } from 'class-validator';
 
-export class LoginResponseDTO {
+export class SignInResponseDTO {
   @IsString()
   readonly accessToken: string;
 
