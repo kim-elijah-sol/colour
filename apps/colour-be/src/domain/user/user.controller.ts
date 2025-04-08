@@ -87,7 +87,9 @@ export class UserController {
 
   @Post('sign-in')
   @HttpCode(200)
-  async signIn(@Body() signInRequestDTO: SignInRequestDTO) {
+  async signIn(
+    @Body() signInRequestDTO: SignInRequestDTO
+  ): Promise<ColourResponse<SignInResponseDTO>> {
     const user = await this.userService.signIn(signInRequestDTO);
 
     if (!user) throw new UnauthorizedException('Can not find matching account');
@@ -111,7 +113,7 @@ export class UserController {
 
   @Delete('sign-out')
   @HttpCode(200)
-  async signOut(@Token() token: TokenDTO) {
+  async signOut(@Token() token: TokenDTO): Promise<ColourResponse> {
     await this.authService.removeRefreshToken(token.refreshToken);
 
     return {
