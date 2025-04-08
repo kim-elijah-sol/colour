@@ -1,4 +1,4 @@
-import Modal from '@/utils/Modal';
+import Modal from '@/utils/components/Modal';
 import React, { useEffect, useRef, useState } from 'react';
 import Description from './Description';
 import * as style from './style.css';
