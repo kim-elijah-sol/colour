@@ -1,5 +1,19 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-08
+
+BE 의 user api end-point 를 변경했다.<br>
+FE 에서 사용되는 sign in, sign up, sign out 에 맞춰 변경했고,<br>
+DTO 및 변수명도 변경했다.<br>
+
+FE 는 로그인 및 회원가입 flow 를 정리했다.<br>
+1차적으로 모든 api 를 붙혔고, 내일부터는 `토스트 메시지 처리` 및 `조건식 검사`, `토큰 저장`, `엑세스 토큰 재발급 처리`를 진행할 예정이다.<br>
+
+아 맞다 이번 FE http 요청 라이브러리는 `ky` 로 결정했다.<br>
+
+`ky` 가 `axios` 보다 번들 크기도 작고, `axios` success 시 데이터를 추가적으로 `AxiosResponse` 로 래핑 하지만,<br>
+`ky` 는 server 에서 응답한 데이터를 그대로 내려주기 때문에 별도의 interceptor 처리가 필요 없기 때문에 써보기로
+
 # 2025-04-07
 
 FE 화면에 로그인 버튼을 그리고 버튼 클릭 시 로그인 모달이 뜨도록 만들었다.<br>
