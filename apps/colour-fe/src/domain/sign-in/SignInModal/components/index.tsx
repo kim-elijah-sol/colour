@@ -1,3 +1,4 @@
+import { useModalShowContext } from '@/stores/ModalShowContext';
 import Modal from '@/utils/components/Modal';
 import useInputRollingHeight from '../hooks/useInputRollingHeight';
 import useInputRollingTranslateX from '../hooks/useInputRollingTranslateX';
@@ -10,11 +11,9 @@ import * as style from './style.css';
 import Title from './Title';
 import VerifyCodeInput from './VerifyCodeInput';
 
-type Props = {
-  close: () => void;
-};
+function SignInModal() {
+  const { close } = useModalShowContext();
 
-function SignInModal({ close }: Props) {
   const { $email, $password, $verify } = useSignInInputAutoFocus();
 
   const handleSubmit = useSignInSubmit();

@@ -20,6 +20,8 @@ type Action = {
   setPassword: (password: string) => void;
   setVerificationId: (verificationId: string | null) => void;
   setVerifyCode: (verifyCode: string) => void;
+
+  reset: () => void;
 };
 
 type SignInStore = State & Action;
@@ -37,6 +39,15 @@ const useSignInStore = create<SignInStore>()((set) => ({
   setPassword: (password) => set({ password }),
   setVerificationId: (verificationId) => set({ verificationId }),
   setVerifyCode: (verifyCode) => set({ verifyCode }),
+  reset: () =>
+    set({
+      step: 'email',
+      submitType: 'sign-in',
+      email: '',
+      password: '',
+      verificationId: null,
+      verifyCode: '',
+    }),
 }));
 
 export default useSignInStore;

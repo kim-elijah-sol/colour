@@ -1,12 +1,23 @@
 import SignInModal from '@/domain/sign-in/SignInModal/components';
+import { ModalShowContext } from '@/stores/ModalShowContext';
+import useSignInStore from '@/stores/useSignInStore';
 import Portal from '@/utils/components/Portal';
 import { useState } from 'react';
 
 function useSignIn() {
+  const reset = useSignInStore((state) => state.reset);
+
   const [isModalShow, setIsModalShow] = useState(false);
 
   function open() {
     setIsModalShow(true);
+  }
+
+  function close() {
+    setIsModalShow(false);
+    setTimeout(() => {
+      reset();
+    }, 300);
   }
 
   const SignIn = () => {
@@ -14,7 +25,14 @@ function useSignIn() {
 
     return (
       <Portal>
-        <SignInModal close={() => setIsModalShow(false)} />
+        <ModalShowContext
+          value={{
+            isShow: isModalShow,
+            close,
+          }}
+        >
+          <SignInModal />
+        </ModalShowContext>
       </Portal>
     );
   };
