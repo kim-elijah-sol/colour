@@ -16,6 +16,7 @@ import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
+import { RefreshResponseDTO } from './dtos/RefreshResponse.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignInResponseDTO } from './dtos/SignInResponse.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
@@ -128,7 +129,7 @@ export class UserController {
   async refresh(
     @Token() token: TokenDTO,
     @TokenInfo() tokenInfo: TokenInfoDTO
-  ) {
+  ): Promise<ColourResponse<RefreshResponseDTO>> {
     const newAccessToken = await this.authService.refresh(
       tokenInfo.idx,
       token.refreshToken
