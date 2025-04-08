@@ -2,12 +2,14 @@ import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
 function VerifyCodeInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
-  const { step } = useSignInStore();
+  const { step, verifyCode, setVerifyCode } = useSignInStore();
 
   return (
     <div className={style.inputBox}>
       <input
         ref={ref}
+        value={verifyCode}
+        onChange={(e) => setVerifyCode(e.target.value)}
         disabled={step !== 'verify'}
         type='text'
         maxLength={6}

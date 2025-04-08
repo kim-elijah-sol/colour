@@ -2,12 +2,14 @@ import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
 function EmailInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
-  const { step } = useSignInStore();
+  const { step, email, setEmail } = useSignInStore();
 
   return (
     <div className={style.inputBox}>
       <input
         ref={ref}
+        value={email}
+        onChange={e => setEmail(e.target.value)}
         disabled={step !== 'email'}
         type='email'
         className={style.input}

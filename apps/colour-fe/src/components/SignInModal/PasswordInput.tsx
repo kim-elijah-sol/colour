@@ -2,12 +2,14 @@ import useSignInStore from '@/stores/useSignInStore';
 import * as style from './style.css';
 
 function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
-  const { step } = useSignInStore();
+  const { step, password, setPassword } = useSignInStore();
 
   return (
     <div className={style.inputBox}>
       <input
         ref={ref}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         disabled={step !== 'password'}
         type='password'
         maxLength={20}
