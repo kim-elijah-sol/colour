@@ -1,4 +1,4 @@
-import SignInModal from '@/components/SignInModal';
+import SignInModal from '@/domain/sign-in/SignInModal/components';
 import Portal from '@/utils/components/Portal';
 import { useState } from 'react';
 
