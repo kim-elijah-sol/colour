@@ -31,7 +31,7 @@ export class UserController {
     private readonly authService: AuthService
   ) {}
 
-  @Post('join')
+  @Post('sign-up-request')
   @HttpCode(200)
   async join(
     @Body() joinRequestDTO: JoinRequestDTO
@@ -86,7 +86,7 @@ export class UserController {
     };
   }
 
-  @Post('login')
+  @Post('sign-in')
   @HttpCode(200)
   async login(@Body() loginRequestDTO: LoginRequestDTO) {
     try {
@@ -119,7 +119,7 @@ export class UserController {
     }
   }
 
-  @Delete('logout')
+  @Delete('sign-out')
   @HttpCode(200)
   async logout(@Token() token: TokenDTO) {
     try {
