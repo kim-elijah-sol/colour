@@ -9,7 +9,6 @@ import {
   HttpCode,
   Post,
   Query,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
@@ -114,7 +113,7 @@ export class UserController {
   ): Promise<ColourResponse<SignInResponseDTO>> {
     const user = await this.userService.signIn(signInRequestDTO);
 
-    if (!user) throw new UnauthorizedException('Can not find matching account');
+    if (!user) throw new BadRequestException('Can not find matching account');
 
     const accessToken = await this.authService.createAccessToken(user);
     const refreshToken = await this.authService.createRefreshToken(user);

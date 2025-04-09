@@ -1,7 +1,7 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserRepository } from 'src/domain/user/user.repository';
@@ -37,7 +37,7 @@ export class AuthService {
     );
 
     if (!result) {
-      throw new UnauthorizedException('You need to log in first');
+      throw new BadRequestException('You need to log in first');
     }
 
     const user = await this.userRepository.findUserByIdx(userIdx);
