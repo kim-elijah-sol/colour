@@ -1,20 +1,20 @@
 import useSignInStore from '@/stores/useSignInStore';
 import useHandleEmail from './useHandleEmail';
+import useHandlePasswordWhenSignIn from './useHandlePasswordWhenSignIn';
+import useHandlePasswordWhenSignUp from './useHandlePasswordWhenSignUp';
+import useHandleVerifyCode from './useHandleVerifyCode';
 import useIsSubmitPending from './useIsSubmitPending';
-import usePasswordWhenSignIn from './usePasswordWhenSignIn';
-import usePasswordWhenSignUp from './usePasswordWhenSignUp';
-import useVerifyCode from './useVerifyCode';
 
 function useSignInSubmit() {
   const { step, submitType } = useSignInStore();
 
   const handleEmail = useHandleEmail();
 
-  const handlePasswordWhenSignIn = usePasswordWhenSignIn();
+  const handlePasswordWhenSignIn = useHandlePasswordWhenSignIn();
 
-  const handlePasswordWhenSignUp = usePasswordWhenSignUp();
+  const handlePasswordWhenSignUp = useHandlePasswordWhenSignUp();
 
-  const handleVerifyCode = useVerifyCode();
+  const handleVerifyCode = useHandleVerifyCode();
 
   const isSubmitPending = useIsSubmitPending();
 

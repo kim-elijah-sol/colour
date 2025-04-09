@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 import { postSignIn } from '../apis/postSignIn';
 
-function usePasswordWhenSignIn() {
+function useHandlePasswordWhenSignIn() {
   const { email, password } = useSignInStore();
 
   const { mutate } = useMutation({
@@ -33,4 +33,4 @@ function usePasswordWhenSignIn() {
   return handlePasswordWhenSignIn;
 }
 
-export default usePasswordWhenSignIn;
+export default useHandlePasswordWhenSignIn;

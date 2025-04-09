@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 import { postVerify } from '../apis/postVerify';
 
-function useVerifyCode() {
+function useHandleVerifyCode() {
   const {
     verificationId,
     verifyCode,
@@ -47,4 +47,4 @@ function useVerifyCode() {
   return handleVerifyCode;
 }
 
-export default useVerifyCode;
+export default useHandleVerifyCode;

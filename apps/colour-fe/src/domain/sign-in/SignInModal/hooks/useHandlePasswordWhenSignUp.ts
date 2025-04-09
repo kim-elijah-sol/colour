@@ -2,7 +2,7 @@ import useSignInStore from '@/stores/useSignInStore';
 import { useMutation } from '@tanstack/react-query';
 import { postSignUpRequest } from '../apis/postSignUpRequest';
 
-function usePasswordWhenSignUp() {
+function useHandlePasswordWhenSignUp() {
   const { email, password, setVerificationId, setStep } = useSignInStore();
 
   const { mutate } = useMutation({
@@ -24,4 +24,4 @@ function usePasswordWhenSignUp() {
   return handlePasswordWhenSignUp;
 }
 
-export default usePasswordWhenSignUp;
+export default useHandlePasswordWhenSignUp;
