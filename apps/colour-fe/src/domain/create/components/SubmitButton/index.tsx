@@ -1,5 +1,6 @@
+import Loader from '@/components/Loader';
 import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { LoaderPinwheel, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { useHandleCreate } from '../../hooks/useHandleCreate';
 import * as style from './style.css';
@@ -21,7 +22,7 @@ function SubmitButton() {
       className={style.submitButton}
     >
       {isPending ? (
-        <LoaderPinwheel className={style.loader} color='#FFFFFF' size={16} />
+        <Loader />
       ) : (
         <>
           <Send color='#FFFFFF' size={16} /> Submit
