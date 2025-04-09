@@ -39,15 +39,17 @@ export class UserController {
   async checkEmail(
     @Query() checkEmailRequestDTO: CheckEmailRequestDTO
   ): Promise<ColourResponse<CheckEmailResponseDTO>> {
-    const isAlready = (await this.userService.findUserByEmail(checkEmailRequestDTO.email)) !== null
+    const isAlready =
+      (await this.userService.findUserByEmail(checkEmailRequestDTO.email)) !==
+      null;
 
     return {
       statusCode: 200,
       success: true,
       data: {
-        isAlready
-      }
-    }
+        isAlready,
+      },
+    };
   }
 
   @Post('sign-up-request')
