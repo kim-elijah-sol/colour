@@ -1,8 +1,12 @@
+import { useAccessToken } from '@/queries/useAccessToken';
 import { Link } from 'react-router';
-import * as style from './Header.css';
 import SignInButton from '../../SignInButton';
+import * as style from './Header.css';
+import Profile from './Profile';
 
 function Header() {
+  const { data: accessToken } = useAccessToken();
+
   return (
     <header className={style.header}>
       <h1>
@@ -12,7 +16,7 @@ function Header() {
           <span className={style.logoR}>r</span>
         </Link>
       </h1>
-      <SignInButton />
+      {accessToken ? <Profile /> : <SignInButton />}
     </header>
   );
 }
