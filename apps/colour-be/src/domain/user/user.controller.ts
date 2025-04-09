@@ -93,11 +93,12 @@ export class UserController {
       verifyRequestDTO
     );
 
-    const { requestEmail, requestPassword } = verificationEmail;
+    const { requestEmail, requestPassword, code } = verificationEmail;
 
     await this.userService.signUp({
       email: requestEmail,
       password: requestPassword,
+      profileColor: code,
     });
 
     return {

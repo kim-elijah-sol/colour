@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateUserDTO } from './dtos/CreateUser.dto';
 import { CreateVerificationEmailDTO } from './dtos/CreateVerificationEmailRequest.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
-import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { UserDTO } from './dtos/User.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 
@@ -43,6 +43,11 @@ export class UserRepository {
           gt: now,
         },
       },
+      select: {
+        requestEmail: true,
+        requestPassword: true,
+        code: true,
+      },
     });
   }
 
@@ -55,11 +60,12 @@ export class UserRepository {
     });
   }
 
-  async createUser({ email, password }: SignUpRequestDTO) {
+  async createUser({ email, password, profileColor }: CreateUserDTO) {
     return await this.prismaClient.user.create({
       data: {
         email,
         password,
+        profileColor,
       },
     });
   }

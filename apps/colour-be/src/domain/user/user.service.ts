@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
+import { CreateUserDTO } from './dtos/CreateUser.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
@@ -42,10 +43,11 @@ export class UserService {
     );
   }
 
-  async signUp({ email, password }: SignUpRequestDTO) {
+  async signUp({ email, password, profileColor }: CreateUserDTO) {
     return await this.userRepository.createUser({
       email,
       password: SHA256(password).toString(),
+      profileColor,
     });
   }
 
@@ -56,9 +58,14 @@ export class UserService {
     });
   }
 
+  getRandomRGBValue(): string {
+    return (Math.floor(Math.random() * 155) + 100)
+      .toString(16)
+      .padStart(2, '0');
+  }
+
   getVerificationEmailCode(): string {
-    const code = Math.floor(Math.random() * 1000000);
-    return code.toString().padStart(6, '0');
+    return `${this.getRandomRGBValue()}${this.getRandomRGBValue()}${this.getRandomRGBValue()}`;
   }
 
   getExpiredDate(): Date {
