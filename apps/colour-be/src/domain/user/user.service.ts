@@ -65,7 +65,7 @@ export class UserService {
   }
 
   getVerificationEmailCode(): string {
-    return `${this.getRandomRGBValue()}${this.getRandomRGBValue()}${this.getRandomRGBValue()}`;
+    return `${this.getRandomRGBValue()}${this.getRandomRGBValue()}${this.getRandomRGBValue()}`.toUpperCase();
   }
 
   getExpiredDate(): Date {
