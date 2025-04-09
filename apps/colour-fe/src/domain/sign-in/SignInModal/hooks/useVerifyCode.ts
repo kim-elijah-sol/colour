@@ -1,12 +1,9 @@
-import { useModalShowContext } from '@/stores/ModalShowContext';
 import useSignInStore from '@/stores/useSignInStore';
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 import { postVerify } from '../apis/postVerify';
 
 function useVerifyCode() {
-  const { close } = useModalShowContext();
-
   const {
     verificationId,
     verifyCode,
