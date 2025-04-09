@@ -14,7 +14,8 @@ datasource db {
 }
 
 model verificationEmail {
-  id                String @id @db.VarChar(256)
+  idx               Int    @id @default(autoincrement())
+  id                String @unique @db.VarChar(256)
   code              String @db.VarChar(6)
   requestEmail      String @db.VarChar(50)
   requestPassword   String @db.VarChar(16)
