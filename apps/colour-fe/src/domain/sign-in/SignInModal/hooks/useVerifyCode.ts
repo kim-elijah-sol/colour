@@ -7,13 +7,25 @@ import { postVerify } from '../apis/postVerify';
 function useVerifyCode() {
   const { close } = useModalShowContext();
 
-  const { verificationId, verifyCode } = useSignInStore();
+  const {
+    verificationId,
+    verifyCode,
+    setStep,
+    setSubmitType,
+    setPassword,
+    setVerificationId,
+    setVerifyCode,
+  } = useSignInStore();
 
   const { mutate } = useMutation({
     mutationFn: postVerify,
     mutationKey: ['postVerify'],
     onSuccess: () => {
-      close();
+      setStep('password');
+      setSubmitType('sign-in');
+      setPassword('');
+      setVerificationId(null);
+      setVerifyCode('');
     },
     onError: async (error) => {
       if (error instanceof HTTPError) {
