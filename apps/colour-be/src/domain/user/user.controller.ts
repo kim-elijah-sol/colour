@@ -9,15 +9,18 @@ import {
   HttpCode,
   Post,
   Query,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
+import { JwtAccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { CheckEmailRequestDTO } from './dtos/CheckEmailRequest.dto';
 import { CheckEmailResponseDTO } from './dtos/CheckEmailResponse.dto';
+import { MeResponseDTO } from './dtos/MeResponse.dto';
 import { RefreshResponseDTO } from './dtos/RefreshResponse.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignInResponseDTO } from './dtos/SignInResponse.dto';
@@ -162,6 +165,25 @@ export class UserController {
       data: {
         accessToken: newAccessToken,
       },
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Get('me')
+  @HttpCode(200)
+  async me(
+    @TokenInfo() tokenInfo: TokenInfoDTO
+  ): Promise<ColourResponse<MeResponseDTO>> {
+    const data = await this.userService.findMyMe(tokenInfo.idx);
+
+    if (data === null) {
+      throw new UnauthorizedException("Can't find user");
+    }
+
+    return {
+      statusCode: 200,
+      success: true,
+      data,
     };
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
 import { CreateUserDTO } from './dtos/CreateUser.dto';
+import { MeResponseDTO } from './dtos/MeResponse.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
@@ -56,6 +57,10 @@ export class UserService {
       email,
       password: SHA256(password).toString(),
     });
+  }
+
+  async findMyMe(idx: number): Promise<MeResponseDTO | null> {
+    return await this.userRepository.findUserByMe(idx);
   }
 
   getRandomRGBValue(): string {

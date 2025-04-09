@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDTO } from './dtos/CreateUser.dto';
 import { CreateVerificationEmailDTO } from './dtos/CreateVerificationEmailRequest.dto';
+import { MeResponseDTO } from './dtos/MeResponse.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { UserDTO } from './dtos/User.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
@@ -91,6 +92,18 @@ export class UserRepository {
       select: {
         idx: true,
         email: true,
+      },
+      where: {
+        idx,
+      },
+    });
+  }
+
+  async findUserByMe(idx: number): Promise<MeResponseDTO | null> {
+    return await this.prismaClient.user.findUnique({
+      select: {
+        email: true,
+        profileColor: true,
       },
       where: {
         idx,
