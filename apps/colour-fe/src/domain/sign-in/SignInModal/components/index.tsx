@@ -1,7 +1,9 @@
+import Loader from '@/components/Loader';
 import { useModalShowContext } from '@/stores/ModalShowContext';
 import Modal from '@/utils/components/Modal';
 import useInputRollingHeight from '../hooks/useInputRollingHeight';
 import useInputRollingTranslateX from '../hooks/useInputRollingTranslateX';
+import useIsSubmitPending from '../hooks/useIsSubmitPending';
 import useSignInInputAutoFocus from '../hooks/useSignInInputAutoFocus';
 import useSignInSubmit from '../hooks/useSignInSubmit';
 import Description from './Description';
@@ -21,6 +23,8 @@ function SignInModal() {
   const inputRollingTranslateX = useInputRollingTranslateX();
 
   const inputRollingHeight = useInputRollingHeight();
+
+  const isSubmitPending = useIsSubmitPending();
 
   return (
     <Modal>
@@ -49,7 +53,7 @@ function SignInModal() {
           </div>
 
           <button type='submit' className={style.button}>
-            Next
+            {!isSubmitPending ? 'Next' : <Loader size={20} />}
           </button>
         </form>
       </div>

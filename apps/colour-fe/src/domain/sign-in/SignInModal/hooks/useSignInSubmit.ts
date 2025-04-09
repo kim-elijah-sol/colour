@@ -1,5 +1,6 @@
 import useSignInStore from '@/stores/useSignInStore';
 import useHandleEmail from './useHandleEmail';
+import useIsSubmitPending from './useIsSubmitPending';
 import usePasswordWhenSignIn from './usePasswordWhenSignIn';
 import usePasswordWhenSignUp from './usePasswordWhenSignUp';
 import useVerifyCode from './useVerifyCode';
@@ -15,8 +16,12 @@ function useSignInSubmit() {
 
   const handleVerifyCode = useVerifyCode();
 
+  const isSubmitPending = useIsSubmitPending();
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (isSubmitPending) return;
 
     if (step === 'email') {
       handleEmail();

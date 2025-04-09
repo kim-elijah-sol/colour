@@ -73,6 +73,7 @@ export const input = style({
 
 export const button = style([
   brandButtonCSS,
+  flex({ align: 'center', justify: 'center' }),
   {
     width: vars.full,
     height: 46,
