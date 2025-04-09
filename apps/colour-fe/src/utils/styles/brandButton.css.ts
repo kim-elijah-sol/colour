@@ -12,4 +12,8 @@ export const brandButtonCSS = style({
   ':active': {
     backgroundColor: `#004FBE`,
   },
+  ':disabled': {
+    cursor: 'not-allowed',
+    background: '#AAAAAA',
+  },
 });
