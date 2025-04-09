@@ -3,6 +3,7 @@ import useHandleEmail from './useHandleEmail';
 import useHandlePasswordWhenSignIn from './useHandlePasswordWhenSignIn';
 import useHandlePasswordWhenSignUp from './useHandlePasswordWhenSignUp';
 import useHandleVerifyCode from './useHandleVerifyCode';
+import useIsSubmitDisabled from './useIsSubmitDisabled';
 import useIsSubmitPending from './useIsSubmitPending';
 
 function useSignInSubmit() {
@@ -18,10 +19,13 @@ function useSignInSubmit() {
 
   const isSubmitPending = useIsSubmitPending();
 
+  const isSubmitDisabled = useIsSubmitDisabled();
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (isSubmitPending) return;
+    if (isSubmitDisabled) return;
 
     if (step === 'email') {
       handleEmail();

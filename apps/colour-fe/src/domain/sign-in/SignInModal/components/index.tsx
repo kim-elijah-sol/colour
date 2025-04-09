@@ -3,6 +3,7 @@ import { useModalShowContext } from '@/stores/ModalShowContext';
 import Modal from '@/utils/components/Modal';
 import useInputRollingHeight from '../hooks/useInputRollingHeight';
 import useInputRollingTranslateX from '../hooks/useInputRollingTranslateX';
+import useIsSubmitDisabled from '../hooks/useIsSubmitDisabled';
 import useIsSubmitPending from '../hooks/useIsSubmitPending';
 import useSignInInputAutoFocus from '../hooks/useSignInInputAutoFocus';
 import useSignInSubmit from '../hooks/useSignInSubmit';
@@ -25,6 +26,8 @@ function SignInModal() {
   const inputRollingHeight = useInputRollingHeight();
 
   const isSubmitPending = useIsSubmitPending();
+
+  const isSubmitDisabled = useIsSubmitDisabled();
 
   return (
     <Modal>
@@ -52,7 +55,11 @@ function SignInModal() {
             </div>
           </div>
 
-          <button type='submit' className={style.button}>
+          <button
+            type='submit'
+            className={style.button}
+            disabled={isSubmitDisabled}
+          >
             {!isSubmitPending ? 'Next' : <Loader size={20} />}
           </button>
         </form>
