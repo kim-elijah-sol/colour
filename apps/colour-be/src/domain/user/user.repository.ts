@@ -61,12 +61,12 @@ export class UserRepository {
     });
   }
 
-  async createUser({ email, password, profileColor }: CreateUserDTO) {
+  async createUser({ email, password, profileColour }: CreateUserDTO) {
     return await this.prismaClient.user.create({
       data: {
         email,
         password,
-        profileColor,
+        profileColour,
       },
     });
   }
@@ -103,7 +103,7 @@ export class UserRepository {
     return await this.prismaClient.user.findUnique({
       select: {
         email: true,
-        profileColor: true,
+        profileColour: true,
       },
       where: {
         idx,

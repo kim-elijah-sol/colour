@@ -5,5 +5,5 @@ export class MeResponseDTO {
   email: string;
 
   @IsString()
-  profileColor: string;
+  profileColour: string;
 }

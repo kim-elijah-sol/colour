@@ -44,11 +44,11 @@ export class UserService {
     );
   }
 
-  async signUp({ email, password, profileColor }: CreateUserDTO) {
+  async signUp({ email, password, profileColour }: CreateUserDTO) {
     return await this.userRepository.createUser({
       email,
       password: SHA256(password).toString(),
-      profileColor,
+      profileColour,
     });
   }
 

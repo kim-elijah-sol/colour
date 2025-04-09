@@ -27,7 +27,7 @@ model user {
   idx            Int       @id @default(autoincrement())
   email          String    @unique @db.VarChar(50) 
   password       String    @db.VarChar(256)
-  profileColor   String    @db.VarChar(6)
+  profileColour  String    @db.VarChar(6)
 
   createdAt      DateTime  @db.Timestamp(3) @default(now())
   updatedAt      DateTime? @db.Timestamp(3) @updatedAt()
