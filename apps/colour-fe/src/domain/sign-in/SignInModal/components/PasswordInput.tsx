@@ -1,8 +1,11 @@
 import useSignInStore from '@/stores/useSignInStore';
+import usePasswordValidator from '../hooks/usePasswordValidator';
 import * as style from './style.css';
 
 function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
   const { step, submitType, password, setPassword } = useSignInStore();
+
+  const { length, letterAndNumber, specialChar } = usePasswordValidator();
 
   return (
     <div className={style.inputBox}>
@@ -19,18 +22,42 @@ function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
       {submitType === 'sign-up' && (
         <div className={style.passwordGuideWrapper}>
           <div className={style.passwordGuideItem}>
-            <div className={style.passwordGuideCircle['pass']} />
-            <p className={style.passwordGuideText['pass']}>8 ~ 16 characters</p>
+            <div
+              className={
+                style.passwordGuideCircle[length ? 'pass' : 'nonePass']
+              }
+            />
+            <p
+              className={style.passwordGuideText[length ? 'pass' : 'nonePass']}
+            >
+              8 ~ 16 characters
+            </p>
           </div>
           <div className={style.passwordGuideItem}>
-            <div className={style.passwordGuideCircle['nonePass']} />
-            <p className={style.passwordGuideText['nonePass']}>
+            <div
+              className={
+                style.passwordGuideCircle[letterAndNumber ? 'pass' : 'nonePass']
+              }
+            />
+            <p
+              className={
+                style.passwordGuideText[letterAndNumber ? 'pass' : 'nonePass']
+              }
+            >
               letter & number
             </p>
           </div>
           <div className={style.passwordGuideItem}>
-            <div className={style.passwordGuideCircle['nonePass']} />
-            <p className={style.passwordGuideText['nonePass']}>
+            <div
+              className={
+                style.passwordGuideCircle[specialChar ? 'pass' : 'nonePass']
+              }
+            />
+            <p
+              className={
+                style.passwordGuideText[specialChar ? 'pass' : 'nonePass']
+              }
+            >
               special character
             </p>
           </div>
