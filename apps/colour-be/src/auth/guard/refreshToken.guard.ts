@@ -13,7 +13,7 @@ import { TokenPayloadDTO } from '../dtos/TokenPayload.dto';
 export class JwtRefreshTokenGuard extends AuthGuard('refreshToken') {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly authService: AuthService,
+    private readonly authService: AuthService
   ) {
     super();
   }
@@ -32,7 +32,7 @@ export class JwtRefreshTokenGuard extends AuthGuard('refreshToken') {
 
       const result = this.authService.findRefreshToken(
         payload.idx,
-        refreshToken,
+        refreshToken
       );
 
       if (!result) {
@@ -61,10 +61,10 @@ export class JwtRefreshTokenGuard extends AuthGuard('refreshToken') {
     } catch (e) {
       switch (e.message) {
         case 'jwt expired':
-          throw new UnauthorizedException('token is expired');
+          throw new UnauthorizedException('refresh token is expired');
         case 'invalid signature':
         case 'jwt malformed':
-          throw new UnauthorizedException('token is invalid');
+          throw new UnauthorizedException('refresh token is invalid');
         default:
           throw new InternalServerErrorException();
       }

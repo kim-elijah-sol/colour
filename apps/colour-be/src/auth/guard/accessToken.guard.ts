@@ -48,10 +48,10 @@ export class JwtAccessTokenGuard extends AuthGuard('accessToken') {
     } catch (e) {
       switch (e.message) {
         case 'jwt expired':
-          throw new UnauthorizedException('token is expired');
+          throw new UnauthorizedException('access token is expired');
         case 'invalid signature':
         case 'jwt malformed':
-          throw new UnauthorizedException('token is invalid');
+          throw new UnauthorizedException('access token is invalid');
         default:
           throw new InternalServerErrorException();
       }
