@@ -1,4 +1,5 @@
 import useSignInStore from '@/stores/useSignInStore';
+import { toastOnHttpsError } from '@/utils/https';
 import { useMutation } from '@tanstack/react-query';
 import { postSignUpRequest } from '../apis/postSignUpRequest';
 
@@ -12,6 +13,7 @@ function useHandlePasswordWhenSignUp() {
       setVerificationId(data.data.verificationId);
       setStep('verify');
     },
+    onError: toastOnHttpsError,
   });
 
   function handlePasswordWhenSignUp() {

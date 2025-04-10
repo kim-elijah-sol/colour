@@ -1,4 +1,5 @@
 import useSignInStore from '@/stores/useSignInStore';
+import { toastOnHttpsError } from '@/utils/https';
 import { useMutation } from '@tanstack/react-query';
 import { getCheckEmail } from '../apis/getCheckEmail';
 
@@ -14,6 +15,7 @@ function useHandleEmail() {
         setSubmitType('sign-up');
       }
     },
+    onError: toastOnHttpsError,
   });
 
   async function handleEmail() {

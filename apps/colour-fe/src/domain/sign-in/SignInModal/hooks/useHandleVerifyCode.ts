@@ -1,6 +1,6 @@
 import useSignInStore from '@/stores/useSignInStore';
+import { toastOnHttpsError } from '@/utils/https';
 import { useMutation } from '@tanstack/react-query';
-import { HTTPError } from 'ky';
 import { postVerify } from '../apis/postVerify';
 
 function useHandleVerifyCode() {
@@ -24,17 +24,7 @@ function useHandleVerifyCode() {
       setVerificationId(null);
       setVerifyCode('');
     },
-    onError: async (error) => {
-      if (error instanceof HTTPError) {
-        const { message } = await error.response.json();
-
-        // Nest JS Error
-        console.log(message);
-      } else {
-        // Unexception Error
-        console.log(error);
-      }
-    },
+    onError: toastOnHttpsError,
   });
 
   function handleVerifyCode() {
