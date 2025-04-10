@@ -7,6 +7,7 @@ import Popular from '@/pages/popular';
 import Favourite from './pages/favourite';
 
 import Layout from '@/components/layouts/Layout';
+import ToastCenter from '@/components/Toast/ToastCenter';
 
 import '@/styles/reset.css';
 import { useEffect } from 'react';
@@ -28,18 +29,21 @@ function Router() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Index />} />
-            <Route path='/popular' element={<Popular />} />
-            <Route path='/create' element={<Create />} />
-            <Route path='/favourite' element={<Favourite />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Index />} />
+              <Route path='/popular' element={<Popular />} />
+              <Route path='/create' element={<Create />} />
+              <Route path='/favourite' element={<Favourite />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+      <ToastCenter />
+    </>
   );
 }
 
