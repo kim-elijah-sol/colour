@@ -2,7 +2,7 @@ import { deleteSignOut } from '@/apis/deleteSignOut';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import { getForegroundColorType } from '@/utils/functions';
 import classNames from 'classnames';
-import { LogOut, UserRound } from 'lucide-react';
+import { LogOut, Palette, UserRound } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import * as style from './style.css';
@@ -58,6 +58,10 @@ function Profile() {
             isFadeOut ? style.menuFadeOut : undefined
           )}
         >
+          <Link className={style.anchor} to='user/studio' onClick={close}>
+            <Palette color='#333333' size={16} />
+            Studio
+          </Link>
           <Link className={style.anchor} to='user/account' onClick={close}>
             <UserRound color='#333333' size={16} />
             Account
