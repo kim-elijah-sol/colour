@@ -6,9 +6,9 @@ export const handleTokenExpired: BeforeRetryHook = async ({ error }) => {
   if (error instanceof HTTPError) {
     const { message } = await error.response.json<{ message: string }>();
 
-    if (message.includes('access token')) {
+    if (message === 'access token is expired') {
       await getNewAccessToken();
-    } else if (message.includes('refresh token')) {
+    } else if (message === 'refresh token is expired') {
       await deleteSignOut();
 
       localStorage.removeItem('colour-access-token');
