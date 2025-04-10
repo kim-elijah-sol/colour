@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import Portal from '../Portal';
 import * as style from './style.css';
-import ToastPortal from './ToastPortal';
 
 type Toast = {
   id: number;
@@ -35,13 +35,13 @@ function ToastCenter() {
   if (toasts.length === 0) return null;
 
   return (
-    <ToastPortal>
+    <Portal id='toast-portal'>
       {toasts.map((it) => (
         <div className={style.toast} key={it.id}>
           {it.text}
         </div>
       ))}
-    </ToastPortal>
+    </Portal>
   );
 }
 
