@@ -53,6 +53,21 @@ export const menu = style([
   },
 ]);
 
+const menuFadeOutKeyframes = keyframes({
+  to: {
+    transform: 'translateY(-8px)',
+    opacity: 0,
+  },
+  from: {
+    transform: 'translateY(0px)',
+    opacity: 1,
+  },
+});
+
+export const menuFadeOut = style({
+  animation: `${menuFadeOutKeyframes} 0.21s forwards`,
+});
+
 export const anchor = style([
   clickableStyle.dark,
   flex({ align: 'center', justify: 'start' }),
