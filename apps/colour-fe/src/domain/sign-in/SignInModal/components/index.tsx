@@ -1,6 +1,6 @@
 import Loader from '@/components/Loader';
 import { useModalShowContext } from '@/stores/ModalShowContext';
-import Modal from '@/utils/components/Modal';
+import Modal from '@/components/Modal';
 import useInputRollingHeight from '../hooks/useInputRollingHeight';
 import useInputRollingTranslateX from '../hooks/useInputRollingTranslateX';
 import useIsSubmitDisabled from '../hooks/useIsSubmitDisabled';
