@@ -11,6 +11,8 @@ import ToastCenter from '@/components/Toast/ToastCenter';
 
 import '@/styles/reset.css';
 import { useEffect } from 'react';
+import UserAccountLayout from './domain/user-account/components/UserAccountLayout';
+import UserAccount from './domain/user-account/pages/user-account';
 import { themeClass } from './styles/theme.css';
 
 const queryClient = new QueryClient({
@@ -35,9 +37,14 @@ function Router() {
           <Routes>
             <Route element={<Layout />}>
               <Route index element={<Index />} />
-              <Route path='/popular' element={<Popular />} />
-              <Route path='/create' element={<Create />} />
-              <Route path='/favourite' element={<Favourite />} />
+              <Route path='popular' element={<Popular />} />
+              <Route path='create' element={<Create />} />
+              <Route path='favourite' element={<Favourite />} />
+              <Route path='user'>
+                <Route path='account' element={<UserAccountLayout />}>
+                  <Route index element={<UserAccount />} />
+                </Route>
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>
