@@ -3,11 +3,13 @@ import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import { getForegroundColorType } from '@/utils/functions';
 import classNames from 'classnames';
 import { LogOut, Palette, UserRound } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import * as style from './style.css';
 
 function Profile() {
+  const $menu = useRef<HTMLDivElement | null>(null);
+
   const [isMenuShow, setIsMenuShow] = useState(false);
 
   const [isFadeOut, setIsFadeOut] = useState(false);
@@ -42,6 +44,19 @@ function Profile() {
     }, 220);
   }
 
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (!$menu.current?.contains(event.target as Node) && isMenuShow) {
+        close();
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuShow]);
+
   return (
     <div className={style.container}>
       <div
@@ -53,6 +68,7 @@ function Profile() {
       />
       {isMenuShow && (
         <div
+          ref={$menu}
           className={classNames(
             style.menu,
             isFadeOut ? style.menuFadeOut : undefined
