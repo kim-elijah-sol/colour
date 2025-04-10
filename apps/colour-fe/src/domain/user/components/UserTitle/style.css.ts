@@ -6,5 +6,4 @@ export const userTitle = style({
   fontWeight: 800,
   ...margin({ bottom: 16, x: 8 }),
   fontFamily: 'IBM Plex Sans',
-  color: '#000000',
 });
