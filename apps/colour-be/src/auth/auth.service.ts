@@ -1,5 +1,6 @@
 import {
-  BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
@@ -37,7 +38,10 @@ export class AuthService {
     );
 
     if (!result) {
-      throw new BadRequestException('You need to log in first');
+      throw new HttpException(
+        'You need to log in first',
+        HttpStatus.BAD_GATEWAY
+      );
     }
 
     const user = await this.userRepository.findUserByIdx(userIdx);

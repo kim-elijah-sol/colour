@@ -1,12 +1,13 @@
 import { ColourResponse } from '@colour/types';
 import {
-  BadRequestException,
   Body,
   ConflictException,
   Controller,
   Delete,
   Get,
   HttpCode,
+  HttpException,
+  HttpStatus,
   Post,
   Query,
   UnauthorizedException,
@@ -90,7 +91,7 @@ export class UserController {
       await this.userService.findVerificationEmail(verifyRequestDTO);
 
     if (verificationEmail === null)
-      throw new BadRequestException('invalid virify request');
+      throw new HttpException('invalid virify request', HttpStatus.BAD_GATEWAY);
 
     await this.userService.deleteVerificationEmailAtVerifySuccess(
       verifyRequestDTO
@@ -117,7 +118,11 @@ export class UserController {
   ): Promise<ColourResponse<SignInResponseDTO>> {
     const user = await this.userService.signIn(signInRequestDTO);
 
-    if (!user) throw new BadRequestException('Can not find matching account');
+    if (!user)
+      throw new HttpException(
+        'Can not find matching account',
+        HttpStatus.BAD_GATEWAY
+      );
 
     const accessToken = await this.authService.createAccessToken(user);
     const refreshToken = await this.authService.createRefreshToken(user);
