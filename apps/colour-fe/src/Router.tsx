@@ -3,10 +3,12 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 
 import UserLayout from '@/domain/user/components/UserLayout';
 import UserAccount from '@/domain/user/pages/user-account';
+import UserCancelAccount from '@/domain/user/pages/user-cancel';
+import UserProfile from '@/domain/user/pages/user-profile';
 import Index from '@/pages';
 import Create from '@/pages/create';
+import Favourite from '@/pages/favourite';
 import Popular from '@/pages/popular';
-import Favourite from './pages/favourite';
 
 import Layout from '@/components/layouts/Layout';
 import ToastCenter from '@/components/Toast/ToastCenter';
@@ -42,6 +44,8 @@ function Router() {
               <Route path='favourite' element={<Favourite />} />
               <Route path='user' element={<UserLayout />}>
                 <Route path='account' element={<UserAccount />} />
+                <Route path='profile' element={<UserProfile />} />
+                <Route path='cancel' element={<UserCancelAccount />} />
               </Route>
             </Route>
           </Routes>

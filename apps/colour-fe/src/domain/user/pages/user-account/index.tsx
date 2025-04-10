@@ -1,5 +1,9 @@
 function UserAccount() {
-  return <main></main>;
+  return (
+    <>
+      <h2>Account</h2>
+    </>
+  );
 }
 
 export default UserAccount;

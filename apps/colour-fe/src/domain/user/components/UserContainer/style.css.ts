@@ -7,6 +7,6 @@ export const userContainer = style([
   {
     height: vars.full,
     width: vars.full,
-    ...padding(20),
+    ...padding(32),
   },
 ]);
