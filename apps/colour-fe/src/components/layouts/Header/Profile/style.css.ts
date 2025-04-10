@@ -1,18 +1,17 @@
 import { vars } from '@/styles/theme.css';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { clickableStyle, flex, padding } from '@/utils/styles';
+import { keyframes, style, styleVariants } from '@vanilla-extract/css';
 
-export const _profile = style({
+export const container = style({
+  position: 'relative',
+});
+
+const _profile = style({
   width: 40,
   height: 40,
   borderRadius: vars.half,
   cursor: 'pointer',
   transition: '0.21s',
-  ':hover': {
-    boxShadow: '0 0 8px 3px rgba(100,100,100,0.2)',
-    width: 44,
-    height: 44,
-    transform: 'translateX(2px)',
-  },
 });
 
 export const profile = styleVariants({
@@ -24,3 +23,46 @@ export const profile = styleVariants({
     },
   ],
 });
+
+const menuKeyframes = keyframes({
+  from: {
+    transform: 'translateY(-8px)',
+    opacity: 0,
+  },
+  to: {
+    transform: 'translateY(0px)',
+    opacity: 1,
+  },
+});
+
+export const menu = style([
+  flex({
+    direction: 'column',
+  }),
+  {
+    position: 'absolute',
+    right: 0,
+    top: `calc(${vars.full} + 16px)`,
+    ...padding(8),
+    backgroundColor: vars.color.white,
+    borderRadius: 12,
+    zIndex: 3,
+    boxShadow: '0 8px 24px 4px rgba(100,100,150,0.15)',
+    animation: `${menuKeyframes} 0.21s forwards`,
+    gap: 6,
+  },
+]);
+
+export const anchor = style([
+  clickableStyle.dark,
+  flex({ align: 'center', justify: 'start' }),
+  {
+    gap: 6,
+    whiteSpace: 'nowrap',
+    textDecoration: 'none',
+    fontSize: 15,
+    ...padding({ x: 12, y: 6 }),
+    borderRadius: 8,
+    fontWeight: 600,
+  },
+]);
