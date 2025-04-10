@@ -2,7 +2,7 @@ import { vars } from '@/styles/theme.css';
 import { flex } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
-export const userAccountPage = style([
+export const userPage = style([
   flex(),
   {
     flex: 1,

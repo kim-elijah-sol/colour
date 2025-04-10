@@ -1,6 +1,8 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
+import UserLayout from '@/domain/user/components/UserLayout';
+import UserAccount from '@/domain/user/pages/user-account';
 import Index from '@/pages';
 import Create from '@/pages/create';
 import Popular from '@/pages/popular';
@@ -11,8 +13,6 @@ import ToastCenter from '@/components/Toast/ToastCenter';
 
 import '@/styles/reset.css';
 import { useEffect } from 'react';
-import UserAccountLayout from './domain/user-account/components/UserAccountLayout';
-import UserAccount from './domain/user-account/pages/user-account';
 import { themeClass } from './styles/theme.css';
 
 const queryClient = new QueryClient({
@@ -40,10 +40,8 @@ function Router() {
               <Route path='popular' element={<Popular />} />
               <Route path='create' element={<Create />} />
               <Route path='favourite' element={<Favourite />} />
-              <Route path='user'>
-                <Route path='account' element={<UserAccountLayout />}>
-                  <Route index element={<UserAccount />} />
-                </Route>
+              <Route path='user' element={<UserLayout />}>
+                <Route path='account' element={<UserAccount />} />
               </Route>
             </Route>
           </Routes>

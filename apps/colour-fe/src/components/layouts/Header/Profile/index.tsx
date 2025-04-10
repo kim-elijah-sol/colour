@@ -74,13 +74,13 @@ function Profile() {
             isFadeOut ? style.menuFadeOut : undefined
           )}
         >
-          <Link className={style.anchor} to='user/studio' onClick={close}>
+          <Link className={style.anchor} to='studio' onClick={close}>
             <Palette color='#333333' size={16} />
             Studio
           </Link>
           <Link className={style.anchor} to='user/account' onClick={close}>
             <UserRound color='#333333' size={16} />
-            Account
+            User
           </Link>
           <Link className={style.anchor} to='#' onClick={handleSignOut}>
             <LogOut color='#333333' size={16} />

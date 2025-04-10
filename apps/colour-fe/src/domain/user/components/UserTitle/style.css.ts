@@ -1,7 +1,7 @@
 import { margin } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
-export const userAccountTitle = style({
+export const userTitle = style({
   fontSize: 32,
   fontWeight: 800,
   ...margin({ bottom: 16 }),
