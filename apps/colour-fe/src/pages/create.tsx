@@ -8,7 +8,8 @@ import { randomHex } from '@/utils/functions';
 import { useEffect } from 'react';
 
 function Create() {
-  const { colors, setAllColors, clearAllColors } = useCreatePaletteColors();
+  const { colors, setAllColors, clearAllColors, setSelectedIndex } =
+    useCreatePaletteColors();
 
   useEffect(() => {
     if (colors.length === 0) {
@@ -22,6 +23,7 @@ function Create() {
 
     return () => {
       clearAllColors();
+      setSelectedIndex(0);
     };
   }, []);
 
