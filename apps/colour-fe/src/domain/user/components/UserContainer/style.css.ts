@@ -1,5 +1,5 @@
 import { vars } from '@/styles/theme.css';
-import { flex, padding } from '@/utils/styles';
+import { flex, margin, padding } from '@/utils/styles';
 import { style } from '@vanilla-extract/css';
 
 export const userContainer = style([
@@ -8,5 +8,7 @@ export const userContainer = style([
     height: vars.full,
     width: vars.full,
     ...padding(32),
+    maxWidth: 1260,
+    ...margin({ x: vars.auto }),
   },
 ]);
