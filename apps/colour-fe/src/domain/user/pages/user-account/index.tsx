@@ -2,10 +2,9 @@ import * as signInModalStyles from '@/domain/sign-in/SignInModal/components/styl
 import usePasswordValidator from '@/hooks/usePasswordValidator';
 import { useState } from 'react';
 import userContentStyles from '../../styles/user-content-styles.css';
+import EmailForm from './components/EmailForm';
 
 function UserAccount() {
-  const [email, setEmail] = useState('');
-
   const [currentPassword, setCurrentPassword] = useState('');
 
   const [newPassword, setNewPassword] = useState('');
@@ -25,18 +24,7 @@ function UserAccount() {
       <div className={userContentStyles.sectionList}>
         <section className={userContentStyles.section}>
           <h3 className={userContentStyles.sectionTitle}>Email</h3>
-          <form className={userContentStyles.form}>
-            <input
-              type='email'
-              placeholder='your email'
-              className={userContentStyles.input}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button type='submit' className={userContentStyles.button}>
-              Save
-            </button>
-          </form>
+          <EmailForm />
         </section>
         <section className={userContentStyles.section}>
           <h3 className={userContentStyles.sectionTitle}>Password</h3>
