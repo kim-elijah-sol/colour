@@ -94,7 +94,7 @@ export class UserController {
       await this.userService.findVerificationEmail(verifyRequestDTO);
 
     if (verificationEmail === null)
-      throw new HttpException('invalid virify request', HttpStatus.BAD_GATEWAY);
+      throw new HttpException('invalid verify request', HttpStatus.BAD_GATEWAY);
 
     await this.userService.deleteVerificationEmailAtVerifySuccess(
       verifyRequestDTO
@@ -196,7 +196,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAccessTokenGuard)
-  @Patch('change-email')
+  @Post('change-email')
   @HttpCode(200)
   async changeEmail(
     @Body() changeEmailRequestDTO: ChangeEmailRequestDTO
@@ -220,6 +220,33 @@ export class UserController {
       data: {
         verificationId: createVerificationEmailResult.id,
       },
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('verify-change-email')
+  @HttpCode(200)
+  async verifyChangeEmail(
+    @TokenInfo() tokenInfo: TokenInfoDTO,
+    @Body() verifyRequestDTO: VerifyRequestDTO
+  ): Promise<ColourResponse> {
+    const verificationEmail =
+      await this.userService.findVerificationEmail(verifyRequestDTO);
+
+    if (verificationEmail === null)
+      throw new HttpException('invalid verify request', HttpStatus.BAD_GATEWAY);
+
+    await this.userService.deleteVerificationEmailAtVerifySuccess(
+      verifyRequestDTO
+    );
+
+    const { requestEmail } = verificationEmail;
+
+    await this.userService.changeEmail(tokenInfo.email, requestEmail);
+
+    return {
+      statusCode: 200,
+      success: true,
     };
   }
 }

@@ -63,6 +63,10 @@ export class UserService {
     return await this.userRepository.findUserByMe(idx);
   }
 
+  async changeEmail(currentEmail: string, newEmail: string) {
+    return await this.userRepository.changeEmail(currentEmail, newEmail)
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)

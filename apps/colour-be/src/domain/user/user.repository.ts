@@ -110,4 +110,16 @@ export class UserRepository {
       },
     });
   }
+
+  async changeEmail(currentEmail: string, newEmail: string) {
+    return await this.prismaClient.user.update({
+      where: {
+        email: currentEmail,
+      },
+      data: {
+        email: newEmail,
+        updatedAt: new Date()
+      }
+    })
+  }
 }
