@@ -4,10 +4,9 @@ import {
   ConflictException,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   HttpCode,
-  HttpException,
-  HttpStatus,
   Patch,
   Post,
   Query,
@@ -96,7 +95,7 @@ export class UserController {
       await this.userService.findVerificationEmail(verifyRequestDTO);
 
     if (verificationEmail === null)
-      throw new HttpException('invalid verify request', HttpStatus.BAD_GATEWAY);
+      throw new ForbiddenException('invalid verify request');
 
     await this.userService.deleteVerificationEmailAtVerifySuccess(
       verifyRequestDTO
@@ -123,11 +122,7 @@ export class UserController {
   ): Promise<ColourResponse<SignInResponseDTO>> {
     const user = await this.userService.signIn(signInRequestDTO);
 
-    if (!user)
-      throw new HttpException(
-        'Can not find matching account',
-        HttpStatus.BAD_GATEWAY
-      );
+    if (!user) throw new ForbiddenException('Can not find matching account');
 
     const accessToken = await this.authService.createAccessToken(user);
     const refreshToken = await this.authService.createRefreshToken(user);
@@ -236,7 +231,7 @@ export class UserController {
       await this.userService.findVerificationEmail(verifyRequestDTO);
 
     if (verificationEmail === null)
-      throw new HttpException('invalid verify request', HttpStatus.BAD_GATEWAY);
+      throw new ForbiddenException('invalid verify request');
 
     await this.userService.deleteVerificationEmailAtVerifySuccess(
       verifyRequestDTO
@@ -266,9 +261,8 @@ export class UserController {
       currentPasswordInDB !==
       SHA256(changePasswordRequestDTO.currentPassword).toString()
     )
-      throw new HttpException(
-        'The current password you entered does not match.',
-        HttpStatus.BAD_REQUEST
+      throw new ForbiddenException(
+        'The current password you entered does not match.'
       );
 
     await this.userService.changePasswordByUserIdx(
