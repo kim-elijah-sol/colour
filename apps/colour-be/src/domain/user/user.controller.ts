@@ -196,9 +196,9 @@ export class UserController {
   }
 
   @UseGuards(JwtAccessTokenGuard)
-  @Post('change-email')
+  @Post('change-email-request')
   @HttpCode(200)
-  async changeEmail(
+  async changeEmailRequest(
     @Body() changeEmailRequestDTO: ChangeEmailRequestDTO
   ): Promise<ColourResponse<ChangeEmailResponseDTO>> {
     const alreadyRegisteredUser = await this.userService.findUserByEmail(
