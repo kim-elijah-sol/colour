@@ -2,7 +2,7 @@ import toast from '@/components/Toast/toast';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import { toastOnHttpsError } from '@/utils/https';
 import { useMutation } from '@tanstack/react-query';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isEmail } from 'validator';
 import { patchVerifyChangeEmail } from '../apis/patchVerifyChangeEmail';
 import { postChangeEmailRequest } from '../apis/postChangeEmailRequest';
