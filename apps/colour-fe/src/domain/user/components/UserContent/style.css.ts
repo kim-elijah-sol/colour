@@ -3,6 +3,6 @@ import { style } from '@vanilla-extract/css';
 
 export const container = style({
   overflowY: 'auto',
-  ...padding(20),
+  ...padding(32),
   flex: 1,
 });
