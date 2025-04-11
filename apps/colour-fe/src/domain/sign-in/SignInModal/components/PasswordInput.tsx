@@ -1,11 +1,12 @@
+import usePasswordValidator from '@/hooks/usePasswordValidator';
 import useSignInStore from '@/stores/useSignInStore';
-import usePasswordValidator from '../hooks/usePasswordValidator';
 import * as style from './style.css';
 
 function PasswordInput({ ref }: { ref: React.Ref<HTMLInputElement> }) {
   const { step, submitType, password, setPassword } = useSignInStore();
 
-  const { length, letterAndNumber, specialChar } = usePasswordValidator();
+  const { length, letterAndNumber, specialChar } =
+    usePasswordValidator(password);
 
   return (
     <div className={style.inputBox}>

@@ -1,8 +1,4 @@
-import useSignInStore from '@/stores/useSignInStore';
-
-function usePasswordValidator() {
-  const password = useSignInStore((state) => state.password);
-
+function usePasswordValidator(password: string) {
   const specialCharRegExp = /[^a-zA-Z0-9]/;
 
   return {

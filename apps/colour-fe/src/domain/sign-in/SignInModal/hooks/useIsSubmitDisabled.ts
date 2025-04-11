@@ -1,11 +1,12 @@
+import usePasswordValidator from '@/hooks/usePasswordValidator';
 import useSignInStore from '@/stores/useSignInStore';
 import isEmail from 'validator/lib/isEmail';
-import usePasswordValidator from './usePasswordValidator';
 
 function useIsSubmitDisabled(): boolean {
   const step = useSignInStore((state) => state.step);
   const email = useSignInStore((state) => state.email);
-  const passwordValidate = usePasswordValidator();
+  const password = useSignInStore((state) => state.password);
+  const passwordValidate = usePasswordValidator(password);
   const verifyCode = useSignInStore((state) => state.verifyCode);
 
   if (step === 'email') return !isEmail(email);
