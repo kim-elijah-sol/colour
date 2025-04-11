@@ -1,11 +1,14 @@
+import toast from '@/components/Toast/toast';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
+import { toastOnHttpsError } from '@/utils/https';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState, useEffect } from 'react';
 import { isEmail } from 'validator';
+import { patchVerifyChangeEmail } from '../apis/patchVerifyChangeEmail';
 import { postChangeEmailRequest } from '../apis/postChangeEmailRequest';
 
 function useEmailForm() {
-  const { data } = useGetMeQuery();
+  const { data, refetch } = useGetMeQuery();
 
   const [email, setEmail] = useState('');
 
@@ -19,25 +22,54 @@ function useEmailForm() {
     onSuccess: (data) => {
       setVerificationId(data.data.verificationId);
       setVerifyCode('');
+      toast.open(
+        `We've sent a verification code to your requested email address.`
+      );
     },
+    onError: toastOnHttpsError,
+  });
+
+  const verifyChangeEmail = useMutation({
+    mutationKey: ['patchVerifyChangeEmail'],
+    mutationFn: patchVerifyChangeEmail,
+    onSuccess: () => {
+      setVerificationId(null);
+      refetch();
+      toast.open(`Your email address has been updated.`);
+    },
+    onError: toastOnHttpsError,
   });
 
   const isOriginal = email === data?.data.email;
 
-  const isDisabled = isOriginal || !isEmail(email);
+  const isDisabled = ((): boolean => {
+    if (isOriginal) return true;
+    if (verificationId === null && !isEmail(email)) return true;
+    if (verificationId !== null && verifyCode.length !== 6) return true;
+
+    return false;
+  })();
 
   const isCodeInputShow = verificationId !== null;
+
+  const isPending = changeEmailRequest.isPending || verifyChangeEmail.isPending;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (isDisabled) {
-      return;
-    }
+    if (isDisabled) return;
+    if (isPending) return;
 
-    changeEmailRequest.mutate({
-      email,
-    });
+    if (verificationId) {
+      verifyChangeEmail.mutate({
+        id: verificationId,
+        code: verifyCode,
+      });
+    } else {
+      changeEmailRequest.mutate({
+        email,
+      });
+    }
   }
 
   function handleChangeEmail(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,6 +94,7 @@ function useEmailForm() {
     isCodeInputShow,
     verifyCode,
     handleChangeVerifyCode,
+    isPending,
   };
 }
 

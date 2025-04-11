@@ -1,3 +1,4 @@
+import Loader from '@/components/Loader';
 import userContentStyles from '../../../styles/user-content-styles.css';
 import useEmailForm from '../hooks/useEmailForm';
 
@@ -10,6 +11,7 @@ function EmailForm() {
     isCodeInputShow,
     verifyCode,
     handleChangeVerifyCode,
+    isPending,
   } = useEmailForm();
 
   return (
@@ -19,6 +21,7 @@ function EmailForm() {
         placeholder='your email'
         className={userContentStyles.input}
         value={email}
+        disabled={isCodeInputShow}
         onChange={handleChangeEmail}
       />
       {isCodeInputShow && (
@@ -35,7 +38,7 @@ function EmailForm() {
         className={userContentStyles.button}
         disabled={isDisabled}
       >
-        Save
+        {!isPending ? 'Save' : <Loader size={20} />}
       </button>
     </form>
   );
