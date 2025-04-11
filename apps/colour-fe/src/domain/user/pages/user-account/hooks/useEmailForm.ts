@@ -8,7 +8,7 @@ import { patchVerifyChangeEmail } from '../apis/patchVerifyChangeEmail';
 import { postChangeEmailRequest } from '../apis/postChangeEmailRequest';
 
 function useEmailForm() {
-  const { data, refetch } = useGetMeQuery();
+  const me = useGetMeQuery();
 
   const [email, setEmail] = useState('');
 
@@ -34,16 +34,17 @@ function useEmailForm() {
     mutationFn: patchVerifyChangeEmail,
     onSuccess: () => {
       setVerificationId(null);
-      refetch();
+      me.refetch();
       toast.open(`Your email address has been updated.`);
     },
     onError: toastOnHttpsError,
   });
 
-  const isOriginal = email === data?.data.email;
+  const isOriginal = email === me.data?.data.email;
 
   const isDisabled = ((): boolean => {
     if (isOriginal) return true;
+    if (me.isPending) return true;
     if (verificationId === null && !isEmail(email)) return true;
     if (verificationId !== null && verifyCode.length !== 6) return true;
 
@@ -81,10 +82,10 @@ function useEmailForm() {
   }
 
   useEffect(() => {
-    if (data?.data.email) {
-      setEmail(data?.data.email);
+    if (me.data?.data.email) {
+      setEmail(me.data.data.email);
     }
-  }, [data?.data.email]);
+  }, [me.data?.data.email]);
 
   return {
     email,
