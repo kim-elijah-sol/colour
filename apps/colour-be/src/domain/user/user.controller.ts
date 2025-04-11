@@ -14,6 +14,7 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
+import { SHA256 } from 'crypto-js';
 import { AuthService } from 'src/auth/auth.service';
 import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
@@ -22,6 +23,7 @@ import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
 import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
+import { ChangePasswordRequestDTO } from './dtos/ChangePasswordRequest.dto';
 import { CheckEmailRequestDTO } from './dtos/CheckEmailRequest.dto';
 import { CheckEmailResponseDTO } from './dtos/CheckEmailResponse.dto';
 import { MeResponseDTO } from './dtos/MeResponse.dto';
@@ -243,6 +245,36 @@ export class UserController {
     const { requestEmail } = verificationEmail;
 
     await this.userService.changeEmail(tokenInfo.email, requestEmail);
+
+    return {
+      statusCode: 200,
+      success: true,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('change-password')
+  @HttpCode(200)
+  async changeEmail(
+    @TokenInfo() tokenInfo: TokenInfoDTO,
+    @Body() changePasswordRequestDTO: ChangePasswordRequestDTO
+  ): Promise<ColourResponse> {
+    const currentPasswordInDB =
+      await this.userService.findCurrentPasswordByUserIdx(tokenInfo.idx);
+
+    if (
+      currentPasswordInDB !==
+      SHA256(changePasswordRequestDTO.currentPassword).toString()
+    )
+      throw new HttpException(
+        'The current password you entered does not match.',
+        HttpStatus.BAD_REQUEST
+      );
+
+    await this.userService.changePasswordByUserIdx(
+      tokenInfo.idx,
+      changePasswordRequestDTO.newPassword
+    );
 
     return {
       statusCode: 200,

@@ -118,8 +118,30 @@ export class UserRepository {
       },
       data: {
         email: newEmail,
-        updatedAt: new Date()
-      }
-    })
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  async findCurrentPasswordByUserIdx(userIdx: number) {
+    return await this.prismaClient.user.findUnique({
+      where: {
+        idx: userIdx,
+      },
+      select: {
+        password: true,
+      },
+    });
+  }
+
+  async changePasswordByUserIdx(userIdx: number, password: string) {
+    return await this.prismaClient.user.update({
+      where: {
+        idx: userIdx,
+      },
+      data: {
+        password,
+      },
+    });
   }
 }

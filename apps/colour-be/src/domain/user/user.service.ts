@@ -64,7 +64,19 @@ export class UserService {
   }
 
   async changeEmail(currentEmail: string, newEmail: string) {
-    return await this.userRepository.changeEmail(currentEmail, newEmail)
+    return await this.userRepository.changeEmail(currentEmail, newEmail);
+  }
+
+  async findCurrentPasswordByUserIdx(userIdx: number) {
+    return (await this.userRepository.findCurrentPasswordByUserIdx(userIdx))
+      ?.password;
+  }
+
+  async changePasswordByUserIdx(userIdx: number, password: string) {
+    return await this.userRepository.changePasswordByUserIdx(
+      userIdx,
+      SHA256(password).toString()
+    );
   }
 
   getRandomRGBValue(): string {
