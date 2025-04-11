@@ -8,7 +8,7 @@ export const userContainer = style([
     height: vars.full,
     width: vars.full,
     ...padding(32),
-    maxWidth: 1260,
+    maxWidth: 1024,
     ...margin({ x: vars.auto }),
   },
 ]);
