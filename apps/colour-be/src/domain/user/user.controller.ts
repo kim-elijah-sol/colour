@@ -101,7 +101,7 @@ export class UserController {
 
     await this.userService.signUp({
       email: requestEmail,
-      password: requestPassword,
+      password: requestPassword!,
       profileColour: code,
     });
 
