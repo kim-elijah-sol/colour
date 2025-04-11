@@ -11,7 +11,7 @@ export class CreateVerificationEmailDTO {
   requestEmail: string;
 
   @IsString()
-  requestPassword: string;
+  requestPassword?: string;
 
   @IsDate()
   expiredAt: Date;

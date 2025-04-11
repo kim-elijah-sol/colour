@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { SHA256 } from 'crypto-js';
 import { CreateUserDTO } from './dtos/CreateUser.dto';
+import { CreateVerificationEmailParameterDTO } from './dtos/CreateVerificationEmailParameter.dto';
 import { MeResponseDTO } from './dtos/MeResponse.dto';
 import { SignInRequestDTO } from './dtos/SignInRequest.dto';
-import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserRepository } from './user.repository';
 
@@ -18,7 +18,7 @@ export class UserService {
   async createVerificationEmail({
     email: requestEmail,
     password: requestPassword,
-  }: SignUpRequestDTO) {
+  }: CreateVerificationEmailParameterDTO) {
     const id = this.getVerificationEmailId(requestEmail);
     const code = this.getVerificationEmailCode();
     const expiredAt = this.getExpiredDate();

@@ -8,6 +8,7 @@ import {
   HttpCode,
   HttpException,
   HttpStatus,
+  Patch,
   Post,
   Query,
   UnauthorizedException,
@@ -19,6 +20,8 @@ import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtAccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
+import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
+import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
 import { CheckEmailRequestDTO } from './dtos/CheckEmailRequest.dto';
 import { CheckEmailResponseDTO } from './dtos/CheckEmailResponse.dto';
 import { MeResponseDTO } from './dtos/MeResponse.dto';
@@ -189,6 +192,34 @@ export class UserController {
       statusCode: 200,
       success: true,
       data,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('change-email')
+  @HttpCode(200)
+  async changeEmail(
+    @Body() changeEmailRequestDTO: ChangeEmailRequestDTO
+  ): Promise<ColourResponse<ChangeEmailResponseDTO>> {
+    const alreadyRegisteredUser = await this.userService.findUserByEmail(
+      changeEmailRequestDTO.email
+    );
+
+    if (alreadyRegisteredUser !== null) {
+      throw new ConflictException(
+        `${changeEmailRequestDTO.email} is already registered`
+      );
+    }
+
+    const createVerificationEmailResult =
+      await this.userService.createVerificationEmail(changeEmailRequestDTO);
+
+    return {
+      statusCode: 200,
+      success: true,
+      data: {
+        verificationId: createVerificationEmailResult.id,
+      },
     };
   }
 }
