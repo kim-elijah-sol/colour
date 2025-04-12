@@ -1,5 +1,11 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-12
+
+FE 와 BE 에 회원 관련 기능을 추가했다.<br>
+account, profile, cancel account 이 3가지로 회원 기능을 나눴다.<br>
+profile 에는 유저 색상만 들어가기엔 뭐하니까 닉네임, 한 줄 소개, contact 를 넣어야겠다.
+
 # 2025-04-08
 
 BE 의 user api end-point 를 변경했다.<br>
