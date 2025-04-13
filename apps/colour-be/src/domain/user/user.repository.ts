@@ -142,6 +142,30 @@ export class UserRepository {
       },
       data: {
         password,
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  async changeNicknameByUserIdx(userIdx: number, nickname: string | null) {
+    return await this.prismaClient.user.update({
+      where: {
+        idx: userIdx,
+      },
+      data: {
+        nickname,
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  async findUserByNickname(nickname: string) {
+    return await this.prismaClient.user.findUnique({
+      where: {
+        nickname,
+      },
+      select: {
+        nickname: true,
       },
     });
   }

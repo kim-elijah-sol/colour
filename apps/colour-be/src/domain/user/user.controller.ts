@@ -22,6 +22,7 @@ import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
 import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
+import { ChangeNicknameRequestDTO } from './dtos/ChangeNicknameRequest.dto';
 import { ChangePasswordRequestDTO } from './dtos/ChangePasswordRequest.dto';
 import { CheckEmailRequestDTO } from './dtos/CheckEmailRequest.dto';
 import { CheckEmailResponseDTO } from './dtos/CheckEmailResponse.dto';
@@ -269,6 +270,30 @@ export class UserController {
       tokenInfo.idx,
       changePasswordRequestDTO.newPassword
     );
+
+    return {
+      statusCode: 200,
+      success: true,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('change-nickname')
+  @HttpCode(200)
+  async changeNickname(
+    @TokenInfo() { idx }: TokenInfoDTO,
+    @Body() { nickname }: ChangeNicknameRequestDTO
+  ): Promise<ColourResponse> {
+    if (nickname) {
+      const alreadyRegisteredUser =
+        await this.userService.findUserByNickname(nickname);
+
+      if (alreadyRegisteredUser !== null) {
+        throw new ConflictException(`${nickname} is already registered`);
+      }
+    }
+
+    await this.userService.changeNicknameByUserIdx(idx, nickname);
 
     return {
       statusCode: 200,

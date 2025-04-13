@@ -79,6 +79,14 @@ export class UserService {
     );
   }
 
+  async changeNicknameByUserIdx(userIdx: number, nickname: string | null) {
+    return await this.userRepository.changeNicknameByUserIdx(userIdx, nickname);
+  }
+
+  async findUserByNickname(nickname: string) {
+    return await this.userRepository.findUserByNickname(nickname);
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)
