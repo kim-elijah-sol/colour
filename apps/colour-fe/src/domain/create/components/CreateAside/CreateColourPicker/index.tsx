@@ -12,7 +12,7 @@ export type PickerType = 'hex' | 'rgb' | 'hsl' | 'hsv' | 'cmyk' | 'lab';
 
 let _pickerType: PickerType = 'hex';
 
-function CreateColorPicker() {
+function CreateColourPicker() {
   const [pickerType, setPickerType] = useState<PickerType>(_pickerType);
 
   return (
@@ -28,4 +28,4 @@ function CreateColorPicker() {
   );
 }
 
-export default CreateColorPicker;
+export default CreateColourPicker;

@@ -1,14 +1,14 @@
-import { getForegroundColorType } from '@/utils/functions';
+import { getForegroundColourType } from '@/utils/functions';
 import { useEffect, useState } from 'react';
 
 function useForegroundColorType(color: string) {
   const [foregroundColorType, setForegroundColorType] = useState(
-    getForegroundColorType(color)
+    getForegroundColourType(color)
   );
 
   useEffect(() => {
     if (color.length === 6) {
-      setForegroundColorType(getForegroundColorType(color));
+      setForegroundColorType(getForegroundColourType(color));
     }
   }, [color]);
 

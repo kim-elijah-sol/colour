@@ -1,6 +1,6 @@
 import { deleteSignOut } from '@/apis/deleteSignOut';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
-import { getForegroundColorType, getShades } from '@/utils/functions';
+import { getForegroundColourType, getShades } from '@/utils/functions';
 import classNames from 'classnames';
 import { LogOut, Palette, UserRound } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -16,11 +16,11 @@ function Profile() {
 
   const { data } = useGetMeQuery();
 
-  const color = data ? data.data.profileColour : 'FFFFFF';
+  const colour = data ? data.data.profileColour : 'FFFFFF';
 
   const nickname = data?.data.nickname ?? '';
 
-  const isForLight = getForegroundColorType(color) === 'black';
+  const isForLight = getForegroundColourType(colour) === 'black';
 
   async function handleSignOut(e: React.MouseEvent<HTMLAnchorElement>) {
     e.preventDefault();
@@ -46,10 +46,10 @@ function Profile() {
     }, 220);
   }
 
-  const nicknameColor = useMemo(() => {
-    const shades = getShades(color);
+  const nicknameColour = useMemo(() => {
+    const shades = getShades(colour);
 
-    const indexInShades = shades.indexOf(color);
+    const indexInShades = shades.indexOf(colour);
 
     let index = indexInShades + 5;
 
@@ -58,7 +58,7 @@ function Profile() {
     }
 
     return shades[indexInShades + 5];
-  }, [color]);
+  }, [colour]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -78,7 +78,7 @@ function Profile() {
       <div
         onClick={handleClickProfile}
         style={{
-          backgroundColor: `#${color}`,
+          backgroundColor: `#${colour}`,
         }}
         className={style.profile[isForLight ? 'forLight' : 'default']}
       >
@@ -86,7 +86,7 @@ function Profile() {
           <span
             className={style.nickname}
             style={{
-              color: `#${nicknameColor}`,
+              color: `#${nicknameColour}`,
             }}
           >
             {nickname[0].toUpperCase()}

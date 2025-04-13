@@ -1,5 +1,5 @@
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { getForegroundColorType } from '@/utils/functions';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
+import { getForegroundColourType } from '@/utils/functions';
 import { flex } from '@/utils/styles';
 import {
   Activity,
@@ -40,19 +40,19 @@ const PieData = [
 ];
 
 function LandingPage() {
-  const { colors } = useCreatePaletteColors();
+  const { colours } = useCreatePaletteColours();
 
-  const foregroundColors = colors
-    .map(getForegroundColorType)
+  const foregroundColours = colours
+    .map(getForegroundColourType)
     .map((it) => (it === 'black' ? '#333333' : '#FFFFFF'));
 
   return (
     <div className={style.container}>
-      <aside className={style.aside} style={{ background: `#${colors[0]}` }}>
+      <aside className={style.aside} style={{ background: `#${colours[0]}` }}>
         <div className={style.asideTop}>
           <img
             style={
-              foregroundColors[0] === '#FFFFFF'
+              foregroundColours[0] === '#FFFFFF'
                 ? {
                     filter: 'brightness(5)',
                   }
@@ -64,46 +64,46 @@ function LandingPage() {
           />
           <div className={style.menus}>
             <div className={style.menu}>
-              <LayoutDashboard size={20} color={foregroundColors[0]} />
+              <LayoutDashboard size={20} color={foregroundColours[0]} />
               <p
                 className={style.menuTitle}
-                style={{ color: foregroundColors[0] }}
+                style={{ color: foregroundColours[0] }}
               >
                 Dashboard
               </p>
             </div>
             <div className={style.menu}>
-              <ChartLine size={20} color={foregroundColors[0]} />
+              <ChartLine size={20} color={foregroundColours[0]} />
               <p
                 className={style.menuTitle}
-                style={{ color: foregroundColors[0] }}
+                style={{ color: foregroundColours[0] }}
               >
                 Statistics
               </p>
             </div>
             <div className={style.menu}>
-              <FlaskConical size={20} color={foregroundColors[0]} />
+              <FlaskConical size={20} color={foregroundColours[0]} />
               <p
                 className={style.menuTitle}
-                style={{ color: foregroundColors[0] }}
+                style={{ color: foregroundColours[0] }}
               >
                 User Test
               </p>
             </div>
             <div className={style.menu}>
-              <ContactRound size={20} color={foregroundColors[0]} />
+              <ContactRound size={20} color={foregroundColours[0]} />
               <p
                 className={style.menuTitle}
-                style={{ color: foregroundColors[0] }}
+                style={{ color: foregroundColours[0] }}
               >
                 User
               </p>
             </div>
             <div className={style.menu}>
-              <Siren size={20} color={foregroundColors[0]} />
+              <Siren size={20} color={foregroundColours[0]} />
               <p
                 className={style.menuTitle}
-                style={{ color: foregroundColors[0] }}
+                style={{ color: foregroundColours[0] }}
               >
                 Policy
               </p>
@@ -111,7 +111,7 @@ function LandingPage() {
           </div>
         </div>
         <div className={flex({ justify: 'end' })}>
-          <LogOut color={foregroundColors[0]} />
+          <LogOut color={foregroundColours[0]} />
         </div>
       </aside>
       <main className={style.page}>
@@ -120,19 +120,19 @@ function LandingPage() {
         <div className={style.row}>
           <div
             className={style.row1Card}
-            style={{ background: `#${colors[1]}` }}
+            style={{ background: `#${colours[1]}` }}
           >
             <div className={style.row1CardTop}>
-              <Activity size={16} color={foregroundColors[1]} />
+              <Activity size={16} color={foregroundColours[1]} />
               <p
                 className={style.row1CardTitle}
-                style={{ color: foregroundColors[1] }}
+                style={{ color: foregroundColours[1] }}
               >
                 MAU
               </p>
             </div>
             <p
-              style={{ color: foregroundColors[1] }}
+              style={{ color: foregroundColours[1] }}
               className={style.row1CardValue}
             >
               783,132
@@ -140,19 +140,19 @@ function LandingPage() {
           </div>
           <div
             className={style.row1Card}
-            style={{ background: `#${colors[2]}` }}
+            style={{ background: `#${colours[2]}` }}
           >
             <div className={style.row1CardTop}>
-              <BadgeDollarSign size={16} color={foregroundColors[2]} />
+              <BadgeDollarSign size={16} color={foregroundColours[2]} />
               <p
                 className={style.row1CardTitle}
-                style={{ color: foregroundColors[2] }}
+                style={{ color: foregroundColours[2] }}
               >
                 Revenue
               </p>
             </div>
             <p
-              style={{ color: foregroundColors[2] }}
+              style={{ color: foregroundColours[2] }}
               className={style.row1CardValue}
             >
               $ 9,205
@@ -160,19 +160,19 @@ function LandingPage() {
           </div>
           <div
             className={style.row1Card}
-            style={{ background: `#${colors[3]}` }}
+            style={{ background: `#${colours[3]}` }}
           >
             <div className={style.row1CardTop}>
-              <Eye size={16} color={foregroundColors[3]} />
+              <Eye size={16} color={foregroundColours[3]} />
               <p
                 className={style.row1CardTitle}
-                style={{ color: foregroundColors[3] }}
+                style={{ color: foregroundColours[3] }}
               >
                 Today's Page View
               </p>
             </div>
             <p
-              style={{ color: foregroundColors[3] }}
+              style={{ color: foregroundColours[3] }}
               className={style.row1CardValue}
             >
               241,589
@@ -204,13 +204,13 @@ function LandingPage() {
                   type='monotone'
                   dataKey='guest'
                   strokeWidth={2}
-                  stroke={`#${colors[1]}`}
+                  stroke={`#${colours[1]}`}
                 />
                 <Line
                   type='monotone'
                   dataKey='user'
                   strokeWidth={2}
-                  stroke={`#${colors[0]}`}
+                  stroke={`#${colours[0]}`}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -231,8 +231,8 @@ function LandingPage() {
                 ]}
               >
                 <CartesianGrid strokeDasharray='3 3' opacity={0.5} />
-                <Bar dataKey='palette' fill={`#${colors[2]}`} />
-                <Bar dataKey='gradient' fill={`#${colors[3]}`} />
+                <Bar dataKey='palette' fill={`#${colours[2]}`} />
+                <Bar dataKey='gradient' fill={`#${colours[3]}`} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -254,7 +254,7 @@ function LandingPage() {
                   dataKey='value'
                 >
                   {PieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={`#${colors[index]}`} />
+                    <Cell key={`cell-${index}`} fill={`#${colours[index]}`} />
                   ))}
                 </Pie>
                 <Legend />
@@ -290,8 +290,8 @@ function LandingPage() {
                 <Area
                   type='monotone'
                   dataKey='revenue'
-                  stroke={`#${colors[0]}`}
-                  fill={`#${colors[0]}`}
+                  stroke={`#${colours[0]}`}
+                  fill={`#${colours[0]}`}
                 />
                 <CartesianGrid strokeDasharray='3 3' opacity={0.5} />
               </AreaChart>
@@ -343,25 +343,25 @@ function LandingPage() {
                   type='monotone'
                   dataKey='a'
                   strokeWidth={2}
-                  stroke={`#${colors[0]}`}
+                  stroke={`#${colours[0]}`}
                 />
                 <Line
                   type='monotone'
                   dataKey='b'
                   strokeWidth={2}
-                  stroke={`#${colors[1]}`}
+                  stroke={`#${colours[1]}`}
                 />
                 <Line
                   type='monotone'
                   dataKey='c'
                   strokeWidth={2}
-                  stroke={`#${colors[2]}`}
+                  stroke={`#${colours[2]}`}
                 />
                 <Line
                   type='monotone'
                   dataKey='d'
                   strokeWidth={2}
-                  stroke={`#${colors[3]}`}
+                  stroke={`#${colours[3]}`}
                 />
               </LineChart>
             </ResponsiveContainer>

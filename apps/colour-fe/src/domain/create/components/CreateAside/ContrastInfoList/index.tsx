@@ -1,18 +1,18 @@
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import ContrastInfo from '../ContrastInfo';
 import * as style from './style.css';
 
 function ContrastInfoList() {
-  const { selectedIndex, colors } = useCreatePaletteColors();
+  const { selectedIndex, colours } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
   return (
     <ul className={style.container}>
-      <ContrastInfo foreground='FFFFFF' background={color} />
-      <ContrastInfo background='FFFFFF' foreground={color} />
-      <ContrastInfo foreground='000000' background={color} />
-      <ContrastInfo background='000000' foreground={color} />
+      <ContrastInfo foreground='FFFFFF' background={colour} />
+      <ContrastInfo background='FFFFFF' foreground={colour} />
+      <ContrastInfo foreground='000000' background={colour} />
+      <ContrastInfo background='000000' foreground={colour} />
     </ul>
   );
 }

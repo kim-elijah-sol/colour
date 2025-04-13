@@ -1,4 +1,4 @@
-import { getContrastRatio, getForegroundColorType } from '@/utils/functions';
+import { getContrastRatio, getForegroundColourType } from '@/utils/functions';
 import { CircleAlert, CircleCheck } from 'lucide-react';
 import * as style from './style.css';
 
@@ -12,7 +12,7 @@ function ContrastInfo({ foreground, background }: Props) {
 
   const isPass = contrastRatio >= 4.5;
 
-  const foregroundColorType = getForegroundColorType(background);
+  const foregroundColorType = getForegroundColourType(background);
 
   return (
     <li

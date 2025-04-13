@@ -3,17 +3,17 @@ import {
   CreateContainer,
   CreateRight,
 } from '@/domain/create/components';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { randomHex } from '@/utils/functions';
 import { useEffect } from 'react';
 
 function Create() {
-  const { colors, setAllColors, clearAllColors, setSelectedIndex } =
-    useCreatePaletteColors();
+  const { colours, setAllColours, clearAllColours, setSelectedIndex } =
+    useCreatePaletteColours();
 
   useEffect(() => {
-    if (colors.length === 0) {
-      setAllColors([
+    if (colours.length === 0) {
+      setAllColours([
         randomHex(50),
         randomHex(50),
         randomHex(50),
@@ -22,12 +22,12 @@ function Create() {
     }
 
     return () => {
-      clearAllColors();
+      clearAllColours();
       setSelectedIndex(0);
     };
   }, []);
 
-  if (colors.length === 0) return null;
+  if (colours.length === 0) return null;
 
   return (
     <CreateContainer>

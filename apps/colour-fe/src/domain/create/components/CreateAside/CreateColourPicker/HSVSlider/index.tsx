@@ -1,21 +1,21 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { hexToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@colour/fx';
 import { HSV } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
+import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useHSVInput from './useHSVInput';
 import useHSVSlider from './useHSVSlider';
 
 function HSVSlider() {
-  const { colors, setColor, selectedIndex } = useCreatePaletteColors();
+  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
-  const hsv = pipe(color, hexToRgb, rgbToHsv);
+  const hsv = pipe(colour, hexToRgb, rgbToHsv);
 
   const [hue, setHue] = useState<number>(hsv[0]);
   const [saturation, setSaturation] = useState<number>(hsv[1]);
@@ -51,7 +51,7 @@ function HSVSlider() {
   });
 
   function getBackground(hsvIndex: number) {
-    const hsv = pipe(color, hexToRgb, rgbToHsv);
+    const hsv = pipe(colour, hexToRgb, rgbToHsv);
 
     const leftHSV = [...hsv] as HSV;
     leftHSV[hsvIndex] = 0;
@@ -69,11 +69,14 @@ function HSVSlider() {
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(
+      selectedIndex,
+      pipe([hue, saturation, value], hsvToRgb, rgbToHex)
+    );
   }, [hue, saturation, value]);
 
-  useHandleChangeAsdieColor((color) => {
-    const [h, s, v] = pipe(color, hexToRgb, rgbToHsv);
+  useHandleChangeAsideColour((colour) => {
+    const [h, s, v] = pipe(colour, hexToRgb, rgbToHsv);
 
     setHue(h);
     setSaturation(s);

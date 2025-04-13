@@ -1,26 +1,18 @@
 import Loader from '@/components/Loader';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
-import { useHandleCreate } from '../../hooks/useHandleCreate';
 import * as style from './style.css';
 
 function SubmitButton() {
   const navigate = useNavigate();
 
-  const colors = useCreatePaletteColors().colors;
+  const colours = useCreatePaletteColours().colours;
 
-  const { handleCreate, isPending } = useHandleCreate({
-    onSuccess: () => navigate('/'),
-  });
+  const isPending = false;
 
   return (
-    <button
-      type='button'
-      onClick={() => handleCreate({ colors })}
-      disabled={isPending}
-      className={style.submitButton}
-    >
+    <button type='button' disabled={isPending} className={style.submitButton}>
       {isPending ? (
         <Loader />
       ) : (

@@ -1,4 +1,4 @@
-import { getForegroundColorType } from '@/utils/functions';
+import { getForegroundColourType } from '@/utils/functions';
 import { Check } from 'lucide-react';
 import * as style from './style.css';
 
@@ -8,8 +8,8 @@ type Props = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function PaletteColorButton({ color, isSelected, onClick }: Props) {
-  const iconColor = getForegroundColorType(color);
+function PaletteColourButton({ color, isSelected, onClick }: Props) {
+  const iconColor = getForegroundColourType(color);
 
   return (
     <button
@@ -24,4 +24,4 @@ function PaletteColorButton({ color, isSelected, onClick }: Props) {
   );
 }
 
-export default PaletteColorButton;
+export default PaletteColourButton;

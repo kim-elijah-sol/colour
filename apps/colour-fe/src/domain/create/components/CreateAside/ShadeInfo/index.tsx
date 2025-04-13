@@ -1,23 +1,23 @@
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { getForegroundColorType } from '@/utils/functions';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
+import { getForegroundColourType } from '@/utils/functions';
 import { Check } from 'lucide-react';
 import * as style from './style.css';
 
 type Props = {
-  color: string;
+  colour: string;
   isDefaultColor: boolean;
 };
 
-function ShadeInfo({ color, isDefaultColor }: Props) {
-  const { selectedIndex, setColor } = useCreatePaletteColors();
+function ShadeInfo({ colour, isDefaultColor }: Props) {
+  const { selectedIndex, setColour } = useCreatePaletteColours();
 
   const textColor =
-    getForegroundColorType(color) === 'white' ? '#FFFFFF' : '#333333';
+    getForegroundColourType(colour) === 'white' ? '#FFFFFF' : '#333333';
 
   function handleClick() {
-    setColor(selectedIndex, color);
+    setColour(selectedIndex, colour);
 
-    const event = new CustomEvent('changeAsideColor', { detail: { color } });
+    const event = new CustomEvent('changeAsideColour', { detail: { colour } });
     window.dispatchEvent(event);
   }
 
@@ -25,10 +25,10 @@ function ShadeInfo({ color, isDefaultColor }: Props) {
     <div
       onClick={handleClick}
       className={style.shadeInfo}
-      style={{ backgroundColor: `#${color}` }}
+      style={{ backgroundColor: `#${colour}` }}
     >
       <p className={style.colorCode} style={{ color: textColor }}>
-        {color}
+        {colour}
       </p>
       {isDefaultColor && (
         <Check size={18} color={textColor} className={style.icon} />

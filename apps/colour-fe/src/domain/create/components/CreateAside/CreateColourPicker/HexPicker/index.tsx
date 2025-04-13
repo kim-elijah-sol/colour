@@ -1,14 +1,8 @@
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import {
-  hexToRgb,
-  hslToRgb,
-  hsvToRgb,
-  rgbToHex,
-  rgbToHsv,
-} from '@colour/fx';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
+import { hexToRgb, hslToRgb, hsvToRgb, rgbToHex, rgbToHsv } from '@colour/fx';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
+import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
 import * as style from './style.css';
@@ -16,11 +10,11 @@ import useHexInput from './useHexInput';
 import usePicker from './usePicker';
 
 function HexPicker() {
-  const { colors, setColor, selectedIndex } = useCreatePaletteColors();
+  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
-  const hsv = pipe(color, hexToRgb, rgbToHsv);
+  const hsv = pipe(colour, hexToRgb, rgbToHsv);
 
   const [hue, setHue] = useState(hsv[0]);
   const [saturation, setSaturation] = useState(hsv[1]);
@@ -28,17 +22,17 @@ function HexPicker() {
 
   function setHueForSlider(hue: number) {
     setHue(hue);
-    setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
   }
 
   function setSaturationForSlider(saturation: number) {
     setSaturation(saturation);
-    setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
   }
 
   function setValueForSlider(value: number) {
     setValue(value);
-    setColor(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
   }
 
   const { pickerRef, ...pickerProps } = usePicker(
@@ -58,8 +52,8 @@ function HexPicker() {
   );
 
   const hexInput = useHexInput({
-    defaultValue: color,
-    setValue: (value) => setColor(selectedIndex, value),
+    defaultValue: colour,
+    setValue: (value) => setColour(selectedIndex, value),
     onChanged: (hex) => {
       const [hue, saturation, value] = rgbToHsv(hexToRgb(hex));
       setHue(hue);
@@ -68,10 +62,10 @@ function HexPicker() {
     },
   });
 
-  const pickerHighlightColor = pipe([hue, 100, 50], hslToRgb, rgbToHex);
+  const pickerHighlightColour = pipe([hue, 100, 50], hslToRgb, rgbToHex);
 
-  useHandleChangeAsdieColor((color) => {
-    const [h, s, v] = pipe(color, hexToRgb, rgbToHsv);
+  useHandleChangeAsideColour((colour) => {
+    const [h, s, v] = pipe(colour, hexToRgb, rgbToHsv);
 
     setHue(h);
     setSaturation(s);
@@ -84,7 +78,7 @@ function HexPicker() {
         ref={pickerRef}
         className={style.picker}
         style={{
-          background: `linear-gradient(to right, #FFFFFF, #${pickerHighlightColor})`,
+          background: `linear-gradient(to right, #FFFFFF, #${pickerHighlightColour})`,
         }}
         {...pickerProps}
       >
@@ -106,7 +100,7 @@ function HexPicker() {
       <div className={style.inputBox}>
         <input type='text' className={style.input} {...hexInput} />
         <div
-          style={{ background: `#${color}` }}
+          style={{ background: `#${colour}` }}
           className={style.previewColorBox}
         />
       </div>

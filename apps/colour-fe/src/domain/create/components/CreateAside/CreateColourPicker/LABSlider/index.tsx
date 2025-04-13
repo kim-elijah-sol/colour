@@ -1,22 +1,22 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { roundMap } from '@/utils/functions';
 import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@colour/fx';
 import { LAB } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
+import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useLABInput from './useLABInput';
 import useLABSlider from './useLABSlider';
 
 function LABSlider() {
-  const { colors, setColor, selectedIndex } = useCreatePaletteColors();
+  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
-  const lab = pipe(color, hexToRgb, rgbToLab, roundMap);
+  const lab = pipe(colour, hexToRgb, rgbToLab, roundMap);
 
   const [luminance, setLuminance] = useState<number>(lab[0]);
   const [greenRed, setGreenRed] = useState<number>(lab[1]);
@@ -55,7 +55,7 @@ function LABSlider() {
     labIndex: number,
     valueRange: [number, number, number]
   ) {
-    const lab = pipe(color, hexToRgb, rgbToLab);
+    const lab = pipe(colour, hexToRgb, rgbToLab);
 
     const leftLAB = [...lab] as LAB;
     leftLAB[labIndex] = valueRange[0];
@@ -73,14 +73,14 @@ function LABSlider() {
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(
+    setColour(
       selectedIndex,
       pipe([luminance, greenRed, blueYellow], labToRgb, roundMap, rgbToHex)
     );
   }, [luminance, greenRed, blueYellow]);
 
-  useHandleChangeAsdieColor((color) => {
-    const [l, a, b] = pipe(color, hexToRgb, rgbToLab, roundMap);
+  useHandleChangeAsideColour((colour) => {
+    const [l, a, b] = pipe(colour, hexToRgb, rgbToLab, roundMap);
 
     setLuminance(l);
     setGreenRed(a);

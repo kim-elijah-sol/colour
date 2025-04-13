@@ -1,10 +1,10 @@
 import { TabSelect } from '@/components/inputs';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
-import { useEffect, useState } from 'react';
-import ColorInfoList from './ColorInfoList';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
+import { useState } from 'react';
+import ColourInfoList from './ColourInfoList';
 import ContrastInfoList from './ContrastInfoList';
-import CreateColorPicker from './CreateColorPicker';
-import PaletteColorButton from './PaletteColorButton';
+import CreateColourPicker from './CreateColourPicker';
+import PaletteColourButton from './PaletteColourButton';
 import PaletteContainer from './PaletteContainer';
 import ShadeInfoList from './ShadeInfoList';
 import * as style from './style.css';
@@ -12,31 +12,32 @@ import * as style from './style.css';
 function CreateAside() {
   const [selectedDetail, setSelectedDetail] = useState<string>('info');
 
-  const { selectedIndex, setSelectedIndex, colors } = useCreatePaletteColors();
+  const { selectedIndex, setSelectedIndex, colours } =
+    useCreatePaletteColours();
 
-  function handleClickPaletteColor(index: number) {
-    setSelectedIndex(index)
+  function handleClickPaletteColour(index: number) {
+    setSelectedIndex(index);
 
-    const color = colors[index]
+    const color = colours[index];
 
-    const event = new CustomEvent('changeAsideColor', { detail: { color } });
+    const event = new CustomEvent('changeAsideColour', { detail: { color } });
     window.dispatchEvent(event);
   }
 
   return (
     <div className={style.aside}>
       <PaletteContainer>
-        {colors.map((color, index) => (
-          <PaletteColorButton
-            color={color}
+        {colours.map((colour, index) => (
+          <PaletteColourButton
+            color={colour}
             isSelected={index === selectedIndex}
-            onClick={() => handleClickPaletteColor(index)}
-            key={color}
+            onClick={() => handleClickPaletteColour(index)}
+            key={colour}
           />
         ))}
       </PaletteContainer>
 
-      <CreateColorPicker />
+      <CreateColourPicker />
 
       <TabSelect
         className={style.tabSelect}
@@ -49,7 +50,7 @@ function CreateAside() {
       </TabSelect>
 
       <div className={style.detail}>
-        {selectedDetail === 'info' && <ColorInfoList />}
+        {selectedDetail === 'info' && <ColourInfoList />}
         {selectedDetail === 'contrast' && <ContrastInfoList />}
         {selectedDetail === 'shades' && <ShadeInfoList />}
       </div>

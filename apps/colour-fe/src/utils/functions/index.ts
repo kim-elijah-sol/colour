@@ -3,7 +3,7 @@ export * from './delay';
 export * from './enterToBlur';
 export * from './findNotNil';
 export * from './getContrastRatio';
-export * from './getForegroundColorType';
+export * from './getForegroundColourType';
 export * from './getHue';
 export * from './getLuminance';
 export * from './getShades';

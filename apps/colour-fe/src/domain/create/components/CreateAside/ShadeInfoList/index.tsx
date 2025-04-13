@@ -1,19 +1,19 @@
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { getShades } from '@/utils/functions';
 import ShadeInfo from '../ShadeInfo';
 import * as style from './style.css';
 
 function ShadeInfoList() {
-  const { selectedIndex, colors } = useCreatePaletteColors();
+  const { selectedIndex, colours } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
-  const shades = getShades(color);
+  const shades = getShades(colour);
 
   return (
     <div className={style.container}>
       {shades.map((it) => (
-        <ShadeInfo color={it} key={it} isDefaultColor={it === color} />
+        <ShadeInfo colour={it} key={it} isDefaultColor={it === colour} />
       ))}
     </div>
   );

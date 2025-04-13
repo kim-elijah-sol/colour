@@ -1,21 +1,21 @@
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColors from '@/stores/useCreatePaletteColors';
+import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { cmykToRgb, hexToRgb, rgbToCmyk, rgbToHex } from '@colour/fx';
 import { CMYK } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsdieColor from '../../useHandleChangeAsideColor';
+import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useSlider from '../Slider/useSlider';
 import useCMYKInput from './useCMYKInput';
 
 function CMYKSlider() {
-  const { colors, setColor, selectedIndex } = useCreatePaletteColors();
+  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
 
-  const color = colors[selectedIndex];
+  const colour = colours[selectedIndex];
 
-  const cmyk = pipe(color, hexToRgb, rgbToCmyk);
+  const cmyk = pipe(colour, hexToRgb, rgbToCmyk);
 
   const [cyan, setCyan] = useState(cmyk[0]);
   const [magenta, setMagenta] = useState(cmyk[1]);
@@ -71,14 +71,14 @@ function CMYKSlider() {
   }
 
   useIgnoreFirstEffect(() => {
-    setColor(
+    setColour(
       selectedIndex,
       pipe([cyan, magenta, yellow, key], cmykToRgb, rgbToHex)
     );
   }, [cyan, magenta, yellow, key]);
 
-  useHandleChangeAsdieColor((color) => {
-    const [c, m, y, k] = pipe(color, hexToRgb, rgbToCmyk);
+  useHandleChangeAsideColour((colour) => {
+    const [c, m, y, k] = pipe(colour, hexToRgb, rgbToCmyk);
 
     setCyan(c);
     setMagenta(m);
