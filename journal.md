@@ -1,5 +1,13 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-13
+
+FE 와 BE 에 닉네임 변경 기능을 추가했다.<br>
+영문자, 숫자, \_ , - 만 조합할 수 있도록 만들었고,<br>
+닉네임이 추가되면 프로필 영역에 첫문자가 뜰 수 있도록 만들었다.<br>
+내일부터는 프로필 컬러 변경 기능을 추가할 예정이다.<br>
+프로필 컬러 변경 기능에도 ColourPicker 가 필요하겠지...
+
 # 2025-04-12
 
 FE 와 BE 에 회원 관련 기능을 추가했다.<br>
