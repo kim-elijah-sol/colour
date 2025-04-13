@@ -4,6 +4,7 @@ import { ColourResponse } from '@colour/types';
 export type MeResponse = {
   email: string;
   profileColour: string;
+  nickname: string | null;
 };
 
 export const getMe = () =>

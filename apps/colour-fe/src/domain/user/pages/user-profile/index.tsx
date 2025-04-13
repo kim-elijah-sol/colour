@@ -1,4 +1,5 @@
 import userContentStyles from '../../styles/user-content-styles.css';
+import { NicknameForm } from './components';
 
 function UserProfile() {
   return (
@@ -13,6 +14,7 @@ function UserProfile() {
       <div className={userContentStyles.sectionList}>
         <section className={userContentStyles.section}>
           <h3 className={userContentStyles.sectionTitle}>Nickname</h3>
+          <NicknameForm />
         </section>
         <section className={userContentStyles.section}>
           <h3 className={userContentStyles.sectionTitle}>Profile Colour</h3>
