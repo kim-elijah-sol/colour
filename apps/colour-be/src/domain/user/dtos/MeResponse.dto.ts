@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
 
 export class MeResponseDTO {
   @IsEmail()
@@ -6,4 +6,8 @@ export class MeResponseDTO {
 
   @IsString()
   profileColour: string;
+
+  @IsString()
+  @IsOptional()
+  nickname: string | null;
 }
