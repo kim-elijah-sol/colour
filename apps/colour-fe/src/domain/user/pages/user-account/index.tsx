@@ -1,6 +1,5 @@
 import userContentStyles from '../../styles/user-content-styles.css';
-import EmailForm from './components/EmailForm';
-import PasswordForm from './components/PasswordForm';
+import { EmailForm, PasswordForm } from './components';
 
 function UserAccount() {
   return (
