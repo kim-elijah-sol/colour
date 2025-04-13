@@ -1,9 +1,9 @@
 import { deleteSignOut } from '@/apis/deleteSignOut';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
-import { getForegroundColorType } from '@/utils/functions';
+import { getForegroundColorType, getShades } from '@/utils/functions';
 import classNames from 'classnames';
 import { LogOut, Palette, UserRound } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import * as style from './style.css';
 
@@ -17,6 +17,8 @@ function Profile() {
   const { data } = useGetMeQuery();
 
   const color = data ? data.data.profileColour : 'FFFFFF';
+
+  const nickname = data?.data.nickname ?? '';
 
   const isForLight = getForegroundColorType(color) === 'black';
 
@@ -44,6 +46,20 @@ function Profile() {
     }, 220);
   }
 
+  const nicknameColor = useMemo(() => {
+    const shades = getShades(color);
+
+    const indexInShades = shades.indexOf(color);
+
+    let index = indexInShades + 5;
+
+    if (index >= 10) {
+      index -= 10;
+    }
+
+    return shades[indexInShades + 5];
+  }, [color]);
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (!$menu.current?.contains(event.target as Node) && isMenuShow) {
@@ -65,7 +81,18 @@ function Profile() {
           backgroundColor: `#${color}`,
         }}
         className={style.profile[isForLight ? 'forLight' : 'default']}
-      />
+      >
+        {nickname !== '' && (
+          <span
+            className={style.nickname}
+            style={{
+              color: `#${nicknameColor}`,
+            }}
+          >
+            {nickname[0].toUpperCase()}
+          </span>
+        )}
+      </div>
       {isMenuShow && (
         <div
           ref={$menu}
