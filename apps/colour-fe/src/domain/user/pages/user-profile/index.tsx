@@ -9,6 +9,18 @@ function UserProfile() {
         <br />
         Update your profile details to express yourself.
       </p>
+
+      <div className={userContentStyles.sectionList}>
+        <section className={userContentStyles.section}>
+          <h3 className={userContentStyles.sectionTitle}>Nickname</h3>
+        </section>
+        <section className={userContentStyles.section}>
+          <h3 className={userContentStyles.sectionTitle}>Profile Colour</h3>
+        </section>
+        <section className={userContentStyles.section}>
+          <h3 className={userContentStyles.sectionTitle}>Introduce</h3>
+        </section>
+      </div>
     </>
   );
 }
