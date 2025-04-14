@@ -28,7 +28,7 @@ export const value = style({
 });
 
 export const rightIcon = style({
-  stroke: vars.color.text,
+  stroke: vars.colour.text,
   opacity: 0,
   transition: 'opacity 0.21s',
   selectors: {

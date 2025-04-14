@@ -9,7 +9,7 @@ export const shadeInfo = style({
   position: 'relative',
 });
 
-export const colorCode = style({
+export const colourCode = style({
   lineHeight: '36px',
   fontSize: 13,
   fontWeight: 700,

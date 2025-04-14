@@ -73,11 +73,11 @@ export const input = style({
   borderRadius: 8,
   transition: '0.21s',
   ':focus': {
-    borderColor: vars.color.brand,
+    borderColor: vars.colour.brand,
   },
 });
 
-export const previewColorBox = style({
+export const previewColourBox = style({
   position: 'absolute',
   right: 8,
   top: '50%',

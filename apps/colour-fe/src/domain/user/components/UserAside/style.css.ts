@@ -28,7 +28,7 @@ export const anchor = styleVariants({
   is: [
     _anchor,
     {
-      color: vars.color.brand,
+      color: vars.colour.brand,
       backgroundColor: `rgba(0,106,255,0.1)`,
       ':hover': {
         backgroundColor: `rgba(0,106,255,0.2)`,

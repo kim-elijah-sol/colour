@@ -13,7 +13,7 @@ function ShadeInfoList() {
   return (
     <div className={style.container}>
       {shades.map((it) => (
-        <ShadeInfo colour={it} key={it} isDefaultColor={it === colour} />
+        <ShadeInfo colour={it} key={it} isDefaultColour={it === colour} />
       ))}
     </div>
   );

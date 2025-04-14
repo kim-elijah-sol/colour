@@ -26,7 +26,7 @@ export const toast = style({
   fontWeight: 600,
   ...padding({ x: 24, y: 16 }),
   background: '#3B425D',
-  color: vars.color.white,
+  color: vars.colour.white,
   animation: `${toastKeyframes} 3s forwards`,
   borderRadius: 24,
   boxShadow: '0 0 8px 4px rgba(100,100,150,0.15)',

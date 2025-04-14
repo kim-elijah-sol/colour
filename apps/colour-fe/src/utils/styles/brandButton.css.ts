@@ -2,8 +2,8 @@ import { vars } from '@/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const brandButtonCSS = style({
-  color: vars.color.white,
-  backgroundColor: vars.color.brand,
+  color: vars.colour.white,
+  backgroundColor: vars.colour.brand,
   cursor: 'pointer',
   transition: '0.21s',
   ':hover': {

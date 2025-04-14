@@ -40,7 +40,7 @@ const userContentStyles = {
     borderRadius: 12,
     transition: '0.21s',
     ':focus': {
-      borderColor: vars.color.brand,
+      borderColor: vars.colour.brand,
     },
     '::placeholder': {
       color: '#BBBBBB',

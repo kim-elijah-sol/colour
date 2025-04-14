@@ -12,7 +12,7 @@ function ContrastInfo({ foreground, background }: Props) {
 
   const isPass = contrastRatio >= 4.5;
 
-  const foregroundColorType = getForegroundColourType(background);
+  const foregroundColourType = getForegroundColourType(background);
 
   return (
     <li
@@ -28,13 +28,13 @@ function ContrastInfo({ foreground, background }: Props) {
       <div className={style.contrastItemRight}>
         <p
           className={style.contrastItemText}
-          style={{ color: foregroundColorType }}
+          style={{ color: foregroundColourType }}
         >{`${contrastRatio.toFixed(2)}:1`}</p>
 
         {isPass ? (
-          <CircleCheck color={foregroundColorType} />
+          <CircleCheck color={foregroundColourType} />
         ) : (
-          <CircleAlert color={foregroundColorType} />
+          <CircleAlert color={foregroundColourType} />
         )}
       </div>
     </li>

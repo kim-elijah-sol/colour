@@ -15,7 +15,7 @@ export const aside = style([
     }),
     width: vars.size.asideWidth,
     zIndex: 90,
-    background: vars.color.white,
+    background: vars.colour.white,
     ...padding({ x: 8, y: 16 }),
     gap: 24,
     borderRight: '1px solid #F3F3F3',
@@ -57,7 +57,7 @@ export const icon = style({
   stroke: '#BCBCBC',
   selectors: {
     [`${anchor}:hover &`]: {
-      stroke: vars.color.text,
+      stroke: vars.colour.text,
     },
   },
 });
@@ -65,7 +65,7 @@ export const icon = style({
 export const activeIcon = style([
   icon,
   {
-    stroke: vars.color.text,
+    stroke: vars.colour.text,
   },
 ]);
 
@@ -75,7 +75,7 @@ export const anchorText = style({
   fontWeight: 600,
   selectors: {
     [`${anchor}:hover &`]: {
-      color: `${vars.color.text} !important`,
+      color: `${vars.colour.text} !important`,
     },
   },
 });
@@ -83,7 +83,7 @@ export const anchorText = style({
 export const activeAnchorText = style([
   anchorText,
   {
-    color: vars.color.text,
+    color: vars.colour.text,
     fontWeight: 800,
   },
 ]);

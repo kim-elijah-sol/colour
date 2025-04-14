@@ -8,7 +8,7 @@ export const tabSelect = style([
     ...padding(4),
     gap: 8,
     position: 'relative',
-    background: vars.color.background,
+    background: vars.colour.background,
     borderRadius: 22,
   },
 ]);
@@ -47,7 +47,7 @@ export const indicator = style({
   transition: '0.21s',
   '::after': {
     content: '',
-    background: vars.color.white,
+    background: vars.colour.white,
     display: 'block',
     width: vars.full,
     height: vars.full,

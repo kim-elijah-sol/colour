@@ -18,7 +18,7 @@ export const topLeft = style({
 });
 
 export const page = style({
-  background: vars.color.white,
+  background: vars.colour.white,
   borderRadius: 16,
   overflow: 'hidden',
   flex: 1,
@@ -26,7 +26,7 @@ export const page = style({
 });
 
 export const tabSelect = style({
-  background: vars.color.white,
+  background: vars.colour.white,
 });
 
 export const tabSelectIndicator = style({

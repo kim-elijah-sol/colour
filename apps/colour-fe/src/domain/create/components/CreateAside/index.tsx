@@ -18,9 +18,9 @@ function CreateAside() {
   function handleClickPaletteColour(index: number) {
     setSelectedIndex(index);
 
-    const color = colours[index];
+    const colour = colours[index];
 
-    const event = new CustomEvent('changeAsideColour', { detail: { color } });
+    const event = new CustomEvent('changeAsideColour', { detail: { colour } });
     window.dispatchEvent(event);
   }
 
@@ -29,7 +29,7 @@ function CreateAside() {
       <PaletteContainer>
         {colours.map((colour, index) => (
           <PaletteColourButton
-            color={colour}
+            colour={colour}
             isSelected={index === selectedIndex}
             onClick={() => handleClickPaletteColour(index)}
             key={colour}

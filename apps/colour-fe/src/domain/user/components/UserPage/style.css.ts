@@ -6,7 +6,7 @@ export const userPage = style([
   flex(),
   {
     flex: 1,
-    backgroundColor: vars.color.white,
+    backgroundColor: vars.colour.white,
     overflow: 'hidden',
     borderRadius: 16,
     boxShadow: '0 0 8px 4px rgba(50, 50, 50, 0.03)',

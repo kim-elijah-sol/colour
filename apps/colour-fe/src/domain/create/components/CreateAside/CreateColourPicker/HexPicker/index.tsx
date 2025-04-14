@@ -22,17 +22,26 @@ function HexPicker() {
 
   function setHueForSlider(hue: number) {
     setHue(hue);
-    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(
+      selectedIndex,
+      pipe([hue, saturation, value], hsvToRgb, rgbToHex)
+    );
   }
 
   function setSaturationForSlider(saturation: number) {
     setSaturation(saturation);
-    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(
+      selectedIndex,
+      pipe([hue, saturation, value], hsvToRgb, rgbToHex)
+    );
   }
 
   function setValueForSlider(value: number) {
     setValue(value);
-    setColour(selectedIndex, pipe([hue, saturation, value], hsvToRgb, rgbToHex));
+    setColour(
+      selectedIndex,
+      pipe([hue, saturation, value], hsvToRgb, rgbToHex)
+    );
   }
 
   const { pickerRef, ...pickerProps } = usePicker(
@@ -101,7 +110,7 @@ function HexPicker() {
         <input type='text' className={style.input} {...hexInput} />
         <div
           style={{ background: `#${colour}` }}
-          className={style.previewColorBox}
+          className={style.previewColourBox}
         />
       </div>
     </div>

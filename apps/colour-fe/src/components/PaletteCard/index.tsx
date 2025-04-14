@@ -3,17 +3,17 @@ import { copy } from '@/utils/functions';
 import * as style from './style.css';
 
 type Props = {
-  colors: string[];
+  colours: string[];
   isLike: boolean;
   likeCount: number;
   onClickLike?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function PaletteCard({ colors, isLike, likeCount, onClickLike }: Props) {
+function PaletteCard({ colours, isLike, likeCount, onClickLike }: Props) {
   return (
     <div className={style.card}>
       <div className={style.top}>
-        {colors.map((it) => (
+        {colours.map((it) => (
           <div
             className={style.colorItem}
             key={it}
@@ -22,7 +22,7 @@ function PaletteCard({ colors, isLike, likeCount, onClickLike }: Props) {
         ))}
       </div>
       <div className={style.bottom}>
-        {colors.map((it) => (
+        {colours.map((it) => (
           <button
             onClick={() => copy(it)}
             key={it}

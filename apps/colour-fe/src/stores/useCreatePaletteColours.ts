@@ -7,8 +7,8 @@ type State = {
 
 type Actions = {
   setSelectedIndex: (selectedIndex: number) => void;
-  setColour: (index: number, color: string) => void;
-  setAllColours: (colors: string[]) => void;
+  setColour: (index: number, colour: string) => void;
+  setAllColours: (colours: string[]) => void;
   clearAllColours: () => void;
 };
 

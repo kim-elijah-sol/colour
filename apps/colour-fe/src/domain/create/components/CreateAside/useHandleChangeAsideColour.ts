@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-type Callback = (color: string) => void;
+type Callback = (colour: string) => void;
 
 function useHandleChangeAsideColour(callback: Callback) {
   useEffect(() => {
     function handleClickShade(event: Event) {
-      const customEvent = event as CustomEvent<{ color: string }>;
-      callback(customEvent.detail.color);
+      const customEvent = event as CustomEvent<{ colour: string }>;
+      callback(customEvent.detail.colour);
     }
 
     window.addEventListener('changeAsideColour', handleClickShade);

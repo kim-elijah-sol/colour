@@ -10,7 +10,7 @@ export const header = style([
   }),
   {
     height: vars.size.headerHeight,
-    background: vars.color.white,
+    background: vars.colour.white,
     ...fixed({
       x: 0,
       top: 0,
@@ -32,15 +32,15 @@ export const header = style([
 ]);
 
 export const logoO = style({
-  color: vars.color.red,
+  color: vars.colour.red,
 });
 
 export const logoU = style({
-  color: vars.color.green,
+  color: vars.colour.green,
   transform: 'translateY(1px)',
 });
 export const logoR = style({
-  color: vars.color.brand,
+  color: vars.colour.brand,
 });
 
 export const link = style({

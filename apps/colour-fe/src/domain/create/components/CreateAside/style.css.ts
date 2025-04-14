@@ -16,7 +16,7 @@ export const aside = style([
   {
     width: vars.size.domain.create.asideWidth,
     height: vars.full,
-    background: vars.color.white,
+    background: vars.colour.white,
     ...padding(24),
     gap: 16,
     overflowY: 'auto',

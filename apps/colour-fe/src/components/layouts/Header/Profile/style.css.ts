@@ -52,7 +52,7 @@ export const menu = style([
     right: 0,
     top: `calc(${vars.full} + 16px)`,
     ...padding(8),
-    backgroundColor: vars.color.white,
+    backgroundColor: vars.colour.white,
     borderRadius: 12,
     zIndex: 3,
     boxShadow: '0 8px 24px 4px rgba(100,100,150,0.15)',

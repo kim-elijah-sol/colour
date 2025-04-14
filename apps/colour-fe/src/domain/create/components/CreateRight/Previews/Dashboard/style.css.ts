@@ -57,7 +57,7 @@ export const menuTitle = style({
 
 export const page = style({
   flex: 4,
-  background: vars.color.white,
+  background: vars.colour.white,
   padding: 24,
   overflowY: vars.auto,
 });

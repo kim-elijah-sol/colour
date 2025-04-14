@@ -55,7 +55,7 @@ export const optionsContainer = style([
     left: 0,
     ...padding(8),
     borderRadius: 12,
-    background: vars.color.white,
+    background: vars.colour.white,
     boxShadow: '0 0 24px 8px rgba(70,70,70,0.3)',
     animation: `${optionsContainerKeyframes} 0.21s forwards`,
   },

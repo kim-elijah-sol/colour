@@ -15,7 +15,7 @@ function NewPaletteList() {
       {data.map((it) => (
         <PaletteCard
           key={it.id}
-          colors={it.colors}
+          colours={it.colors}
           isLike={it.isLike}
           likeCount={it.likeCount}
           onClickLike={() => handleLike(it.id)}

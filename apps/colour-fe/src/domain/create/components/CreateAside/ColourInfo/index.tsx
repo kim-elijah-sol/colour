@@ -8,7 +8,7 @@ type Props = {
   value: string;
 };
 
-function ColorInfo({ label, value }: Props) {
+function ColourInfo({ label, value }: Props) {
   const [isCopied, setIsCopied] = useState(false);
 
   const Icon = isCopied ? Check : Copy;
@@ -34,4 +34,4 @@ function ColorInfo({ label, value }: Props) {
   );
 }
 
-export default ColorInfo;
+export default ColourInfo;

@@ -5,13 +5,13 @@ import * as style from './style.css';
 
 type Props = {
   colour: string;
-  isDefaultColor: boolean;
+  isDefaultColour: boolean;
 };
 
-function ShadeInfo({ colour, isDefaultColor }: Props) {
+function ShadeInfo({ colour, isDefaultColour }: Props) {
   const { selectedIndex, setColour } = useCreatePaletteColours();
 
-  const textColor =
+  const textColour =
     getForegroundColourType(colour) === 'white' ? '#FFFFFF' : '#333333';
 
   function handleClick() {
@@ -27,11 +27,11 @@ function ShadeInfo({ colour, isDefaultColor }: Props) {
       className={style.shadeInfo}
       style={{ backgroundColor: `#${colour}` }}
     >
-      <p className={style.colorCode} style={{ color: textColor }}>
+      <p className={style.colourCode} style={{ color: textColour }}>
         {colour}
       </p>
-      {isDefaultColor && (
-        <Check size={18} color={textColor} className={style.icon} />
+      {isDefaultColour && (
+        <Check size={18} color={textColour} className={style.icon} />
       )}
     </div>
   );

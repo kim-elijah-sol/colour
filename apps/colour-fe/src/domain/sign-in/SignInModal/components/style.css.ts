@@ -5,7 +5,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 export const container = style({
   width: 360,
   ...padding(12),
-  backgroundColor: vars.color.white,
+  backgroundColor: vars.colour.white,
 });
 
 const rollingWrapper = style({
@@ -64,7 +64,7 @@ export const input = style({
   borderRadius: 12,
   transition: '0.21s',
   ':focus': {
-    borderColor: vars.color.brand,
+    borderColor: vars.colour.brand,
   },
   '::placeholder': {
     color: '#BBBBBB',
@@ -120,7 +120,7 @@ const _passwordGuideCircle = style({
 });
 
 export const passwordGuideCircle = styleVariants({
-  pass: [_passwordGuideCircle, { backgroundColor: vars.color.brand }],
+  pass: [_passwordGuideCircle, { backgroundColor: vars.colour.brand }],
   nonePass: [_passwordGuideCircle, { backgroundColor: '#AAAAAA' }],
 });
 
@@ -131,6 +131,6 @@ export const _passwordGuideText = style({
 });
 
 export const passwordGuideText = styleVariants({
-  pass: [_passwordGuideText, { color: vars.color.brand }],
+  pass: [_passwordGuideText, { color: vars.colour.brand }],
   nonePass: [_passwordGuideText, { color: '#AAAAAA' }],
 });

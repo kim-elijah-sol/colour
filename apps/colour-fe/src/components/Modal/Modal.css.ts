@@ -32,7 +32,7 @@ const foregroundKeyframes = keyframes({
 });
 
 export const foreground = style({
-  background: vars.color.white,
+  background: vars.colour.white,
   borderRadius: 16,
   boxShadow: '0 0 24px 8px rgba(70,70,70,0.05)',
   overflow: 'hidden',

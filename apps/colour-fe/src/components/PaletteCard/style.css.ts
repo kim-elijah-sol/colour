@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 
 export const card = style({
   ...padding(12),
-  backgroundColor: vars.color.white,
+  backgroundColor: vars.colour.white,
   borderRadius: 16,
   boxShadow: '0 0 6px 2px rgba(100,100,100,0.03)',
 });

@@ -3,23 +3,23 @@ import { Check } from 'lucide-react';
 import * as style from './style.css';
 
 type Props = {
-  color: string;
+  colour: string;
   isSelected: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function PaletteColourButton({ color, isSelected, onClick }: Props) {
-  const iconColor = getForegroundColourType(color);
+function PaletteColourButton({ colour, isSelected, onClick }: Props) {
+  const iconColour = getForegroundColourType(colour);
 
   return (
     <button
       className={style.button}
       style={{
-        backgroundColor: `#${color}`,
+        backgroundColor: `#${colour}`,
       }}
       onClick={onClick}
     >
-      {isSelected && <Check size={24} color={iconColor} />}
+      {isSelected && <Check size={24} color={iconColour} />}
     </button>
   );
 }
