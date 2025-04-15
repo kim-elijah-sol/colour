@@ -98,7 +98,10 @@ function ProfileColourForm() {
             >
               <ColourPicker
                 colour={colour}
-                setColour={setColour}
+                setColour={(colour) => {
+                  setColour(colour);
+                  setInputColour(colour);
+                }}
                 bottomRight={
                   <button
                     type='button'
