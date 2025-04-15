@@ -169,4 +169,16 @@ export class UserRepository {
       },
     });
   }
+
+  async changeProfileColourByUserIdx(userIdx: number, profileColour: string) {
+    return await this.prismaClient.user.update({
+      where: {
+        idx: userIdx,
+      },
+      data: {
+        profileColour,
+        updatedAt: new Date(),
+      },
+    });
+  }
 }

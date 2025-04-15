@@ -87,6 +87,13 @@ export class UserService {
     return await this.userRepository.findUserByNickname(nickname);
   }
 
+  async changeProfileColourByUserIdx(userIdx: number, profileColour: string) {
+    return await this.userRepository.changeProfileColourByUserIdx(
+      userIdx,
+      profileColour
+    );
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)

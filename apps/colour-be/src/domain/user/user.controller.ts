@@ -24,6 +24,7 @@ import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
 import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
 import { ChangeNicknameRequestDTO } from './dtos/ChangeNicknameRequest.dto';
 import { ChangePasswordRequestDTO } from './dtos/ChangePasswordRequest.dto';
+import { ChangeProfileColourRequestDTO } from './dtos/ChangeProfileColourRequest.dto';
 import { CheckEmailRequestDTO } from './dtos/CheckEmailRequest.dto';
 import { CheckEmailResponseDTO } from './dtos/CheckEmailResponse.dto';
 import { MeResponseDTO } from './dtos/MeResponse.dto';
@@ -294,6 +295,21 @@ export class UserController {
     }
 
     await this.userService.changeNicknameByUserIdx(idx, nickname);
+
+    return {
+      statusCode: 200,
+      success: true,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('change-profile-colour')
+  @HttpCode(200)
+  async changeProfileColour(
+    @TokenInfo() { idx }: TokenInfoDTO,
+    @Body() { profileColour }: ChangeProfileColourRequestDTO
+  ): Promise<ColourResponse> {
+    await this.userService.changeProfileColourByUserIdx(idx, profileColour);
 
     return {
       statusCode: 200,
