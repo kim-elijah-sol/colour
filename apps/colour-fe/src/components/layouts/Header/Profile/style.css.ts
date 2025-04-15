@@ -1,35 +1,9 @@
 import { vars } from '@/styles/theme.css';
 import { clickableStyle, flex, padding } from '@/utils/styles';
-import { keyframes, style, styleVariants } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 
 export const container = style({
   position: 'relative',
-});
-
-const _profile = style([
-  flex({ align: 'center', justify: 'center' }),
-  {
-    width: 40,
-    height: 40,
-    borderRadius: vars.half,
-    cursor: 'pointer',
-    transition: '0.21s',
-  },
-]);
-
-export const profile = styleVariants({
-  default: [_profile],
-  forLight: [
-    _profile,
-    {
-      border: '1px solid #CCCCCC',
-    },
-  ],
-});
-
-export const nickname = style({
-  fontSize: 20,
-  fontWeight: 700,
 });
 
 const menuKeyframes = keyframes({
