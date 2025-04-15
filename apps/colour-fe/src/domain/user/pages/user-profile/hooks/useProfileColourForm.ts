@@ -1,14 +1,34 @@
+import toast from '@/components/Toast/toast';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
+import { toastOnHttpsError } from '@/utils/https';
+import { useMutation } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
+import { patchChangeProfileColour } from '../apis/patchChangeProfileColour';
 
 function useProfileColourForm() {
-  const { data } = useGetMeQuery();
+  const me = useGetMeQuery();
 
   const [colour, setColour] = useState('');
 
   const [inputColour, setInputColour] = useState('');
 
-  const nickname = data?.data.nickname ?? '';
+  const nickname = me.data?.data.nickname ?? '';
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: patchChangeProfileColour,
+    mutationKey: ['patchChangeProfileColour'],
+    onSuccess: () => {
+      me.refetch();
+      toast.open('Your profile colour has been updated.');
+    },
+    onError: toastOnHttpsError,
+  });
+
+  function onClickSave() {
+    if (isPending) return;
+
+    mutate({ profileColour: colour });
+  }
 
   function onBlur(e: React.FocusEvent<HTMLInputElement>) {
     let newValue = e.target.value;
@@ -22,11 +42,7 @@ function useProfileColourForm() {
 
     setColour(newValue);
     setInputColour(newValue);
-
-    const event = new CustomEvent('changeColour', {
-      detail: { colour: newValue },
-    });
-    window.dispatchEvent(event);
+    setColourPickerValue(newValue);
   }
 
   function onKeydown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -39,18 +55,27 @@ function useProfileColourForm() {
     setInputColour(e.target.value);
   }
 
-  function onChangeColourInColourPicker(colour: string){
-
+  function onChangeColourInColourPicker(colour: string) {
     setColour(colour);
     setInputColour(colour);
   }
 
+  function setColourPickerValue(colour: string) {
+    const event = new CustomEvent('changeColour', {
+      detail: { colour },
+    });
+    window.dispatchEvent(event);
+  }
+
   useEffect(() => {
-    if (data?.data.profileColour) {
-      setColour(data.data.profileColour);
-      setInputColour(data.data.profileColour);
+    if (me.data?.data.profileColour) {
+      const colour = me.data.data.profileColour;
+
+      setColour(colour);
+      setInputColour(colour);
+      setColourPickerValue(colour);
     }
-  }, [data]);
+  }, [me.data]);
 
   return {
     nickname,
@@ -61,7 +86,9 @@ function useProfileColourForm() {
     onChange,
     setColour,
     setInputColour,
-    onChangeColourInColourPicker
+    onChangeColourInColourPicker,
+    onClickSave,
+    isPending,
   };
 }
 

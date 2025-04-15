@@ -1,5 +1,6 @@
 import Avatar from '@/components/Avatar';
 import ColourPicker from '@/components/ColourPicker';
+import Loader from '@/components/Loader';
 import userContentStyles from '@/domain/user/styles/user-content-styles.css';
 import classNames from 'classnames';
 import { Check, Palette } from 'lucide-react';
@@ -19,6 +20,8 @@ function ProfileColourForm() {
     onKeydown,
     onChange,
     onChangeColourInColourPicker,
+    onClickSave,
+    isPending,
   } = useProfileColourForm();
 
   return (
@@ -69,8 +72,12 @@ function ProfileColourForm() {
         </div>
       </div>
 
-      <button type='button' className={userContentStyles.button}>
-        Save
+      <button
+        type='button'
+        onClick={onClickSave}
+        className={userContentStyles.button}
+      >
+        {!isPending ? 'Save' : <Loader size={20} />}
       </button>
     </div>
   );
