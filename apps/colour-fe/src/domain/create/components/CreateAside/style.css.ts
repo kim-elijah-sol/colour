@@ -36,3 +36,9 @@ export const detail = style({
   animation: `${slideInKeyframes} 0.42s forwards`,
   animationDelay: '0.84s',
 });
+
+export const colourPickerContainer = style({
+  transform: 'translateX(-120%)',
+  animation: `${slideInKeyframes} 0.42s forwards`,
+  animationDelay: '0.42s',
+})

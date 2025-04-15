@@ -1,18 +1,16 @@
+import useHandleChangeColour from '@/hooks/useHandleChangeColour';
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { hexToRgb, rgbToHex } from '@colour/fx';
 import { RGB } from '@colour/types';
 import { useState } from 'react';
-import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
+import { useColourPicker } from '..';
 import Slider from '../Slider';
 import * as style from './style.css';
 import useRGBInput from './useRGBInput';
 import useRGBSlider from './useRGBSlider';
 
 function RGBSlider() {
-  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
-
-  const colour = colours[selectedIndex];
+  const { colour, setColour } = useColourPicker();
 
   const rgb = hexToRgb(colour);
 
@@ -57,10 +55,10 @@ function RGBSlider() {
   }
 
   useIgnoreFirstEffect(() => {
-    setColour(selectedIndex, rgbToHex([red, green, blue]));
+    setColour(rgbToHex([red, green, blue]));
   }, [red, green, blue]);
 
-  useHandleChangeAsideColour((colour) => {
+  useHandleChangeColour((colour) => {
     const [r, g, b] = hexToRgb(colour);
 
     setRed(r);

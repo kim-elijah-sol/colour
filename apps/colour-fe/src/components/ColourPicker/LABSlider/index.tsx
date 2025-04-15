@@ -1,20 +1,18 @@
+import useHandleChangeColour from '@/hooks/useHandleChangeColour';
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { roundMap } from '@/utils/functions';
 import { hexToRgb, labToRgb, rgbToHex, rgbToLab } from '@colour/fx';
 import { LAB } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
+import { useColourPicker } from '..';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useLABInput from './useLABInput';
 import useLABSlider from './useLABSlider';
 
 function LABSlider() {
-  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
-
-  const colour = colours[selectedIndex];
+  const { colour, setColour } = useColourPicker();
 
   const lab = pipe(colour, hexToRgb, rgbToLab, roundMap);
 
@@ -74,12 +72,11 @@ function LABSlider() {
 
   useIgnoreFirstEffect(() => {
     setColour(
-      selectedIndex,
       pipe([luminance, greenRed, blueYellow], labToRgb, roundMap, rgbToHex)
     );
   }, [luminance, greenRed, blueYellow]);
 
-  useHandleChangeAsideColour((colour) => {
+  useHandleChangeColour((colour) => {
     const [l, a, b] = pipe(colour, hexToRgb, rgbToLab, roundMap);
 
     setLuminance(l);

@@ -17,7 +17,7 @@ function ShadeInfo({ colour, isDefaultColour }: Props) {
   function handleClick() {
     setColour(selectedIndex, colour);
 
-    const event = new CustomEvent('changeAsideColour', { detail: { colour } });
+    const event = new CustomEvent('changeAside', { detail: { colour } });
     window.dispatchEvent(event);
   }
 

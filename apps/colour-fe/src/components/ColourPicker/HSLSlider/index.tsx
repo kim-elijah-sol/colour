@@ -1,19 +1,17 @@
+import useHandleChangeColour from '@/hooks/useHandleChangeColour';
 import useIgnoreFirstEffect from '@/hooks/useIgnoreFirstEffect';
-import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { hexToRgb, hslToRgb, rgbToHex, rgbToHsl } from '@colour/fx';
 import { HSL } from '@colour/types';
 import { pipe } from 'fp-ts/lib/function';
 import { useState } from 'react';
-import useHandleChangeAsideColour from '../../useHandleChangeAsideColour';
+import { useColourPicker } from '..';
 import * as style from '../RGBSlider/style.css';
 import Slider from '../Slider';
 import useHSLInput from './useHSLInput';
 import useHSLSlider from './useHSLSlider';
 
 function HSLSlider() {
-  const { colours, setColour, selectedIndex } = useCreatePaletteColours();
-
-  const colour = colours[selectedIndex];
+  const { colour, setColour } = useColourPicker();
 
   const hsl = pipe(colour, hexToRgb, rgbToHsl);
 
@@ -70,13 +68,10 @@ function HSLSlider() {
   }
 
   useIgnoreFirstEffect(() => {
-    setColour(
-      selectedIndex,
-      pipe([hue, saturation, luminance], hslToRgb, rgbToHex)
-    );
+    setColour(pipe([hue, saturation, luminance], hslToRgb, rgbToHex));
   }, [hue, saturation, luminance]);
 
-  useHandleChangeAsideColour((colour) => {
+  useHandleChangeColour((colour) => {
     const [h, s, l] = pipe(colour, hexToRgb, rgbToHsl);
 
     setHue(h);
