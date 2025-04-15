@@ -22,7 +22,7 @@ function Avatar({ colour, nickname, onClick }: Props) {
       index -= 10;
     }
 
-    return shades[indexInShades + 5];
+    return shades[index];
   }, [colour]);
 
   return (
