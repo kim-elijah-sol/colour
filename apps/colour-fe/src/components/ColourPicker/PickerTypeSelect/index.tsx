@@ -15,7 +15,7 @@ function PickerTypeSelect({ pickerType, setPickerType }: Props) {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className={style.container}>
+    <>
       <button className={style.button} onClick={() => setIsOpened(!isOpened)}>
         <p className={classNames(style.text, style.selectText)}>
           {pickerType.toUpperCase()}
@@ -47,7 +47,7 @@ function PickerTypeSelect({ pickerType, setPickerType }: Props) {
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }
 

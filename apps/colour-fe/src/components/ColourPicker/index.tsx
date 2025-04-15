@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import Bottom from './Bottom';
 import CMYKSlider from './CMYKSlider';
 import HexPicker from './HexPicker';
 import HSLSlider from './HSLSlider';
@@ -35,9 +36,10 @@ type Props = ColourPickerContextType & {
     >,
     'children'
   >;
+  bottomRight?: React.ReactNode;
 };
 
-function ColourPicker({ containerProps, ...props }: Props) {
+function ColourPicker({ containerProps, bottomRight, ...props }: Props) {
   const [pickerType, setPickerType] = useState<PickerType>(_pickerType);
 
   return (
@@ -49,10 +51,13 @@ function ColourPicker({ containerProps, ...props }: Props) {
         {pickerType === 'hsv' && <HSVSlider />}
         {pickerType === 'cmyk' && <CMYKSlider />}
         {pickerType === 'lab' && <LABSlider />}
-        <PickerTypeSelect
-          pickerType={pickerType}
-          setPickerType={setPickerType}
-        />
+        <Bottom>
+          <PickerTypeSelect
+            pickerType={pickerType}
+            setPickerType={setPickerType}
+          />
+          {bottomRight}
+        </Bottom>
       </div>
     </ColourPickerContext.Provider>
   );

@@ -77,4 +77,14 @@ export const colourPickerContainer = style({
 
 export const colourPickerFadeOut = style({
   animation: `${fadeOutKeyframes} 0.21s forwards`,
-})
+});
+
+export const okButton = style([
+  clickableStyle.dark,
+  flex({ center: true }),
+  {
+    width: 36,
+    height: 36,
+    borderRadius: 8,
+  },
+]);

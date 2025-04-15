@@ -3,7 +3,7 @@ import ColourPicker from '@/components/ColourPicker';
 import userContentStyles from '@/domain/user/styles/user-content-styles.css';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import classNames from 'classnames';
-import { Palette } from 'lucide-react';
+import { Check, Palette } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import * as style from './style.css';
 
@@ -96,7 +96,19 @@ function ProfileColourForm() {
                 isColourPickerFadeOut ? style.colourPickerFadeOut : undefined
               )}
             >
-              <ColourPicker colour={colour} setColour={setColour} />
+              <ColourPicker
+                colour={colour}
+                setColour={setColour}
+                bottomRight={
+                  <button
+                    type='button'
+                    className={style.okButton}
+                    onClick={() => setIsColourPickerShow(false)}
+                  >
+                    <Check size={20} />
+                  </button>
+                }
+              />
             </div>
           )}
         </div>

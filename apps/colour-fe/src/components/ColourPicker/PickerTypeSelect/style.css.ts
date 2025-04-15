@@ -2,11 +2,6 @@ import { vars } from '@/styles/theme.css';
 import { clickableStyle, flex, padding } from '@/utils/styles';
 import { keyframes, style } from '@vanilla-extract/css';
 
-export const container = style({
-  position: 'relative',
-  marginTop: 8,
-});
-
 export const button = style([
   clickableStyle.dark,
   {
