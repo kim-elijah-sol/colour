@@ -30,5 +30,11 @@ export const flex = recipe({
       wrapReverse: { flexWrap: 'wrap-reverse' },
       noWrap: { flexWrap: 'nowrap' },
     },
+    center: {
+      true: {
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    },
   },
 });

@@ -1,11 +1,17 @@
 import Avatar from '@/components/Avatar';
+import ColourPicker from '@/components/ColourPicker';
 import userContentStyles from '@/domain/user/styles/user-content-styles.css';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import classNames from 'classnames';
+import { Palette } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import * as style from './style.css';
 
 function ProfileColourForm() {
+  const [isColourPickerShow, _setIsColourPickerShow] = useState(false);
+
+  const [isColourPickerFadeOut, setIsColourPickerFadeOut] = useState(false);
+
   const { data } = useGetMeQuery();
 
   const [colour, setColour] = useState('');
@@ -26,11 +32,30 @@ function ProfileColourForm() {
 
     setColour(newValue);
     setInputColour(newValue);
+
+    if (isColourPickerShow) {
+      const event = new CustomEvent('changeColour', {
+        detail: { colour: newValue },
+      });
+      window.dispatchEvent(event);
+    }
   }
 
   function handleKeydown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       e.currentTarget.blur();
+    }
+  }
+
+  function setIsColourPickerShow(isColourPickerShow: boolean) {
+    if (isColourPickerShow) {
+      _setIsColourPickerShow(true);
+    } else {
+      setIsColourPickerFadeOut(true);
+      setTimeout(() => {
+        setIsColourPickerFadeOut(false);
+        _setIsColourPickerShow(false);
+      }, 210);
     }
   }
 
@@ -55,6 +80,25 @@ function ProfileColourForm() {
             onBlur={handleBlur}
             onKeyDown={handleKeydown}
           />
+
+          <button
+            type='button'
+            className={style.paletteButton}
+            onClick={() => setIsColourPickerShow(!isColourPickerShow)}
+          >
+            <Palette size={20} />
+          </button>
+
+          {isColourPickerShow && (
+            <div
+              className={classNames(
+                style.colourPickerContainer,
+                isColourPickerFadeOut ? style.colourPickerFadeOut : undefined
+              )}
+            >
+              <ColourPicker colour={colour} setColour={setColour} />
+            </div>
+          )}
         </div>
       </div>
 
