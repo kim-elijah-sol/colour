@@ -105,6 +105,7 @@ export class UserRepository {
         email: true,
         profileColour: true,
         nickname: true,
+        introduce: true,
       },
       where: {
         idx,

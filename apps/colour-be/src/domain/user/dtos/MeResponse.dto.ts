@@ -10,4 +10,8 @@ export class MeResponseDTO {
   @IsString()
   @IsOptional()
   nickname: string | null;
+
+  @IsString()
+  @IsOptional()
+  introduce: string | null;
 }
