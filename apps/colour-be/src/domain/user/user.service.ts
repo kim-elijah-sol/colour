@@ -94,6 +94,13 @@ export class UserService {
     );
   }
 
+  async changeIntroduceByUserIdx(userIdx: number, introduce: string) {
+    return await this.userRepository.changeIntroduceByUserIdx(
+      userIdx,
+      introduce
+    );
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)

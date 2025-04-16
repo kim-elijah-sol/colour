@@ -181,4 +181,16 @@ export class UserRepository {
       },
     });
   }
+
+  async changeIntroduceByUserIdx(userIdx: number, introduce: string) {
+    return await this.prismaClient.user.update({
+      where: {
+        idx: userIdx,
+      },
+      data: {
+        introduce,
+        updatedAt: new Date(),
+      },
+    });
+  }
 }

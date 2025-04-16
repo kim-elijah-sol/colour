@@ -22,6 +22,7 @@ import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
 import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
+import { ChangeIntroduceRequestDTO } from './dtos/ChangeIntroduceRequest.dto';
 import { ChangeNicknameRequestDTO } from './dtos/ChangeNicknameRequest.dto';
 import { ChangePasswordRequestDTO } from './dtos/ChangePasswordRequest.dto';
 import { ChangeProfileColourRequestDTO } from './dtos/ChangeProfileColourRequest.dto';
@@ -310,6 +311,21 @@ export class UserController {
     @Body() { profileColour }: ChangeProfileColourRequestDTO
   ): Promise<ColourResponse> {
     await this.userService.changeProfileColourByUserIdx(idx, profileColour);
+
+    return {
+      statusCode: 200,
+      success: true,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('change-introduce')
+  @HttpCode(200)
+  async changeIntroduce(
+    @TokenInfo() { idx }: TokenInfoDTO,
+    @Body() { introduce }: ChangeIntroduceRequestDTO
+  ): Promise<ColourResponse> {
+    await this.userService.changeIntroduceByUserIdx(idx, introduce);
 
     return {
       statusCode: 200,
