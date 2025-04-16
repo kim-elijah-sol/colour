@@ -1,5 +1,11 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-16
+
+FE 와 BE 에 회원 프로필 변경 기능을 모두 추가했다.<br>
+내일부터 회원 탈퇴 기능을 추가해야한다.<br>
+이를 위해 DB schema 에서 회원 데이터를 제거하면 그와 관련된 모든 데이터가 제거될 수 있도록 처리가 필요할 것 같다.
+
 # 2025-04-13
 
 FE 와 BE 에 닉네임 변경 기능을 추가했다.<br>
