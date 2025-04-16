@@ -1,5 +1,5 @@
 import userContentStyles from '../../styles/user-content-styles.css';
-import { NicknameForm, ProfileColourForm } from './components';
+import { IntroduceForm, NicknameForm, ProfileColourForm } from './components';
 
 function UserProfile() {
   return (
@@ -22,6 +22,7 @@ function UserProfile() {
         </section>
         <section className={userContentStyles.section}>
           <h3 className={userContentStyles.sectionTitle}>Introduce</h3>
+          <IntroduceForm />
         </section>
       </div>
     </>
