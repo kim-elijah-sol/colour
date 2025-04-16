@@ -29,7 +29,7 @@ model user {
   password       String    @db.VarChar(256)
   profileColour  String    @db.VarChar(6)
   nickname       String?   @unique @db.VarChar(16)
-  introduce      String?   @db.VarChar(100)
+  introduce      String?   @db.VarChar(300)
 
   createdAt      DateTime  @db.Timestamp(3) @default(now())
   updatedAt      DateTime? @db.Timestamp(3) @updatedAt()
