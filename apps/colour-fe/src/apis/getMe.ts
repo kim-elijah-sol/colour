@@ -5,6 +5,7 @@ export type MeResponse = {
   email: string;
   profileColour: string;
   nickname: string | null;
+  introduce: string | null;
 };
 
 export const getMe = () =>
