@@ -1,4 +1,5 @@
 import userContentStyles from '../../styles/user-content-styles.css';
+import { CancelForm } from './components';
 
 function UserCancelAccount() {
   return (
@@ -9,6 +10,13 @@ function UserCancelAccount() {
         <br />
         Deleting your account is permanent, so please be certain.
       </p>
+
+      <div className={userContentStyles.sectionList}>
+        <section className={userContentStyles.section}>
+          <h3 className={userContentStyles.sectionTitle}>Good Bye</h3>
+          <CancelForm />
+        </section>
+      </div>
     </>
   );
 }
