@@ -332,4 +332,18 @@ export class UserController {
       success: true,
     };
   }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Delete('cancel')
+  @HttpCode(200)
+  async cancelAccount(
+    @TokenInfo() { idx }: TokenInfoDTO
+  ): Promise<ColourResponse> {
+    await this.userService.deleteUser(idx);
+
+    return {
+      statusCode: 200,
+      success: true,
+    };
+  }
 }

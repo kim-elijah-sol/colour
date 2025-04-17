@@ -101,6 +101,10 @@ export class UserService {
     );
   }
 
+  async deleteUser(userIdx: number) {
+    return await this.userRepository.deleteUser(userIdx);
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)
