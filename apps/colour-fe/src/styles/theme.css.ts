@@ -13,6 +13,7 @@ export const [themeClass, vars] = createTheme({
     red: hexToRGBAValue('FF006A'),
     green: hexToRGBAValue('00F05F'),
     background: hexToRGBAValue('F6F8FA'),
+    warning: hexToRGBAValue('FF1216'),
   },
   size: {
     headerHeight: '64px',
