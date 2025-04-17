@@ -41,7 +41,7 @@ model user {
 
 model refreshToken {
   refreshToken String    @db.VarChar(250) @unique
-  user         user      @relation(fields: [userIdx], references: [idx])
+  user         user      @relation(fields: [userIdx], references: [idx], onDelete: Cascade)
   userIdx      Int
 }
 
@@ -51,7 +51,7 @@ model colour {
 
   createdAt       DateTime  @db.Timestamp(3) @default(now())
 
-  user            user      @relation(fields: [userIdx], references: [idx])
+  user            user      @relation(fields: [userIdx], references: [idx], onDelete: Cascade)
   userIdx         Int
 
   favouriteCount  Int
@@ -61,9 +61,9 @@ model colour {
 model favourite {
   idx          Int    @id @default(autoincrement())
 
-  user         user   @relation(fields: [userIdx], references: [idx])
+  user         user   @relation(fields: [userIdx], references: [idx], onDelete: Cascade)
   userIdx      Int
 
-  colour       colour @relation(fields: [colourIdx], references: [idx])
+  colour       colour @relation(fields: [colourIdx], references: [idx], onDelete: Cascade)
   colourIdx    Int
 }
