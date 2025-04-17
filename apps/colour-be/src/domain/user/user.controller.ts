@@ -20,6 +20,7 @@ import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtAccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
+import { CancelAccountRequestDTO } from './dtos/CancelAccountRequest.dto';
 import { ChangeEmailRequestDTO } from './dtos/ChangeEmailRequest.dto';
 import { ChangeEmailResponseDTO } from './dtos/ChangeEmailResponse.dto';
 import { ChangeIntroduceRequestDTO } from './dtos/ChangeIntroduceRequest.dto';
@@ -334,11 +335,20 @@ export class UserController {
   }
 
   @UseGuards(JwtAccessTokenGuard)
-  @Delete('cancel')
+  @Delete('cancel-account')
   @HttpCode(200)
   async cancelAccount(
-    @TokenInfo() { idx }: TokenInfoDTO
+    @TokenInfo() { idx }: TokenInfoDTO,
+    @Body() { password }: CancelAccountRequestDTO
   ): Promise<ColourResponse> {
+    const currentPasswordInDB =
+      await this.userService.findCurrentPasswordByUserIdx(idx);
+
+    if (currentPasswordInDB !== SHA256(password).toString())
+      throw new ForbiddenException(
+        'The current password you entered does not match.'
+      );
+
     await this.userService.deleteUser(idx);
 
     return {
