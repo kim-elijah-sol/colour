@@ -7,6 +7,8 @@ import {
   ForbiddenException,
   Get,
   HttpCode,
+  NotFoundException,
+  Param,
   Patch,
   Post,
   Query,
@@ -18,6 +20,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtAccessTokenGuard } from 'src/auth/guard/accessToken.guard';
+import { JwtOptionalAccessTokenGuard } from 'src/auth/guard/optionalAccessToken.guard';
 import { JwtRefreshTokenGuard } from 'src/auth/guard/refreshToken.guard';
 import { Token, TokenInfo } from 'src/decorator';
 import { CancelAccountRequestDTO } from './dtos/CancelAccountRequest.dto';
@@ -35,6 +38,8 @@ import { SignInRequestDTO } from './dtos/SignInRequest.dto';
 import { SignInResponseDTO } from './dtos/SignInResponse.dto';
 import { SignUpRequestDTO } from './dtos/SignUpRequest.dto';
 import { SignUpResponseDTO } from './dtos/SignUpResponse.dto';
+import { StudioProfileRequestDTO } from './dtos/StudioProfileRequest.dto';
+import { StudioProfileResponseDTO } from './dtos/StudioProfileResponse.dto';
 import { VerifyRequestDTO } from './dtos/VerifyRequest.dto';
 import { UserService } from './user.service';
 
@@ -354,6 +359,32 @@ export class UserController {
     return {
       statusCode: 200,
       success: true,
+    };
+  }
+
+  @UseGuards(JwtOptionalAccessTokenGuard)
+  @Get('studio/profile/:nickname')
+  @HttpCode(200)
+  async studioProfile(
+    @TokenInfo() tokenInfo: TokenInfoDTO,
+    @Param() { nickname }: StudioProfileRequestDTO
+  ): Promise<ColourResponse<StudioProfileResponseDTO>> {
+    const studioProfile =
+      await this.userService.findStudioProfileByNickname(nickname);
+
+    if (studioProfile === null) {
+      throw new NotFoundException(`can not find '${nickname}' user`);
+    }
+
+    return {
+      statusCode: 200,
+      success: true,
+      data: {
+        isMe: studioProfile.idx === tokenInfo?.idx,
+        nickname: studioProfile.nickname,
+        profileColour: studioProfile.profileColour,
+        introduce: studioProfile.introduce,
+      },
     };
   }
 }

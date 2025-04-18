@@ -105,6 +105,10 @@ export class UserService {
     return await this.userRepository.deleteUser(userIdx);
   }
 
+  async findStudioProfileByNickname(nickname: string) {
+    return await this.userRepository.findStudioProfileByNickname(nickname);
+  }
+
   getRandomRGBValue(): string {
     return (Math.floor(Math.random() * 155) + 100)
       .toString(16)

@@ -202,4 +202,18 @@ export class UserRepository {
       },
     });
   }
+
+  async findStudioProfileByNickname(nickname: string) {
+    return await this.prismaClient.user.findUnique({
+      where: {
+        nickname
+      },
+      select: {
+        idx: true,
+        nickname: true,
+        introduce: true,
+        profileColour: true,
+      }
+    })
+  }
 }
