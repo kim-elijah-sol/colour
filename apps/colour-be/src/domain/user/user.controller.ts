@@ -15,7 +15,6 @@ import {
   UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
-import { SHA256 } from 'crypto-js';
 import { AuthService } from 'src/auth/auth.service';
 import { TokenDTO } from 'src/auth/dtos/Token.dto';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
@@ -268,7 +267,9 @@ export class UserController {
 
     if (
       currentPasswordInDB !==
-      SHA256(changePasswordRequestDTO.currentPassword).toString()
+      this.userService.getHashedPassword(
+        changePasswordRequestDTO.currentPassword
+      )
     )
       throw new ForbiddenException(
         'The current password you entered does not match.'
@@ -349,7 +350,7 @@ export class UserController {
     const currentPasswordInDB =
       await this.userService.findCurrentPasswordByUserIdx(idx);
 
-    if (currentPasswordInDB !== SHA256(password).toString())
+    if (currentPasswordInDB !== this.userService.getHashedPassword(password))
       throw new ForbiddenException(
         'The current password you entered does not match.'
       );

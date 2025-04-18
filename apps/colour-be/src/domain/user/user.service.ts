@@ -47,7 +47,7 @@ export class UserService {
   async signUp({ email, password, profileColour }: CreateUserDTO) {
     return await this.userRepository.createUser({
       email,
-      password: SHA256(password).toString(),
+      password: this.getHashedPassword(password),
       profileColour,
     });
   }
@@ -55,7 +55,7 @@ export class UserService {
   async signIn({ email, password }: SignInRequestDTO) {
     return await this.userRepository.findUserByIdAndPassword({
       email,
-      password: SHA256(password).toString(),
+      password: this.getHashedPassword(password),
     });
   }
 
@@ -75,7 +75,7 @@ export class UserService {
   async changePasswordByUserIdx(userIdx: number, password: string) {
     return await this.userRepository.changePasswordByUserIdx(
       userIdx,
-      SHA256(password).toString()
+      this.getHashedPassword(password)
     );
   }
 
@@ -129,5 +129,9 @@ export class UserService {
     const now = new Date();
 
     return SHA256(`${now.valueOf()}-${email}`).toString();
+  }
+
+  getHashedPassword(password: string): string {
+    return SHA256(password).toString();
   }
 }
