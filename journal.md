@@ -1,5 +1,12 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-04-18
+
+회원 관련 기능이 모두 개발 되었다.<br>
+이제 슬슬 팔레트 기능 관련 작업을 시작해야할 것 같다.<br>
+시밀러 팔레트 검색을 위해 DB Schema 를 손 봐야할 것 같다.<br>
+최소한의 계산으로 검색이 가능하도록...
+
 # 2025-04-16
 
 FE 와 BE 에 회원 프로필 변경 기능을 모두 추가했다.<br>
