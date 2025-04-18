@@ -1,10 +1,11 @@
 import { deleteSignOut } from '@/apis/deleteSignOut';
 import Avatar from '@/components/Avatar';
+import toast from '@/components/Toast/toast';
 import { useGetMeQuery } from '@/queries/useGetMeQuery';
 import classNames from 'classnames';
 import { LogOut, Palette, UserRound } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import * as style from './style.css';
 
 function Profile() {
@@ -13,6 +14,8 @@ function Profile() {
   const [isMenuShow, setIsMenuShow] = useState(false);
 
   const [isFadeOut, setIsFadeOut] = useState(false);
+
+  const navigate = useNavigate();
 
   const { data } = useGetMeQuery();
 
@@ -29,6 +32,18 @@ function Profile() {
     localStorage.removeItem('colour-refresh-token');
 
     location.reload();
+  }
+
+  function handleStudio(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+
+    if (nickname === '') {
+      toast.open(`You'll need a nickname to access the studio.`);
+    } else {
+      navigate(`/studio/${nickname}`);
+    }
+
+    close();
   }
 
   function handleClickProfile() {
@@ -72,7 +87,7 @@ function Profile() {
             isFadeOut ? style.menuFadeOut : undefined
           )}
         >
-          <Link className={style.anchor} to='studio' onClick={close}>
+          <Link className={style.anchor} to='studio' onClick={handleStudio}>
             <Palette color='#333333' size={16} />
             Studio
           </Link>

@@ -15,6 +15,7 @@ import ToastCenter from '@/components/Toast/ToastCenter';
 
 import '@/styles/reset.css';
 import { useEffect } from 'react';
+import Studio from './pages/studio';
 import { themeClass } from './styles/theme.css';
 
 const queryClient = new QueryClient({
@@ -47,6 +48,7 @@ function Router() {
                 <Route path='profile' element={<UserProfile />} />
                 <Route path='cancel' element={<UserCancelAccount />} />
               </Route>
+              <Route path='studio/:nickname' element={<Studio />} />
             </Route>
           </Routes>
         </BrowserRouter>
