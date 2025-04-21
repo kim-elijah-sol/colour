@@ -17,6 +17,9 @@ importers:
 
   apps/colour-be:
     dependencies:
+      '@colour/fx':
+        specifier: workspace:^
+        version: link:../../packages/fx
       '@colour/types':
         specifier: workspace:^
         version: link:../../packages/types

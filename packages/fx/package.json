@@ -1,10 +1,19 @@
 {
   "name": "@colour/fx",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    }
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "pnpm build:cjs && pnpm build:esm",
+    "build:cjs": "tsc --project tsconfig.cjs.json",
+    "build:esm": "tsc --project tsconfig.esm.json"
   },
   "dependencies": {
     "@colour/types": "workspace:^"
