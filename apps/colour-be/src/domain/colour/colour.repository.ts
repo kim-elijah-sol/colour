@@ -18,4 +18,20 @@ export class ColourRepository {
       },
     });
   }
+
+  async createPalette(data: {
+    userIdx: number;
+    colour: string;
+    colourNames: string;
+  }) {
+    return await this.prismaClient.colour.create({
+      data: {
+        ...data,
+        favouriteCount: 0,
+      },
+      select: {
+        idx: true,
+      },
+    });
+  }
 }

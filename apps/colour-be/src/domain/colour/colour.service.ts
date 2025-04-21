@@ -1,6 +1,7 @@
 import { LAB, RGB } from '@colour/types';
 import { Injectable } from '@nestjs/common';
 import { COLOUR_NAMES } from 'src/utils';
+import { hexToRgb } from '../../../../../packages/fx/dist';
 import { ColourRepository } from './colour.repository';
 
 @Injectable()
@@ -14,6 +15,26 @@ export class ColourService {
     }));
   }
 
+  async createPalette({
+    userIdx,
+    colour,
+  }: {
+    userIdx: number;
+    colour: string[];
+  }) {
+    return await this.colourRepository.createPalette({
+      colour: this.colourJoin(colour),
+      colourNames: this.colourNamesJoin(
+        colour.map((it) => this.findColourNameByRGB(hexToRgb(it)))
+      ),
+      userIdx,
+    });
+  }
+
+  colourJoin(colour: string[]) {
+    return colour.join('');
+  }
+
   colourSlice(colour: string): string[] {
     const chunks: string[] = [];
 
@@ -21,6 +42,14 @@ export class ColourService {
       chunks.push(colour.slice(i, i + 6));
     }
     return chunks;
+  }
+
+  colourNamesJoin(colourNames: string[]) {
+    return `|${colourNames.join('|')}|`;
+  }
+
+  colourNamesSlice(colourNames: string) {
+    return colourNames.substring(1, colourNames.length - 1).split('|');
   }
 
   findColourNameByRGB(colour: RGB) {
