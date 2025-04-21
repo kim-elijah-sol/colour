@@ -49,6 +49,8 @@ model colour {
   idx             Int       @id @default(autoincrement())
   colour          String    @db.VarChar(24)
 
+  colourNames     String    @db.VarChar(100)
+
   createdAt       DateTime  @db.Timestamp(3) @default(now())
 
   user            user      @relation(fields: [userIdx], references: [idx], onDelete: Cascade)
