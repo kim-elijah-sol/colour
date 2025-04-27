@@ -4,12 +4,17 @@ import * as style from './style.css';
 
 type Props = {
   colours: string[];
-  isLike: boolean;
-  likeCount: number;
-  onClickLike?: React.MouseEventHandler<HTMLButtonElement>;
+  isFavourite: boolean;
+  favouriteCount: number;
+  onClickFavourite?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function PaletteCard({ colours, isLike, likeCount, onClickLike }: Props) {
+function PaletteCard({
+  colours,
+  isFavourite,
+  favouriteCount,
+  onClickFavourite,
+}: Props) {
   return (
     <div className={style.card}>
       <div className={style.top}>
@@ -34,9 +39,13 @@ function PaletteCard({ colours, isLike, likeCount, onClickLike }: Props) {
       </div>
       <div className={style.divisionBar} />
       <div className={style.toolRow}>
-        <button onClick={onClickLike} className={style.bottomButton}>
-          {isLike ? <Icons.Like.Fill size={16} /> : <Icons.Like size={16} />}
-          <p className={style.likeButtonText}>{likeCount}</p>
+        <button onClick={onClickFavourite} className={style.bottomButton}>
+          {isFavourite ? (
+            <Icons.Like.Fill size={16} />
+          ) : (
+            <Icons.Like size={16} />
+          )}
+          <p className={style.likeButtonText}>{favouriteCount}</p>
         </button>
       </div>
     </div>

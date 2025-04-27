@@ -14,9 +14,9 @@ function NewPaletteList() {
         <PaletteCard
           key={it.idx}
           colours={it.colour}
-          isLike={it.isFavourite}
-          likeCount={it.favouriteCount}
-          onClickLike={() => handleLike(it.idx)}
+          isFavourite={it.isFavourite}
+          favouriteCount={it.favouriteCount}
+          onClickFavourite={() => handleLike(it.idx)}
         />
       ))}
     </PaletteContainer>
