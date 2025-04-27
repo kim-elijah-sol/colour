@@ -1,24 +1,22 @@
 import PaletteCard from '@/components/PaletteCard';
 import PaletteContainer from '@/components/PaletteContainer';
+import { useGetNewQuery } from '../hooks/useGetNewQuery';
 import { useHandleLike } from '../hooks/useHandleLike';
-import { useNewQuery } from '../hooks/useNewQuery';
 
 function NewPaletteList() {
-  const { data, refetch } = useNewQuery();
+  const { data } = useGetNewQuery();
 
-  const { handleLike } = useHandleLike({
-    onSuccess: () => refetch(),
-  });
+  const { handleLike } = useHandleLike({});
 
   return (
     <PaletteContainer>
-      {data.map((it) => (
+      {data.data.map((it) => (
         <PaletteCard
-          key={it.id}
-          colours={it.colors}
-          isLike={it.isLike}
-          likeCount={it.likeCount}
-          onClickLike={() => handleLike(it.id)}
+          key={it.idx}
+          colours={it.colour}
+          isLike={it.isFavourite}
+          likeCount={it.favouriteCount}
+          onClickLike={() => handleLike(it.idx)}
         />
       ))}
     </PaletteContainer>
