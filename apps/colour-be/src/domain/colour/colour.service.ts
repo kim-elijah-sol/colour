@@ -34,6 +34,28 @@ export class ColourService {
     });
   }
 
+  async findFavourite(colourIdx: number, userIdx: number) {
+    return await this.colourRepository.findFavourite(colourIdx, userIdx);
+  }
+
+  async createFavourite(colourIdx: number, userIdx: number) {
+    await this.colourRepository.createFavourite(colourIdx, userIdx);
+    return await this.colourRepository.increaseFavouriteCount(colourIdx);
+  }
+
+  async deleteFavourite(
+    colourIdx: number,
+    userIdx: number,
+    favouriteIdx: number
+  ) {
+    await this.colourRepository.deleteFavourite(
+      favouriteIdx,
+      colourIdx,
+      userIdx
+    );
+    return await this.colourRepository.decreaseFavouriteCount(colourIdx);
+  }
+
   colourJoin(colour: string[]) {
     return colour.join('');
   }

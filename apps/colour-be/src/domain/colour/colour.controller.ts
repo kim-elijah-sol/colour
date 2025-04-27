@@ -1,5 +1,13 @@
 import { ColourResponse } from '@colour/types';
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
 import { JwtAccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 import { JwtOptionalAccessTokenGuard } from 'src/auth/guard/optionalAccessToken.guard';
@@ -39,6 +47,35 @@ export class ColourController {
       statusCode: 201,
       success: true,
       data,
+    };
+  }
+
+  @UseGuards(JwtAccessTokenGuard)
+  @Patch('favourite/:colourIdx')
+  async favourite(
+    @TokenInfo() { idx: userIdx }: TokenInfoDTO,
+    @Param('colourIdx') _colourIdx: string
+  ): Promise<ColourResponse> {
+    const colourIdx = Number(_colourIdx);
+
+    const favourite = await this.colourService.findFavourite(
+      colourIdx,
+      userIdx
+    );
+
+    if (favourite) {
+      await this.colourService.deleteFavourite(
+        colourIdx,
+        userIdx,
+        favourite.idx
+      );
+    } else {
+      await this.colourService.createFavourite(colourIdx, userIdx);
+    }
+
+    return {
+      statusCode: 200,
+      success: true,
     };
   }
 }

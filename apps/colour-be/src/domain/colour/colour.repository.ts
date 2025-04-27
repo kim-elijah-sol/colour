@@ -42,4 +42,65 @@ export class ColourRepository {
       },
     });
   }
+
+  async findFavourite(colourIdx: number, userIdx: number) {
+    return await this.prismaClient.favourite.findFirst({
+      select: {
+        idx: true,
+      },
+      where: {
+        colourIdx,
+        userIdx,
+      },
+    });
+  }
+
+  async increaseFavouriteCount(colourIdx: number) {
+    return await this.prismaClient.colour.update({
+      where: {
+        idx: colourIdx,
+      },
+      data: {
+        favouriteCount: {
+          increment: 1,
+        },
+      },
+    });
+  }
+
+  async decreaseFavouriteCount(colourIdx: number) {
+    return await this.prismaClient.colour.update({
+      where: {
+        idx: colourIdx,
+      },
+      data: {
+        favouriteCount: {
+          decrement: 1,
+        },
+      },
+    });
+  }
+
+  async createFavourite(colourIdx: number, userIdx: number) {
+    return await this.prismaClient.favourite.create({
+      data: {
+        userIdx,
+        colourIdx,
+      },
+    });
+  }
+
+  async deleteFavourite(
+    favouriteIdx: number,
+    colourIdx: number,
+    userIdx: number
+  ) {
+    return await this.prismaClient.favourite.delete({
+      where: {
+        idx: favouriteIdx,
+        colourIdx,
+        userIdx,
+      },
+    });
+  }
 }
