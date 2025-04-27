@@ -8,10 +8,13 @@ import { ColourRepository } from './colour.repository';
 export class ColourService {
   constructor(private readonly colourRepository: ColourRepository) {}
 
-  async findNewColours() {
-    return (await this.colourRepository.findNewColours()).map((it) => ({
-      ...it,
+  async findNewColours(userIdx: number) {
+    return (await this.colourRepository.findNewColours(userIdx)).map((it) => ({
+      idx: it.idx,
+      createdAt: it.createdAt,
       colour: this.colourSlice(it.colour),
+      favouriteCount: it.favouriteCount,
+      isFavourite: it.favourite.length !== 0,
     }));
   }
 

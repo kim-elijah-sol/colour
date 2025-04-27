@@ -15,7 +15,7 @@ export class ColourController {
   @UseGuards(JwtOptionalAccessTokenGuard)
   @Get('new')
   async findNewColours(@TokenInfo() tokenInfo: TokenInfoDTO) {
-    const data = await this.colourService.findNewColours();
+    const data = await this.colourService.findNewColours(tokenInfo.idx ?? 0);
 
     return {
       statusCode: 200,
