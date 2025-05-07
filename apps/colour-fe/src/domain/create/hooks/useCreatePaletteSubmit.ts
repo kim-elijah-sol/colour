@@ -1,3 +1,4 @@
+import toast from '@/components/Toast/toast';
 import useSignIn from '@/hooks/useSignIn';
 import { useAccessToken } from '@/queries/useAccessToken';
 import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
@@ -26,6 +27,18 @@ function useCreatePaletteSubmit() {
 
   function handleSubmit() {
     if (isPending) return;
+
+    const deduplicatedColour = colours.reduce<string[]>((acc, current) => {
+      if (acc.includes(current)) return acc;
+      return acc.concat(current);
+    }, []);
+
+    if (deduplicatedColour.length !== 4) {
+      toast.open(
+        'Oops!<br/>You’ve already added that colour.<br/>Each palette needs four unique colours.'
+      );
+      return;
+    }
 
     if (accessToken) {
       mutate({
