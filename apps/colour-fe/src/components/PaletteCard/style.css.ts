@@ -16,8 +16,32 @@ export const top = style([
     overflow: 'hidden',
     ...margin({ bottom: 12 }),
     height: 80,
+    position: 'relative',
   },
 ]);
+
+export const goCreate = style([
+  flex({ align: 'center', justify: 'center' }),
+  {
+    position: 'absolute',
+    inset: 0,
+    opacity: 0,
+    cursor: 'pointer',
+    textDecoration: 'none',
+    transition: '.21s',
+    ':hover': {
+      opacity: 1,
+    },
+  },
+]);
+
+export const openInCreateText = style({
+  fontSize: 18,
+  fontWeight: 700,
+  backgroundClip: 'text !important',
+  WebkitBackgroundClip: 'text !important',
+  WebkitTextFillColor: 'transparent',
+});
 
 export const colorItem = style({
   flex: 1,

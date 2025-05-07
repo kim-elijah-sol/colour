@@ -6,13 +6,24 @@ import {
 import useCreatePaletteColours from '@/stores/useCreatePaletteColours';
 import { randomHex } from '@/utils/functions';
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router';
 
 function Create() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const { colours, setAllColours, clearAllColours, setSelectedIndex } =
     useCreatePaletteColours();
 
   useEffect(() => {
-    if (colours.length === 0) {
+    const c = searchParams
+      .get('c')
+      ?.replace(/[^0-9 | ^a-f | ^A-F | ^,]/g, '')
+      .toUpperCase();
+
+    if (c?.length === 27) {
+      setAllColours(c.split(','));
+      setSearchParams('');
+    } else if (colours.length === 0) {
       setAllColours([
         randomHex(50),
         randomHex(50),

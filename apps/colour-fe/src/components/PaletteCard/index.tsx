@@ -1,5 +1,6 @@
 import Icons from '@/assets/icons';
-import { copy } from '@/utils/functions';
+import { copy, getForegroundColourType } from '@/utils/functions';
+import { Link } from 'react-router';
 import toast from '../Toast/toast';
 import * as style from './style.css';
 
@@ -16,6 +17,10 @@ function PaletteCard({
   favouriteCount,
   onClickFavourite,
 }: Props) {
+  function getOpenInCreateTextColor(hex: string) {
+    return getForegroundColourType(hex) === 'white' ? '#FFFFFF' : '#333333';
+  }
+
   return (
     <div className={style.card}>
       <div className={style.top}>
@@ -26,6 +31,26 @@ function PaletteCard({
             style={{ background: `#${it}` }}
           />
         ))}
+        <Link
+          to={`/create?c=${colours.join(',')}`}
+          className={style.goCreate}
+          style={{
+            background: `linear-gradient(to right, ${colours
+              .map((it) => `#${it}`)
+              .join(', ')})`,
+          }}
+        >
+          <p
+            className={style.openInCreateText}
+            style={{
+              background: `linear-gradient(to right, ${getOpenInCreateTextColor(
+                colours[1]
+              )}, ${getOpenInCreateTextColor(colours[2])})`,
+            }}
+          >
+            Open in Create
+          </p>
+        </Link>
       </div>
       <div className={style.bottom}>
         {colours.map((it) => (
