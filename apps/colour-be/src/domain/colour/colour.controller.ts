@@ -78,4 +78,15 @@ export class ColourController {
       success: true,
     };
   }
+
+  // will deprecate
+  @Post('test')
+  async test(@Body('colour') colours: string[][]) {
+    for (const colour of colours) {
+      await this.colourService.createPalette({
+        colour: colour,
+        userIdx: 2,
+      });
+    }
+  }
 }
