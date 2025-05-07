@@ -1,3 +1,4 @@
+import toast from '@/components/Toast/toast';
 import { copy } from '@/utils/functions';
 import { Check, Copy } from 'lucide-react';
 import { useState } from 'react';
@@ -17,8 +18,14 @@ function ColourInfo({ label, value }: Props) {
     <li
       className={style.container}
       onClick={() => {
-        copy(value.replace('#', ''));
+        if (isCopied) return;
+
+        const copyValue = value.replace('#', '');
+
+        copy(copyValue);
         setIsCopied(true);
+
+        toast.open(`"${copyValue}" is copied!`);
       }}
       onMouseLeave={() => {
         setIsCopied(false);

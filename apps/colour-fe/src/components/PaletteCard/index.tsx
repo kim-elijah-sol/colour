@@ -1,5 +1,6 @@
 import Icons from '@/assets/icons';
 import { copy } from '@/utils/functions';
+import toast from '../Toast/toast';
 import * as style from './style.css';
 
 type Props = {
@@ -29,7 +30,10 @@ function PaletteCard({
       <div className={style.bottom}>
         {colours.map((it) => (
           <button
-            onClick={() => copy(it)}
+            onClick={() => {
+              copy(it);
+              toast.open(`"${it}" is copied!`);
+            }}
             key={it}
             className={style.bottomButton}
           >
