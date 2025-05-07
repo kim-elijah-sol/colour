@@ -15,8 +15,12 @@ export function useHandleFavourite() {
   const { mutate } = useMutation({
     mutationFn: patchFavourite,
     mutationKey: ['patchFavourite'],
-    onSuccess: () => {
-      toast.open('Marked as a favourite!');
+    onSuccess: (res) => {
+      const message = res.data.favourite
+        ? 'Marked as a favourite!'
+        : 'Unmarked as favourite.';
+
+      toast.open(message);
       queryClient.invalidateQueries({
         queryKey: ['getNew'],
       });
