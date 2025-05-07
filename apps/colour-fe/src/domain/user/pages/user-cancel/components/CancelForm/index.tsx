@@ -23,7 +23,7 @@ function CancelForm() {
       />
 
       <button type='submit' className={style.button} disabled={isDisabled}>
-        {!isPending ? 'Good Bye' : <Loader size={20} />}
+        {!isPending ? 'Cancel' : <Loader size={20} />}
       </button>
     </form>
   );
