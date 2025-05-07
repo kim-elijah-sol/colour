@@ -37,9 +37,11 @@ function ToastCenter() {
   return (
     <Portal id='toast-portal'>
       {toasts.map((it) => (
-        <div className={style.toast} key={it.id}>
-          {it.text}
-        </div>
+        <div
+          className={style.toast}
+          key={it.id}
+          dangerouslySetInnerHTML={{ __html: it.text }}
+        />
       ))}
     </Portal>
   );

@@ -30,4 +30,5 @@ export const toast = style({
   animation: `${toastKeyframes} 3s forwards`,
   borderRadius: 24,
   boxShadow: '0 0 8px 4px rgba(100,100,150,0.15)',
+  textAlign: 'center',
 });
