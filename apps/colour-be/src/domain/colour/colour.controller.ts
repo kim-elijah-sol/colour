@@ -15,6 +15,7 @@ import { TokenInfo } from 'src/decorator';
 import { ColourService } from './colour.service';
 import { CreatePaletteRequestDTO } from './dtos/CreatePaletteRequest.dto';
 import { CreatePaletteResponseDTO } from './dtos/CreatePaletteResponse.dto';
+import { FavouriteResponseDTO } from './dtos/FavouriteResponse.dto';
 
 @Controller('colour')
 export class ColourController {
@@ -55,7 +56,7 @@ export class ColourController {
   async favourite(
     @TokenInfo() { idx: userIdx }: TokenInfoDTO,
     @Param('colourIdx') _colourIdx: string
-  ): Promise<ColourResponse> {
+  ): Promise<ColourResponse<FavouriteResponseDTO>> {
     const colourIdx = Number(_colourIdx);
 
     const favourite = await this.colourService.findFavourite(
@@ -76,6 +77,9 @@ export class ColourController {
     return {
       statusCode: 200,
       success: true,
+      data: {
+        favourite: favourite ? false : true,
+      },
     };
   }
 
