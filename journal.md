@@ -1,5 +1,22 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-05-07
+
+현재 앵간한 기능은 거의 다 만든 것 같다.<br>
+내가 전역하고 1차로 배포할 기능만 확실히 정해서 개발을 중단하고 다른 프로젝트에 집중할 시간도 필요할 것 같다.<br>
+즉, MVP 의 range 가 필요하다.<br><br>
+
+현재 기준에서 필요한 기능만 리스트업 해보겠다.<br>
+
+- popular 페이지 개발
+- favourite 페이지 개발
+- studio 페이지 개발
+  - 유저의 팔레트 관련 데이터 overview ( 올린 팔레트 수, 받은 좋아요 수 )
+  - 유저의 프로필 노출
+    - 유저에게 contact 할 수 있는 `linked-in`, `github`, `dribbble` 등 타 플랫폼도 링크 예정
+  - 유저가 올린 팔레트 목록 노출
+- create 페이지 내 AI 색상 추천 기능 추가
+
 # 2025-04-18
 
 회원 관련 기능이 모두 개발 되었다.<br>
