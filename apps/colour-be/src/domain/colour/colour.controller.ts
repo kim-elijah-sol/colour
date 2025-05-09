@@ -1,6 +1,7 @@
 import { ColourResponse } from '@colour/types';
 import {
   Body,
+  ConflictException,
   Controller,
   Get,
   Param,
@@ -39,9 +40,17 @@ export class ColourController {
     @TokenInfo() { idx: userIdx }: TokenInfoDTO,
     @Body() { colour }: CreatePaletteRequestDTO
   ): Promise<ColourResponse<CreatePaletteResponseDTO>> {
+    const alreadyColour = await this.colourService.findColourByColour(
+      colour.join('')
+    );
+
+    if (alreadyColour !== null) {
+      throw new ConflictException(this.colourService.getConflictMessage());
+    }
+
     const data = await this.colourService.createPalette({
       userIdx,
-      colour: colour as unknown as string[],
+      colour: colour,
     });
 
     return {

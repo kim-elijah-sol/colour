@@ -103,4 +103,15 @@ export class ColourRepository {
       },
     });
   }
+
+  async findColourByColour(colour: string) {
+    return await this.prismaClient.colour.findFirst({
+      where: {
+        colour,
+      },
+      select: {
+        idx: true,
+      },
+    });
+  }
 }

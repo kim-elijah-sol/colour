@@ -56,6 +56,21 @@ export class ColourService {
     return await this.colourRepository.decreaseFavouriteCount(colourIdx);
   }
 
+  async findColourByColour(colour: string) {
+    return await this.colourRepository.findColourByColour(colour);
+  }
+
+  getConflictMessage() {
+    const messages = [
+      "Whoa! This is practically the colour lottery 🎉 Someone's already created the exact same combo!",
+      'This palette already exists in the world… Was it chance, or was it destiny? ✨',
+      'That exact combo’s already out there. Do you know the odds of picking the same four colours? Neither do we!',
+      "Hold on a sec… you've made this exact combo again?! Brilliant! But it’s already been added 😅",
+    ];
+
+    return messages[Math.floor(Math.random() * messages.length)];
+  }
+
   colourJoin(colour: string[]) {
     return colour.join('');
   }
