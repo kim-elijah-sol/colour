@@ -1,9 +1,7 @@
-import toast from '@/components/Toast/toast';
+import usePatchFavouriteMutation from '@/hooks/usePatchFavouriteMutation';
 import useSignIn from '@/hooks/useSignIn';
 import { useAccessToken } from '@/queries/useAccessToken';
-import { toastOnHttpsError } from '@/utils/https';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchFavourite } from '../apis/patchFavourite';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function useHandleFavourite() {
   const [SignInModal, open] = useSignIn();
@@ -12,20 +10,10 @@ export function useHandleFavourite() {
 
   const { data: accessToken } = useAccessToken();
 
-  const { mutate } = useMutation({
-    mutationFn: patchFavourite,
-    mutationKey: ['patchFavourite'],
-    onSuccess: (res) => {
-      const message = res.data.favourite
-        ? 'Marked as a favourite!'
-        : 'Unmarked as favourite.';
-
-      toast.open(message);
-      queryClient.invalidateQueries({
-        queryKey: ['getNew'],
-      });
-    },
-    onError: toastOnHttpsError,
+  const { mutate } = usePatchFavouriteMutation(() => {
+    queryClient.invalidateQueries({
+      queryKey: ['getNew'],
+    });
   });
 
   function handleClickFavourite(colourIdx: number) {
