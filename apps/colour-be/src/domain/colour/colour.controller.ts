@@ -92,6 +92,18 @@ export class ColourController {
     };
   }
 
+  @UseGuards(JwtAccessTokenGuard)
+  @Get('favourite')
+  async findFavouriteColours(@TokenInfo() tokenInfo: TokenInfoDTO) {
+    const data = await this.colourService.findFavouriteColour(tokenInfo.idx);
+
+    return {
+      statusCode: 200,
+      success: true,
+      data,
+    };
+  }
+
   // will deprecate
   @Post('test')
   async test(@Body('colour') colours: string[][]) {

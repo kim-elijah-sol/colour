@@ -114,4 +114,18 @@ export class ColourRepository {
       },
     });
   }
+
+  async findFavouriteColour(userIdx: number) {
+    return await this.prismaClient.favourite.findMany({
+      where: {
+        userIdx,
+      },
+      orderBy: {
+        idx: 'desc',
+      },
+      include: {
+        colour: true,
+      },
+    });
+  }
 }

@@ -60,6 +60,18 @@ export class ColourService {
     return await this.colourRepository.findColourByColour(colour);
   }
 
+  async findFavouriteColour(userIdx: number) {
+    return (await this.colourRepository.findFavouriteColour(userIdx))
+      .map((it) => it.colour)
+      .map((it) => ({
+        idx: it.idx,
+        colour: this.colourSlice(it.colour),
+        createdAt: it.createdAt,
+        favouriteCount: it.favouriteCount,
+        isFavourite: true,
+      }));
+  }
+
   getConflictMessage() {
     const messages = [
       "Whoa! This is practically the colour lottery 🎉 Someone's already created the exact same combo!",
