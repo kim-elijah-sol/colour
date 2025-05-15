@@ -1,5 +1,12 @@
 # Col<span style="color:#FF006A">o</span><span style="color:#00F05F">u</span><span style="color:#006BFF">r</span> Journal
 
+# 2025-05-15
+
+머리가 안돌아간다. ㅋㅋㅋ<br>
+남은 태스크가 정확히 뭐가 있는지를 md 파일에만 정리하려니 역시 안되나보다.<br>
+무지성 `notion on`.<br>
+노션에 남은 태스크를 정리해봤다. 꽤 많다... [링크](https://www.notion.so/Colour-1f4939e5892a80b6a4bbc3050f707846)
+
 # 2025-05-07
 
 현재 앵간한 기능은 거의 다 만든 것 같다.<br>
