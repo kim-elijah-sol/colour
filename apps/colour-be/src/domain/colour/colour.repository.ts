@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ColourRepository {
   constructor(private readonly prismaClient: PrismaService) {}
 
-  async findNewColours(userIdx: number) {
+  async findNewColours(userIdx: number, lastId?: number) {
     return await this.prismaClient.colour.findMany({
       orderBy: {
         createdAt: 'desc',
@@ -24,6 +24,9 @@ export class ColourRepository {
           },
         },
       },
+      take: 20,
+      skip: lastId ? 1 : 0,
+      ...(lastId && { cursor: { idx: lastId } }),
     });
   }
 

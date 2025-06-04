@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { TokenInfoDTO } from 'src/auth/dtos/TokenInfo.dto';
@@ -17,6 +18,7 @@ import { ColourService } from './colour.service';
 import { CreatePaletteRequestDTO } from './dtos/CreatePaletteRequest.dto';
 import { CreatePaletteResponseDTO } from './dtos/CreatePaletteResponse.dto';
 import { FavouriteResponseDTO } from './dtos/FavouriteResponse.dto';
+import { FindNewColourRequestDTO } from './dtos/FindNewColoursRequest.dto';
 
 @Controller('colour')
 export class ColourController {
@@ -24,8 +26,14 @@ export class ColourController {
 
   @UseGuards(JwtOptionalAccessTokenGuard)
   @Get('new')
-  async findNewColours(@TokenInfo() tokenInfo: TokenInfoDTO) {
-    const data = await this.colourService.findNewColours(tokenInfo.idx ?? 0);
+  async findNewColours(
+    @TokenInfo() tokenInfo: TokenInfoDTO,
+    @Query() { lastId }: FindNewColourRequestDTO
+  ) {
+    const data = await this.colourService.findNewColours(
+      tokenInfo.idx ?? 0,
+      lastId ? Number(lastId) : undefined
+    );
 
     return {
       statusCode: 200,
