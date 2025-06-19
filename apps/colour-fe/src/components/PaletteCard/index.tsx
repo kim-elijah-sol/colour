@@ -33,7 +33,6 @@ function PaletteCard({
         ))}
         <Link
           to={`/create?c=${colours.join(',')}`}
-          replace
           className={style.goCreate}
           style={{
             background: `linear-gradient(to right, ${colours
