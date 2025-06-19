@@ -12,3 +12,4 @@ export * from './random';
 export * from './randomHex';
 export * from './rgbToRgbPercentage';
 export * from './roundMap';
+export * from './tail';
