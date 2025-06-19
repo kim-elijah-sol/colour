@@ -1,3 +1,4 @@
+import { tail } from '@/utils/functions';
 import { https } from '@/utils/https';
 import { ColourResponse } from '@colour/types';
 
@@ -9,5 +10,17 @@ export type GetNewResponse = {
   isFavourite: boolean;
 };
 
-export const getNew = () =>
-  https.get<ColourResponse<GetNewResponse[]>>('colour/new').json();
+export const getNew = (lastId: number | null) =>
+  https
+    .get<ColourResponse<GetNewResponse[]>>('colour/new', {
+      searchParams: lastId
+        ? {
+            lastId: lastId?.toString(),
+          }
+        : undefined,
+    })
+    .json()
+    .then((response) => ({
+      ...response,
+      nextCursor: tail(response.data)?.idx ?? null,
+    }));

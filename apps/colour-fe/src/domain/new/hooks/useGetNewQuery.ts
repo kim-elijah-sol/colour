@@ -1,9 +1,11 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getNew } from '../apis/getNew';
 
 export const useGetNewQuery = () => {
-  return useSuspenseQuery({
+  return useInfiniteQuery({
     queryKey: ['getNew'],
-    queryFn: getNew,
+    queryFn: ({ pageParam }) => getNew(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (response) => response.nextCursor,
   });
 };
