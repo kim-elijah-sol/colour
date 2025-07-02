@@ -96,6 +96,7 @@ export class ColourController {
       success: true,
       data: {
         favourite: favourite ? false : true,
+        colourIdx,
       },
     };
   }
