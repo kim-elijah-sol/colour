@@ -1,9 +1,9 @@
 import PaletteCard from '@/components/PaletteCard';
 import PaletteContainer from '@/components/PaletteContainer';
-import { GetNewResponse } from '@/domain/new/apis/getNew';
+import useGetNewFavouriteOptimisticUpdate from '@/hooks/useGetNewFavouriteOptimisticUpdate';
 import usePatchFavouriteMutation from '@/hooks/usePatchFavouriteMutation';
 import { ColourResponse } from '@colour/types';
-import { InfiniteData, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { GetFavouriteResponse } from '../apis/getFavourite';
 import { useGetFavouriteQuery } from '../hooks/useGetFavouriteQuery';
 
@@ -14,6 +14,8 @@ function FavouritePaletteList() {
 
   const { mutate } = usePatchFavouriteMutation();
 
+  const getNewFavouriteOptimisticUpdate = useGetNewFavouriteOptimisticUpdate();
+
   function handleClickFavourite(colourIdx: number) {
     queryClient.setQueryData(
       ['getFavourite'],
@@ -23,28 +25,7 @@ function FavouritePaletteList() {
       })
     );
 
-    queryClient.setQueryData<InfiniteData<ColourResponse<GetNewResponse[]>>>(
-      ['getNew'],
-      (data) => {
-        if (!data) return data;
-
-        return {
-          ...data,
-          pages: data.pages.map((page) => ({
-            ...page,
-            data: page.data.map((it) =>
-              it.idx === colourIdx
-                ? {
-                    ...it,
-                    isFavourite: false,
-                    favouriteCount: it.favouriteCount - 1,
-                  }
-                : it
-            ),
-          })),
-        };
-      }
-    );
+    getNewFavouriteOptimisticUpdate(colourIdx, false);
 
     mutate(colourIdx);
   }
