@@ -3,6 +3,7 @@ import { ColourResponse } from '@colour/types';
 
 export type PatchFavouriteResponse = {
   favourite: boolean;
+  colourIdx: number;
 };
 
 export const patchFavourite = (colourIdx: number) =>

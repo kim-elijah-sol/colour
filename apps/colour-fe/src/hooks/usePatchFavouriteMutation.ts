@@ -1,9 +1,12 @@
-import { patchFavourite } from '@/apis/patchFavourite';
+import { patchFavourite, PatchFavouriteResponse } from '@/apis/patchFavourite';
 import toast from '@/components/Toast/toast';
 import { toastOnHttpsError } from '@/utils/https';
+import { ColourResponse } from '@colour/types';
 import { useMutation } from '@tanstack/react-query';
 
-function usePatchFavouriteMutation(callback?: () => void) {
+function usePatchFavouriteMutation(
+  callback?: (data: ColourResponse<PatchFavouriteResponse>) => void
+) {
   const mutation = useMutation({
     mutationFn: patchFavourite,
     mutationKey: ['patchFavourite'],
@@ -13,7 +16,7 @@ function usePatchFavouriteMutation(callback?: () => void) {
         : 'Unmarked as favourite.';
 
       toast.open(message);
-      callback?.();
+      callback?.(res);
     },
     onError: toastOnHttpsError,
   });
