@@ -27,7 +27,9 @@ function NewPaletteList() {
                 colours={it.colour}
                 isFavourite={it.isFavourite}
                 favouriteCount={it.favouriteCount}
-                onClickFavourite={() => handleClickFavourite(it.idx)}
+                onClickFavourite={() =>
+                  handleClickFavourite(it.idx, !it.isFavourite)
+                }
               />
             ))}
           </Fragment>
